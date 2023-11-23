@@ -70,7 +70,7 @@ def parse_paf_file(pafFilename):
                 q_name = fields[0].strip()
                 #only want to get the numbers not the whole section
                 taxaID =  fields[5].split("|")[1] #for PHIbase 
-                #taxaID =  fields[5]
+                #taxaID =  fields[5] #for other fasta references
                 match_bases = int(fields[9].strip())
                 map_length = int(fields[10].strip())
                 MQ = int(fields[11].strip())
@@ -166,13 +166,13 @@ def retain(pafFilename, barcode_number, barcode_dir, queries, taxa_count):
     taxa_file_path = os.path.join(barcode_dir, "{}_taxaID_counts.tsv".format(barcode_number))
     # Open the file in 'a' (append) mode
     with open(taxa_file_path, 'a') as taxa_file:
-        for count, taxa_id in taxa_count.items():
-            taxa_file.write('{}\t{}\t{}\n'.format(barcode_number, taxa_id, count))
+        for taxa_id, count in taxa_count.items():
+            taxa_file.write('{}\t{}\t{}\n'.format(taxa_id, count, barcode_number))
 
     # Print the number of ignored reads to a file within the barcode_dir
     ignored_summary_file_path = os.path.join(barcode_dir, "{}_number_ignored_reads.tsv".format(barcode_number))
     with open(ignored_summary_file_path, 'w') as ignored_summary_file:
-        ignored_summary_file.write('{}\t{}'.format(ignored_reads, pafFilename))
+        ignored_summary_file.write('{}\t{}'.format(ignored_reads, barcode_number))
 
 
 if __name__ == "__main__":

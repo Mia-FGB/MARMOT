@@ -1,8 +1,7 @@
 #!/bin/bash
 
 # Define an array of barcode numbers
-#barcode_list=("08" "09" "10" "11" "12" "13" "14" "15" "16" "17" "18" "19")
-barcode_list=("12")
+barcode_list=("08" "09" "10" "11" "12" "13" "14" "15" "16" "17" "18" "19")
 
 # Define raw read location
 location=(
@@ -14,12 +13,13 @@ filter_length=("300")
 
 #Define mapping database
 reference_database=(
-    /ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/phibase/phibase_10_23_aphanis.fa)
-#    /ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/beet/beet_pathogens/beet_path.fasta)
+    /ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/phibase/phibase_rr_091123.fa)
 
-# Create an array to store job IDs
-job_ids=()
-
+# Create txt files if they don't exist
+touch ./percent_reads_retained_length_filter.txt
+touch ./no_fail_reads.txt
+touch ./no_reads_ignored_parse_filter.txt
+touch ./all_taxaID_count.tsv
 
 # Submit SLURM jobs in a loop for each barcode
 for barcode_number in "${barcode_list[@]}"; 
