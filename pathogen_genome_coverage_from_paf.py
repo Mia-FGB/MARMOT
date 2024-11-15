@@ -3,17 +3,18 @@
 #A script to calculate genome coverage for specific genera from minimap output
 #Filters on identity and coverage
 #Should be run from directory which contains barcode directories
+#Uses a genome_lengths_file generated with genome_lengths_from_fasta.py script using the reference database used for mapping
 
 import sys, getopt, errno, os, csv
 
 # Check if the correct number of arguments is provided
 if len(sys.argv) != 3:
-    print("Usage: python pathogen_genome_coverage_from_paf.py <barcode_number> <lengths_table>")
+    print("Usage: python pathogen_genome_coverage_from_paf.py <barcode_number> <genome_lengths_file>")
     sys.exit(1)
 
 # Extract arguments
 barcode_number = sys.argv[1]
-lengths_table = sys.argv[2]
+genome_lengths_file = sys.argv[2]
 
 # Set the directory where output files should be saved
 barcode_dir = "./barcode{}".format(barcode_number)
@@ -27,15 +28,25 @@ if not pafFilename:
     sys.exit(2)
 
 genome_coverage_file = os.path.join(barcode_dir, "{}_genome_coverage.txt".format(barcode_number))
-ignored_reads_file = os.path.join(barcode_dir, "{}_ignored_reads.txt".format(barcode_number))
+ignored_reads_file = os.path.join(barcode_dir, "{}_coverage_ignored_reads.txt".format(barcode_number))
 
-def calculate_coverage(pafFilename, genome_coverage_file, ignored_reads_file):
+def calculate_coverage(pafFilename, genome_lengths_file, genome_coverage_file, ignored_reads_file):
     # Nested dictionary to track longest alignment for each read_id per taxaID
     read_longest_alignment = {}
     # Dictionary to store total mapped bases for each taxaID
     taxa_mapped_bases = {}
     # List to store information about ignored reads
     ignored_reads = []
+
+    # Load the genome lengths into a dictionary
+    genome_lengths = {}  # Use a separate variable to store genome lengths
+    with open(genome_lengths_file, 'r') as genome_lengths_f:
+        reader = csv.reader(genome_lengths_f, delimiter='\t')
+        next(reader)  # Skip header row
+        for row in reader:
+            taxaID = row[0]
+            length = int(row[1])  # Genome length in base pairs
+            genome_lengths[taxaID] = length
 
     with open(pafFilename, 'r') as paf_file:
         reader = csv.reader(paf_file, delimiter='\t')
@@ -70,7 +81,7 @@ def calculate_coverage(pafFilename, genome_coverage_file, ignored_reads_file):
 
             else:
                 # Add the read_id to the ignored_reads list with additional information
-                ignored_reads.append((read_id, taxaID, total_bases, identity, coverage))
+                ignored_reads.append((read_id, taxaID, q_length, total_bases, identity, coverage))
 
     # Aggregate the total alignment lengths per taxaID
     for read_id, taxa_dict in read_longest_alignment.items():
@@ -80,18 +91,24 @@ def calculate_coverage(pafFilename, genome_coverage_file, ignored_reads_file):
             taxa_mapped_bases[taxaID] += longest_alignment
 
     
-    #Write mapped bases per taxaID to file
+    # Write mapped bases per taxaID to file
     with open(genome_coverage_file, "w") as mapped_file:
-        mapped_file.write("taxaID\tmapped_bases\n")
+        mapped_file.write("taxaID\tmapped_bases\tgenome_length\tcoverage_percentage\n")
         for taxaID, bases in taxa_mapped_bases.items():
-            mapped_file.write(f"{taxaID}\t{bases}\n")
+            genome_length = genome_lengths.get(taxaID, 0)  # Default to 0 if taxaID not found
+            if genome_length > 0:
+                coverage_percentage = (bases / genome_length) * 100
+            else:
+                print(f"Warning: taxaID {taxaID} not found in genome lengths table.")
+                coverage_percentage = 'N/A'
+            mapped_file.write(f"{taxaID}\t{bases}\t{genome_length}\t{coverage_percentage:.4f}\n")
 
     # Write ignored reads information to file
     with open(ignored_reads_file, "w") as ignored_file:
-        ignored_file.write("read_id\ttaxaID\ttotal_bases\tidentity\tcoverage\n")
-        for read_id, taxaID, total_bases, identity, coverage in ignored_reads:
-            ignored_file.write(f"{read_id}\t{taxaID}\t{total_bases}\t{identity:.2f}\t{coverage:.2f}\n")
+        ignored_file.write("read_id\ttaxaID\tq_length\ttotal_bases\tidentity\tcoverage\n")
+        for read_id, taxaID, q_length, total_bases, identity, coverage in ignored_reads:
+            ignored_file.write(f"{read_id}\t{taxaID}\t{q_length}\t{total_bases}\t{identity:.2f}\t{coverage:.2f}\n")
 
     print(f"Results written to {genome_coverage_file} and {ignored_reads_file}")
 
-calculate_coverage(pafFilename, genome_coverage_file, ignored_reads_file)
+calculate_coverage(pafFilename, genome_lengths_file, genome_coverage_file, ignored_reads_file)
