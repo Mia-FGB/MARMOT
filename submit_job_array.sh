@@ -40,12 +40,9 @@ echo "Processing barcode: $barcode_number"
 # Set up directory for the current barcode
 barcode_dir="barcode${barcode_number}"
 
-#Create a lookup table for taxaID and reference genome length to be acessed by genome coverage script
-
-
-# Execute the main processing script
-/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/nanopore_PHIbase_analysis_scripts/single_barcode_process.sh \
-    $barcode_number $location $filter_length $reference_database $scratch_dir
+# Execute the main processing script - commented out for now while I work on the lookup table
+ /ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/nanopore_PHIbase_analysis_scripts/single_barcode_process.sh \
+     $barcode_number $location $filter_length $reference_database $scratch_dir
 
 # Check if the job script encountered an error and handle cancellation
 if [ $? -ne 0 ]; then
