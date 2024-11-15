@@ -7,7 +7,7 @@
 
 import sys, getopt, errno, os
 
-#A class which contains all the info for eqch alignment 
+#A class which contains all the info for each alignment 
 class alignment_info:
     def __init__(self, q_name, taxaID, match_bases, map_length, MQ):
         self.q_name = q_name
@@ -54,7 +54,7 @@ def main(barcode_number):
     # Call parse_paf_file function to populate queries and taxa_count dictionaries
     queries, taxa_count = parse_paf_file(pafFilename)
 
-    # Call the retain function with necessary arguments using queiries & taxa_count from parse_paf_file function
+    # Call the retain function with necessary arguments using queries & taxa_count from parse_paf_file function
     retain(pafFilename, barcode_number, barcode_dir, queries, taxa_count)
 
 def parse_paf_file(pafFilename):
@@ -91,6 +91,9 @@ def parse_paf_file(pafFilename):
         if getattr(e, 'errno', 0) == errno.ENOENT:
             print ("Could not find file " + pafFilename)
             sys.exit(2)
+        else:
+            print("An error occurred while parsing the PAF file.")
+            sys.exit(2)
     
     # Return the updated queries and taxa_count dictionaries
     return queries, taxa_count
@@ -105,7 +108,7 @@ def retain(pafFilename, barcode_number, barcode_dir, queries, taxa_count):
     ignored_reads = 0
     #looping through the queries dictionary 
     for q_name in queries.keys():
-        #creating a list that contains the info from the dictionaty 
+        #creating a list that contains the info from the dictionary 
         ai_list = queries[q_name]
         #If there is only one input for a query name then the read is unique 
         if len(ai_list) == 1:

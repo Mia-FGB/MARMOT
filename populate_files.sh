@@ -2,15 +2,15 @@
 #Script to populate the txt file outputs to combine stats from different barcodes
 #Ordinarilly single_barcode_proccess should do this
 
-barcode_list=("08" "09" "10" "11" "12" "13" "14" "15" "16" "17" "18" "19")
+barcode_list=("17" "18" "20" "21" "22" "25" "26" "27" "28")
 
 for filename in "percent_reads_retained_first_filter.txt" "number_fail_reads.txt" "number_reads_ignored_parse_filter.txt" "all_taxaID_count.tsv"; do
     touch -c "$filename"
 done
 
-percent_results_file="percent_reads_retained_first_filter.txt"
-fail_number_file="number_fail_reads.txt"
-ignored_reads_number_file="number_reads_ignored_parse_filter.txt"
+percent_results_file="percent_reads_retained_length_filter.txt"
+fail_number_file="no_fail_reads.txt"
+ignored_reads_number_file="no_reads_ignored_parse_filter.txt"
 all_taxaID_count="all_taxaID_count.tsv"
 
 for barcode_number in "${barcode_list[@]}"; 

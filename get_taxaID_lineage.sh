@@ -16,10 +16,11 @@ taxonkit lineage ${sample}_taxaID.txt > ${sample}_taxaID_lineage.txt
 taxonkit reformat ${sample}_taxaID_lineage.txt -r Unassigned | cut -f 1,3 > ${sample}_taxaID_lineage_clean.txt
 
 #Change delimiter
-sed 's/;/\t/g' ${sample}_taxaID_lineage_clean.txt | awk -F'\t' 'BEGIN {OFS=","} { print $1, $2, $3, $4, $5, $6, $7 }' > ${sample}_taxaID_lineage_sep.csv
+sed 's/;/\t/g' ${sample}_taxaID_lineage_clean.txt | awk -F'\t' 'BEGIN {OFS=","} { print $1, $2, $3, $4, $5, $6, $7, $8 }' > ${sample}_taxaID_lineage_sep.csv
 
 #Add headers
 echo "taxid,kindom,phylum,class,order,family,genus,species" > header.txt
 cat header.txt ${sample}_taxaID_lineage_sep.csv > ${sample}_taxaID_lineage_sep_head.csv
 
-#Can now use this file in RStudio 
+rm ${sample}_taxaID.txt ${sample}_taxaID_lineage.txt ${sample}_taxaID_lineage_clean.txt  ${sample}_taxaID_lineage_sep.csv  header.txt
+#Can now use this file in RStudio or pandas to plot
