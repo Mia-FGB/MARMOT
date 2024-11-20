@@ -28,15 +28,18 @@ if not pafFilename:
     sys.exit(2)
 
 genome_coverage_file = os.path.join(barcode_dir, "{}_genome_coverage.txt".format(barcode_number))
-ignored_reads_file = os.path.join(barcode_dir, "{}_coverage_ignored_reads.txt".format(barcode_number))
+excluded_reads_file = os.path.join(barcode_dir, "{}_coverage_excluded_reads.txt".format(barcode_number))
+multi_taxa_reads_file = os.path.join(barcode_dir, "{}_coverage_multi_taxa_reads.txt".format(barcode_number))
 
 def calculate_coverage(pafFilename, genome_lengths_file, genome_coverage_file, ignored_reads_file):
-    # Nested dictionary to track longest alignment for each read_id per taxaID
-    read_longest_alignment = {}
     # Dictionary to store total mapped bases for each taxaID
     taxa_mapped_bases = {}
     # List to store information about ignored reads
-    ignored_reads = []
+    excluded_reads = []
+    # Dictionary to track reads that map to multiple taxa
+    multi_taxa_reads = {}
+    # Set to track processed read_id and taxaID pairs
+    processed_reads = set()
 
     # Load the genome lengths into a dictionary
     genome_lengths = {}  # Use a separate variable to store genome lengths
@@ -53,45 +56,37 @@ def calculate_coverage(pafFilename, genome_lengths_file, genome_coverage_file, i
 
         for row in reader:
             # Extract relevant fieldss
-            read_id = row[0]                # Name of the read (column 1)
-            q_length = int(row[1])           # Length of the read (column 2)
-            q_start = int(row[2])            # Start position of the alignment in the read (column 3)
-            q_end = int(row[3])              # End position of the alignment in the read (column 4)
-            taxaID =  row[5].split("|")[1] #for PHIbase references
+            read_id = row[0]                 # Name of the read (column 1)
+            q_length = int(row[1])           # Length of the whole read (column 2)
+            a_start = int(row[2])            # Start position of the alignment in the read (column 3)
+            a_end = int(row[3])              # End position of the alignment in the read (column 4)
+            taxaID =  row[5].split("|")[1]   #for PHIbase references
             mq = int(row[11])                # Mapping quality (column 12)
             matching_bases = int(row[9])     # Number of matching bases (column 10)
-            total_bases = int(row[10])       # Length -> Number bases, including gaps, in the mapping (col 11)
-            identity = (matching_bases / total_bases)* 100 # Calculate the identity of the mapping
-            coverage =((q_end - q_start) / q_length) * 100 # Calculate the coverage of the mapping
-
+            a_length = int(row[10])          # Length -> Number bases, including gaps, in the mapping (col 11)
+            identity = (matching_bases / a_length)* 100 # Calculate identity of mapping = how many bases map / length of alignment
+            coverage =((a_length) / q_length) * 100 # Calculate coverage of mapping = length of alignment compared to read
+           
             # Filter reads on coverage and identity thresholds
-            if coverage >= 80 and identity >= 70: #can change these values
-                # Initialize read_id entry in read_longest_alignment if not already present
-                if read_id not in read_longest_alignment:
-                    read_longest_alignment[read_id] = {}
-                
-                # Check if this taxaID has been encountered for this read_id
-                if taxaID not in read_longest_alignment[read_id]:
-                    # If not present, initialize with current alignment length
-                    read_longest_alignment[read_id][taxaID] = total_bases
-                else:
-                    # Update to keep the longest alignment for this taxaID
-                    if total_bases > read_longest_alignment[read_id][taxaID]:
-                        read_longest_alignment[read_id][taxaID] = total_bases
+            if coverage >= 80 and identity >= 70:  # Can change these values
+                # Check if this read_id and taxaID pair has already been processed
+                if (read_id, taxaID) not in processed_reads:
+                    # Add the q_length to the taxa_mapped_bases for this taxaID
+                    if taxaID not in taxa_mapped_bases:
+                        taxa_mapped_bases[taxaID] = 0
+                    taxa_mapped_bases[taxaID] += q_length
+                    processed_reads.add((read_id, taxaID))
+
+                    # Track reads that map to multiple taxa and pass filters
+                    if read_id not in multi_taxa_reads:
+                        multi_taxa_reads[read_id] = []
+                    multi_taxa_reads[read_id].append((taxaID, identity, coverage))
 
             else:
-                # Add the read_id to the ignored_reads list with additional information
-                ignored_reads.append((read_id, taxaID, q_length, total_bases, identity, coverage))
-
-    # Aggregate the total alignment lengths per taxaID
-    for read_id, taxa_dict in read_longest_alignment.items():
-        for taxaID, longest_alignment in taxa_dict.items():
-            if taxaID not in taxa_mapped_bases:
-                taxa_mapped_bases[taxaID] = 0
-            taxa_mapped_bases[taxaID] += longest_alignment
-
+                # Track alignments which do not pass the filters
+                excluded_reads.append((read_id, taxaID, q_length, a_length, identity, coverage))
     
-    # Write mapped bases per taxaID to file
+    # Calculate coverage using the mapped_bases and genome_lengths
     with open(genome_coverage_file, "w") as mapped_file:
         mapped_file.write("taxaID\tmapped_bases\tgenome_length\tcoverage_percentage\n")
         for taxaID, bases in taxa_mapped_bases.items():
@@ -103,12 +98,20 @@ def calculate_coverage(pafFilename, genome_lengths_file, genome_coverage_file, i
                 coverage_percentage = 'N/A'
             mapped_file.write(f"{taxaID}\t{bases}\t{genome_length}\t{coverage_percentage:.4f}\n")
 
-    # Write ignored reads information to file
-    with open(ignored_reads_file, "w") as ignored_file:
-        ignored_file.write("read_id\ttaxaID\tq_length\ttotal_bases\tidentity\tcoverage\n")
-        for read_id, taxaID, q_length, total_bases, identity, coverage in ignored_reads:
-            ignored_file.write(f"{read_id}\t{taxaID}\t{q_length}\t{total_bases}\t{identity:.2f}\t{coverage:.2f}\n")
+    # Write excluded reads to file
+    with open(excluded_reads_file, "w") as excluded_file:
+        excluded_file.write("read_id\ttaxaID\tread_length\talignment_length\tidentity\tcoverage\n")
+        for read_id, taxaID, q_length, a_length, identity, coverage in excluded_reads:
+            excluded_file.write(f"{read_id}\t{taxaID}\t{q_length}\t{a_length}\t{identity:.2f}\t{coverage:.2f}\n")
 
-    print(f"Results written to {genome_coverage_file} and {ignored_reads_file}")
+    # Write reads that map to multiple taxa to file
+    with open(multi_taxa_reads_file, "w") as multi_taxa_file:
+        multi_taxa_file.write("read_id\ttaxaIDs\tidentity\tcoverage\n")
+        for read_id, taxaIDs in multi_taxa_reads.items():
+            if len(taxaIDs) > 1:  # Only include reads that map to multiple taxa
+                for taxaID, identity, coverage in taxaIDs:
+                    multi_taxa_file.write(f"{read_id}\t{taxaID}\t{identity:.2f}\t{coverage:.2f}\n")
+    
+    print("Processed genome coverage for barcode")
 
-calculate_coverage(pafFilename, genome_lengths_file, genome_coverage_file, ignored_reads_file)
+calculate_coverage(pafFilename, genome_lengths_file, genome_coverage_file, excluded_reads_file)
