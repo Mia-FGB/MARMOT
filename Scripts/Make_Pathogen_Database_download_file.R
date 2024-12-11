@@ -384,6 +384,23 @@ for(sp in setdiff(sort(unique(ref_gen_match$species)),ref_gen_matchAccessions$sp
         }
       }
 
+
+# Check if there are multiple entries for the same species - have noticed this but only a little 
+cat("Ensuring only one accession per species...\n")
+
+# Loop through each species and check for duplicates
+ref_gen_matchAccessions <- ref_gen_matchAccessions %>%
+  dplyr::group_by(species) %>%
+  dplyr::mutate(duplicate_count = n()) %>%
+  dplyr::ungroup() %>%
+  dplyr::group_by(species) %>%
+  dplyr::filter(
+    # If there are multiple entries, prioritize GCF over GCA
+    duplicate_count == 1 | (duplicate_count > 1 & grepl("GCF", accession))
+  ) %>%
+  dplyr::ungroup() %>%
+  dplyr::select(-duplicate_count)  # Remove the temporary duplicate_count column
+
 # Download file -----------------------------------------------------------
 
 ref_gen_match <- ref_gen_match %>%
