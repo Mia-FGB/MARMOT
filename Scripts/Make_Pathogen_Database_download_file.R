@@ -188,6 +188,14 @@ for (sp in setdiff(sort(unique(ref_gen_match$species)), ref_gen_matchAccessions$
     dplyr::filter(v == max(v)) %>%
     dplyr::ungroup()
 
+    # Add prioritization for GCF over GCA
+  x <- x %>%
+    dplyr::mutate(priority = ifelse(grepl("^GCF", assembly_accession), 1, 2)) %>%
+    dplyr::arrange(priority, desc(v)) %>%
+    dplyr::group_by(acc) %>%
+    dplyr::filter(row_number() == 1) %>%
+    dplyr::ungroup()
+
  # If there is only one accession for this species, add the accession to the list
   if (length(unique(x$assembly_accession)) == 1) {
     ref_gen_matchAccessions <- rbind(ref_gen_matchAccessions,
@@ -220,6 +228,8 @@ cat("Query if there is exactly one representative genome, if not, determine the 
 
 for (sp in setdiff(sort(unique(ref_gen_match$species)), ref_gen_matchAccessions$species)) {
   print(sp)
+  #skip species already in the list
+  if (sp %in% ref_gen_matchAccessions$species) next
   #Subset for species and representative genomes
   x <- ref_gen_match %>%
     dplyr::filter(species == sp) %>%
@@ -232,6 +242,14 @@ for (sp in setdiff(sort(unique(ref_gen_match$species)), ref_gen_matchAccessions$
   x <- x %>%
     dplyr::group_by(acc) %>%
     dplyr::filter(v == max(v)) %>%
+    dplyr::ungroup()
+
+  # Add prioritization for GCF over GCA
+  x <- x %>%
+    dplyr::mutate(priority = ifelse(grepl("^GCF", assembly_accession), 1, 2)) %>%
+    dplyr::arrange(priority, desc(v)) %>%
+    dplyr::group_by(acc) %>%
+    dplyr::filter(row_number() == 1) %>%
     dplyr::ungroup()
 
 #If there is only one accession for this species, add the accession to the list
@@ -266,6 +284,8 @@ cat("Query if there is exactly one complete genome, if not, determine the longes
 
 for(sp in setdiff(sort(unique(ref_gen_match$species)),ref_gen_matchAccessions$species)){
   print(sp)
+  #skip species already in the list
+  if (sp %in% ref_gen_matchAccessions$species) next
   #Subset for species and complete genomes
   x <- ref_gen_match %>% dplyr::filter(species==sp) %>% dplyr::filter(assembly_level=="Complete Genome")
   
@@ -276,6 +296,14 @@ for(sp in setdiff(sort(unique(ref_gen_match$species)),ref_gen_matchAccessions$sp
   x <- x %>%
     dplyr::group_by(acc) %>%
     dplyr::filter(v == max(v)) %>%
+    dplyr::ungroup()
+
+  # Add prioritization for GCF over GCA
+  x <- x %>%
+    dplyr::mutate(priority = ifelse(grepl("^GCF", assembly_accession), 1, 2)) %>%
+    dplyr::arrange(priority, desc(v)) %>%
+    dplyr::group_by(acc) %>%
+    dplyr::filter(row_number() == 1) %>%
     dplyr::ungroup()
   
   #If there is only one accession for this species, add the accession to the list
@@ -309,6 +337,8 @@ cat("Query if there is exactly one genome, if not, determine the longest \n")
 
 for(sp in setdiff(sort(unique(ref_gen_match$species)),ref_gen_matchAccessions$species)){
   print(sp)
+  #skip species already in the list
+  if (sp %in% ref_gen_matchAccessions$species) next
   #Subset for species
   x <- ref_gen_match %>% dplyr::filter(species==sp)
   
@@ -319,6 +349,14 @@ for(sp in setdiff(sort(unique(ref_gen_match$species)),ref_gen_matchAccessions$sp
   x <- x %>%
     dplyr::group_by(acc) %>%
     dplyr::filter(v == max(v)) %>%
+    dplyr::ungroup()
+
+  # Add prioritization for GCF over GCA
+  x <- x %>%
+    dplyr::mutate(priority = ifelse(grepl("^GCF", assembly_accession), 1, 2)) %>%
+    dplyr::arrange(priority, desc(v)) %>%
+    dplyr::group_by(acc) %>%
+    dplyr::filter(row_number() == 1) %>%
     dplyr::ungroup()
   
   #If there is only one accession for this species, add the accession to the list
