@@ -7,6 +7,7 @@ library(tidyverse)
 library(taxizedb)
 library(RCurl)
 library(taxonomizr)
+library(jsonlite)
 
 #Set default timeout to 10 mins
 options(timeout = 600)
@@ -18,7 +19,7 @@ option_list <- list(
                 help = "Path to the PHIbase input CSV file", metavar = "character"),
     make_option(c("-d", "--defra"), type = "character", default = NULL,
                 help = "Path to the DEFRA input CSV file", metavar = "character"),
-    make_option(c("-o", "--output"), type = "character", default = "download.txt",
+    make_option(c("-o", "--output"), type = "character", default = "download.json",
                 help = "Path to the output CSV file [default= %default]", metavar = "character")
 )
 
@@ -63,7 +64,7 @@ defra_name_ID <- name2taxid(defra_pest_name$Pest.Name, db = "ncbi", verbose = TR
 defraID <- defra_name_ID %>% 
   select(id)
 
-# PHIbase https://github.com/PHI-base/data/tree/master/releases -----------------------------------------------------------------
+# PHIbase https://github.com/PHI-base/data/tree/master/releases ------------------------------------------
 #Download the most up to date version each time 
 
 #-----Importing the data from command line argument
@@ -117,8 +118,8 @@ df_name_ID <- merge(un_combdf,dfTax_db,by.x="id",by.y="taxid",all=T)
 # Download Refseq & Genbank tables ----------------------------------------
 
 #Download refseq and genbank tables - Need to do this each time so they are up to date
-download.file("https://ftp.ncbi.nlm.nih.gov/genomes/ASSEMBLY_REPORTS/assembly_summary_refseq.txt","assembly_summary_refseq.txt")
-download.file("https://ftp.ncbi.nlm.nih.gov/genomes/ASSEMBLY_REPORTS/assembly_summary_genbank.txt","assembly_summary_genbank.txt")
+# download.file("https://ftp.ncbi.nlm.nih.gov/genomes/ASSEMBLY_REPORTS/assembly_summary_refseq.txt","assembly_summary_refseq.txt")
+# download.file("https://ftp.ncbi.nlm.nih.gov/genomes/ASSEMBLY_REPORTS/assembly_summary_genbank.txt","assembly_summary_genbank.txt")
 
 cat("Reading in refseq dataframe\n")
 refseq <- read.delim("assembly_summary_refseq.txt",header=F,sep="\t",skip=2,quote="")
@@ -166,10 +167,10 @@ ref_gen_match <- ref_gen %>%
 #Only take rows with an https entry
 ref_gen_match <- ref_gen_match[grep("https://",ref_gen_match$ftp_path),]
 
+ref_gen_matchAccessions <- c()
 
 #Loop 1 - Reference genome
 #Query if there is exactly one reference genome, if not, determine the longest
-ref_gen_matchAccessions <- c()
 
 cat("Query if there is exactly one reference genome, if not, determine the longest \n")
 for (sp in setdiff(sort(unique(ref_gen_match$species)), ref_gen_matchAccessions$species)) {
@@ -203,7 +204,7 @@ for (sp in setdiff(sort(unique(ref_gen_match$species)), ref_gen_matchAccessions$
   } else if (length(unique(x$assembly_accession)) > 1) {
   
  # If there is more than one accession for this species, determine the largest genome
-    print("Querying genome sizes")
+    print(paste("Querying genome sizes for species:", sp))
     tmp <- data.frame()
     for (url in x$ftp_path) {
       acc <- x %>% dplyr::filter(ftp_path == url) %>% dplyr::pull(assembly_accession)
@@ -227,9 +228,9 @@ for (sp in setdiff(sort(unique(ref_gen_match$species)), ref_gen_matchAccessions$
 cat("Query if there is exactly one representative genome, if not, determine the longest \n")
 
 for (sp in setdiff(sort(unique(ref_gen_match$species)), ref_gen_matchAccessions$species)) {
-  print(sp)
   #skip species already in the list
   if (sp %in% ref_gen_matchAccessions$species) next
+  print(sp)
   #Subset for species and representative genomes
   x <- ref_gen_match %>%
     dplyr::filter(species == sp) %>%
@@ -258,7 +259,7 @@ for (sp in setdiff(sort(unique(ref_gen_match$species)), ref_gen_matchAccessions$
       data.frame("accession" = x$assembly_accession, "species" = sp, "type" = "Representative Genome"))
 #If there is more than one accession for this species, determine the largest genome
   } else if (length(unique(x$assembly_accession)) > 1) {
-    print("Querying genome sizes")
+    print(paste("Querying genome sizes for species:", sp))
     tmp <- data.frame()
     for (url in x$ftp_path) {
       acc <- x %>% dplyr::filter(ftp_path == url) %>% dplyr::pull(assembly_accession)
@@ -283,9 +284,9 @@ for (sp in setdiff(sort(unique(ref_gen_match$species)), ref_gen_matchAccessions$
 cat("Query if there is exactly one complete genome, if not, determine the longest \n")
 
 for(sp in setdiff(sort(unique(ref_gen_match$species)),ref_gen_matchAccessions$species)){
-  print(sp)
   #skip species already in the list
   if (sp %in% ref_gen_matchAccessions$species) next
+  print(sp)
   #Subset for species and complete genomes
   x <- ref_gen_match %>% dplyr::filter(species==sp) %>% dplyr::filter(assembly_level=="Complete Genome")
   
@@ -312,7 +313,7 @@ for(sp in setdiff(sort(unique(ref_gen_match$species)),ref_gen_matchAccessions$sp
                           data.frame("accession"=x$assembly_accession,"species"=sp,"type"="Complete Genome"))
     #If there is more than one accession for this species, determine the largest genome
   }else if(length(unique(x$assembly_accession))>1){
-    print("Querying genome sizes")
+    print(paste("Querying genome sizes for species:", sp))
     tmp <- data.frame()
     for(url in x$ftp_path){
       acc <- x %>% dplyr::filter(ftp_path==url) %>% dplyr::pull(assembly_accession)
@@ -336,9 +337,9 @@ for(sp in setdiff(sort(unique(ref_gen_match$species)),ref_gen_matchAccessions$sp
 cat("Query if there is exactly one genome, if not, determine the longest \n")
 
 for(sp in setdiff(sort(unique(ref_gen_match$species)),ref_gen_matchAccessions$species)){
-  print(sp)
   #skip species already in the list
   if (sp %in% ref_gen_matchAccessions$species) next
+  print(sp)
   #Subset for species
   x <- ref_gen_match %>% dplyr::filter(species==sp)
   
@@ -365,7 +366,7 @@ for(sp in setdiff(sort(unique(ref_gen_match$species)),ref_gen_matchAccessions$sp
                           data.frame("accession"=x$assembly_accession,"species"=sp,"type"="Other"))
     #If there is more than one accession for this species, determine the largest genome
   }else if(length(unique(x$assembly_accession))>1){
-    print("Querying genome sizes")
+    print(paste("Querying genome sizes for species:", sp))
     tmp <- data.frame()
     for(url in x$ftp_path){
       acc <- x %>% dplyr::filter(ftp_path==url) %>% dplyr::pull(assembly_accession)
@@ -383,7 +384,6 @@ for(sp in setdiff(sort(unique(ref_gen_match$species)),ref_gen_matchAccessions$sp
               "species" = sp, "type" = "Other"))
         }
       }
-
 
 # Check if there are multiple entries for the same species - have noticed this but only a little 
 cat("Ensuring only one accession per species...\n")
@@ -414,13 +414,8 @@ ref_gen_match$dlLink <- paste0(
 ref_gen_match$dlLinkMD5 <- gsub("ftp:", "https:", paste0(ref_gen_match$ftp_path, "/md5checksums.txt"))
 
 #Export download file - using the command line output argument
-write.table(
-  ref_gen_match %>% dplyr::select(
-    species, species_taxid, assembly_accession, dlLinkMD5, dlLink
-    ), 
-    file=opt$output,
-    sep="\t",
-    row.names=F,col.names=F,quote=F
-    )
+write_json(ref_gen_match %>% dplyr::select(
+  species, species_taxid, assembly_accession, dlLinkMD5, dlLink
+), path = opt$output)
 
 cat("Script execution completed")
