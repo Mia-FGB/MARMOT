@@ -35,7 +35,7 @@ if (is.null(opt$phibase) || is.null(opt$defra)) {
 
 #only need to prepare database once so commented out
 #prepareDatabase('accessionTaxa.sql')
-taxDB <- "accessionTaxa.sql"
+taxDB <- "../accessionTaxa.sql"
 
 # DEFRA database
 # https://planthealthportal.defra.gov.uk/pests-and-diseases/uk-plant-health-risk-register/downloadEntireRiskRegister.cfm # nolint
@@ -43,7 +43,8 @@ taxDB <- "accessionTaxa.sql"
 
 #-----Importing the data, from command line argument
 cat("Loading data from Risk_Register and PHIbase...\n")
-defra <- read.csv(opt$defra)
+#defra <- read.csv(opt$defra)
+defra <- read.csv("../Pathogen_Database_Test/Risk_Register_Test.csv")
 cat("DEFRA data loaded\n")
 
 
@@ -69,6 +70,7 @@ defraID <- defra_name_ID %>%
 
 #-----Importing the data from command line argument
 dfPhibase <- read.delim(opt$phibase, sep=",", fill = TRUE)
+dfPhibase <- read.delim("../Pathogen_Database_Test/phibase_test.csv", sep=",", fill = TRUE)
 cat("PHIbase data loaded\n")
 
 # Filter PHIbase data on host description (potential typo in phibase)
@@ -124,7 +126,7 @@ df_name_ID <- merge(un_combdf,dfTax_db,by.x="id",by.y="taxid",all=T)
 # download.file("https://ftp.ncbi.nlm.nih.gov/genomes/ASSEMBLY_REPORTS/assembly_summary_genbank.txt","assembly_summary_genbank.txt")
 
 cat("Reading in refseq dataframe\n")
-refseq <- read.delim("assembly_summary_refseq.txt",header=F,sep="\t",skip=2,quote="")
+refseq <- read.delim("../assembly_summary_refseq.txt",header=F,sep="\t",skip=2,quote="")
 
 colnames(refseq) <- c("assembly_accession","bioproject","biosample","wgs_master",
   "refseq_category","taxid","species_taxid","organism_name","infraspecific_name",
@@ -135,7 +137,7 @@ colnames(refseq) <- c("assembly_accession","bioproject","biosample","wgs_master"
 refseq <- refseq[!is.na(names(refseq))]
 
 cat("Reading in genbank dataframe\n")
-genbank <- read.delim("assembly_summary_genbank.txt",header=F,sep="\t",skip=2,quote="")
+genbank <- read.delim("../assembly_summary_genbank.txt",header=F,sep="\t",skip=2,quote="")
 colnames(genbank) <- c(
   "assembly_accession","bioproject","biosample","wgs_master",
   "refseq_category","taxid","species_taxid","organism_name",

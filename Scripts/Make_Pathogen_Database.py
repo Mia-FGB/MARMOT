@@ -92,6 +92,8 @@ print("Finished getting TaxaIDs")
 unique_species_df['taxid'] = unique_species_df['species_name'].apply(get_taxid)
 # Drop rows with missing TaxID
 unique_species_df = unique_species_df.dropna(subset=['taxid'])
+#Convert taxid to integer
+unique_species_df['taxid'] = unique_species_df['taxid'].astype(int)
 
 # Download Refseq & Genbank tables ===
 # Function to download a file from a URL
@@ -129,11 +131,8 @@ refseq_set = set(refseq['gbrs_paired_asm'])
 genbank_filtered = genbank[~genbank['assembly_accession'].isin(refseq_set)]
 # Merge the two DataFrames (combine them into one)
 ref_gen = pd.concat([refseq, genbank_filtered], ignore_index=True)
+ref_gen['taxid'] = ref_gen['taxid'].astype(int)
 
-#so i don't have to load the above dfs in for each test but for future uses un comment out the stuff above
-# write_csv = ref_gen.to_csv("ref_gen.csv", index=False)
-
-ref_gen = pd.read_csv("ref_gen.csv")
 
 # Filter ref_gen for species present among the PHIbase and DEFRA pathogens - using taxid for better consistency)
 ref_gen_match = ref_gen[ref_gen['taxid'].isin(unique_species_df['taxid'])]
