@@ -118,7 +118,9 @@ df_name_ID <- merge(un_combdf,dfTax_db,by.x="id",by.y="taxid",all=T)
 # Download Refseq & Genbank tables ----------------------------------------
 
 #Download refseq and genbank tables - Need to do this each time so they are up to date
+#cat("Downloading refseq dataframe\n")
 # download.file("https://ftp.ncbi.nlm.nih.gov/genomes/ASSEMBLY_REPORTS/assembly_summary_refseq.txt","assembly_summary_refseq.txt")
+#cat("Downloading genbank dataframe\n")
 # download.file("https://ftp.ncbi.nlm.nih.gov/genomes/ASSEMBLY_REPORTS/assembly_summary_genbank.txt","assembly_summary_genbank.txt")
 
 cat("Reading in refseq dataframe\n")
