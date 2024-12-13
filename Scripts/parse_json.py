@@ -1,6 +1,8 @@
 import json
 import pandas as pd
 
+#A script to look at the species present in the download json output 
+
 # Read the JSON file
 with open("test_download.json", "r") as file:
     json_data = json.load(file)
