@@ -1,4 +1,5 @@
 cat("Script execution started.\n")
+#Now use the python version of this script instead
 
 #Script adapted from
 # https://github.com/mgiolai/crop_airseq/tree/main/prepare-PHIbase-genomes 

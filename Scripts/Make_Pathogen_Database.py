@@ -133,7 +133,7 @@ def get_longest_accession(df):
 def generate_download_links(accessions_df):
     # Create the 'dlLink' and 'dlLinkMD5' columns
     accessions_df['dlLink'] = accessions_df['ftp_path'].apply(lambda x: f"{x}/{x.split('/')[-1]}_genomic.fna.gz")
-    accessions_df['dlLinkMD5'] = accessions_df['ftp_path'].apply(lambda x: f"https:{x.replace('ftp:', '')}/md5checksums.txt")
+    accessions_df['dlLinkMD5'] = accessions_df['ftp_path'].apply(lambda x: f"{x.replace('ftp:', '')}/md5checksums.txt")
     
     # Select the relevant columns
     selected_columns = accessions_df[['taxid', 'organism_name', 'assembly_accession', 'dlLink', 'dlLinkMD5',]]
@@ -217,10 +217,10 @@ def main():
 
     # Download Refseq & Genbank tables ===
     # Only need to do this occassionally to keep up to date as it takes a long time
-    # print("Downloading RefSeq dataframe")
-    # download_file("https://ftp.ncbi.nlm.nih.gov/genomes/ASSEMBLY_REPORTS/assembly_summary_refseq.txt", "assembly_summary_refseq.txt")
-    # print("Downloading GenBank dataframe")
-    # download_file("https://ftp.ncbi.nlm.nih.gov/genomes/ASSEMBLY_REPORTS/assembly_summary_genbank.txt", "assembly_summary_genbank.txt")
+    print("Downloading RefSeq dataframe")
+    download_file("https://ftp.ncbi.nlm.nih.gov/genomes/ASSEMBLY_REPORTS/assembly_summary_refseq.txt", "assembly_summary_refseq.txt")
+    print("Downloading GenBank dataframe")
+    download_file("https://ftp.ncbi.nlm.nih.gov/genomes/ASSEMBLY_REPORTS/assembly_summary_genbank.txt", "assembly_summary_genbank.txt")
 
     # Read in RefSeq dataframe
     print("Reading in RefSeq dataframe")
