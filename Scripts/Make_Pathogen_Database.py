@@ -5,6 +5,12 @@ import argparse
 from ete3 import NCBITaxa
 import requests
 
+# Initialize NCBI Taxa object ===
+# this is instead of accessionTaxa.sql in R script
+ncbi = NCBITaxa()
+# Uncomment the following line only if you need to refresh the database (Downloads the taxonomy database)
+#ncbi.update_taxonomy_database()
+
 #Functions ===
 
 def download_file(url, filename):
@@ -98,10 +104,15 @@ def get_longest_accession(df):
     
     for _, row in df.iterrows():
         ftp_path = row['ftp_path']
+        #for debugging adding these
+        refseq_category = row['refseq_category']
+        assembly_level = row['assembly_level']
         
         size = download_and_parse_assembly_stats(ftp_path)
         if size is not None:
             results.append((row, size))  # Keep the original row and the computed size
+            #for debugging
+            print(f"Processed {ftp_path}: size={size}, refseq_category={refseq_category}, assembly_level={assembly_level}")
     
     # Sort rows by size and release date, and pick the largest and newest for each taxon
     sorted_rows = sorted(results, key=lambda x: (x[1], x[0]['seq_rel_date']), reverse=True)  # Sort by size and date descending
@@ -146,13 +157,13 @@ def main():
     #read in risk register
     print("Reading in", args.risk_register)
     risk_register = pd.read_csv(args.risk_register)
+    risk_register['Type of pest'] = risk_register['Type of pest'].fillna("")  # Fill NaN values with empty strings
     # Define the list of items to remove
     remove = ["Insect", "Mite", "Nematode", "Plant"] 
     # Filter rows where 'Type of pest' is not in the remove list
     risk_register = risk_register[~risk_register['Type of pest'].isin(remove)] 
     # Remove single quotes from 'Pest Name' column if present
     risk_register['Pest Name'] = risk_register['Pest Name'].str.replace("'", "")
-
 
     # PHIbase https://github.com/PHI-base/data/tree/master/releases ===
     #Download the most up to date version each time 
@@ -180,26 +191,11 @@ def main():
     risk_register = risk_register[['Pest Name']].rename(columns={'Pest Name': 'species_name'})
     phibase = phibase[['Pathogen_species']].rename(columns={'Pathogen_species': 'species_name'})
 
-    # Function to trim species names to only have the first three strings
-    def trim_species_name(name):
-        return ' '.join(name.split()[:3])
-    # Apply the function to trim species names in both DataFrames
-    risk_register['species_name'] = risk_register['species_name'].apply(trim_species_name)
-    phibase['species_name'] = phibase['species_name'].apply(trim_species_name)
-
-    # Combine species names into a set to ensure uniqueness
-    unique_species = set(phibase['species_name']).union(set(risk_register['species_name']))
-    # Convert the set back to a dataframe
-    unique_species_df = pd.DataFrame({"species_name": list(unique_species)})
-    #note - could add extra species here if I wanted
-
-
-    # Initialize NCBI Taxa object ===
-    # this is instead of accessionTaxa.sql in R script
-    ncbi = NCBITaxa()
-    # Uncomment the following line only if you need to refresh the database (Downloads the taxonomy database)
-    #ncbi.update_taxonomy_database()
-
+    # Combine the species names from both DataFrames only retain unique values
+    unique_species_df = pd.concat([phibase, risk_register]).drop_duplicates().reset_index(drop=True)
+    #Note - could add extra species here not in the databases if wanted
+    print("Number of unique before taxID species:", len(unique_species_df))
+    
     # Get the TaxID for each species in the dataframe ===
     unique_species_df['taxid'] = unique_species_df['species_name'].apply(get_taxid)
     print("Finished getting TaxaIDs")
@@ -208,12 +204,14 @@ def main():
     #Convert taxid to integer
     unique_species_df['taxid'] = unique_species_df['taxid'].astype(int)
 
+    unique_species_df.to_csv("unique_species_python.csv", index=False)
+
     # Download Refseq & Genbank tables ===
     # Only need to do this occassionally to keep up to date as it takes a long time
-    print("Downloading RefSeq dataframe")
-    download_file("https://ftp.ncbi.nlm.nih.gov/genomes/ASSEMBLY_REPORTS/assembly_summary_refseq.txt", "assembly_summary_refseq.txt")
-    print("Downloading GenBank dataframe")
-    download_file("https://ftp.ncbi.nlm.nih.gov/genomes/ASSEMBLY_REPORTS/assembly_summary_genbank.txt", "assembly_summary_genbank.txt")
+    # print("Downloading RefSeq dataframe")
+    # download_file("https://ftp.ncbi.nlm.nih.gov/genomes/ASSEMBLY_REPORTS/assembly_summary_refseq.txt", "assembly_summary_refseq.txt")
+    # print("Downloading GenBank dataframe")
+    # download_file("https://ftp.ncbi.nlm.nih.gov/genomes/ASSEMBLY_REPORTS/assembly_summary_genbank.txt", "assembly_summary_genbank.txt")
 
     # Read in RefSeq dataframe
     print("Reading in RefSeq dataframe")
@@ -246,36 +244,38 @@ def main():
     #Only take rows with an https entry
     ref_gen_match = ref_gen_match[ref_gen_match['ftp_path'].str.contains("https://")]
 
-    # Create a list to store the data
-    accessions_list = []
-    # Iterate over the unique taxids in ref_gen_match and call the function
-    for taxid in sorted(ref_gen_match['taxid'].unique()):
-        print(f"Processing taxid {taxid}")
-        try:
-            # Call your function to get the best genome
-            taxid, organism_name, assembly_accession, ftp_path, genome_type = get_best_genome_for_taxid(taxid, ref_gen_match)
+    # # Create a list to store the data
+    # accessions_list = []
+    # # Iterate over the unique taxids in ref_gen_match and call the function
+    # for taxid in sorted(ref_gen_match['taxid'].unique()):
+    #     print(f"Processing taxid {taxid}")
+    #     try:
+    #         # Call your function to get the best genome
+    #         taxid, organism_name, assembly_accession, ftp_path, genome_type = get_best_genome_for_taxid(taxid, ref_gen_match)
             
-            # Append the result as a dictionary to the list
-            accessions_list.append({
-                'taxid': taxid,
-                'organism_name': organism_name,
-                'assembly_accession': assembly_accession,
-                'ftp_path': ftp_path,
-                'type': genome_type
-            })
-        except Exception as e:
-            print(f"Error processing taxid {taxid}: {e}")
+    #         # Append the result as a dictionary to the list
+    #         accessions_list.append({
+    #             'taxid': taxid,
+    #             'organism_name': organism_name,
+    #             'assembly_accession': assembly_accession,
+    #             'ftp_path': ftp_path,
+    #             'type': genome_type
+    #         })
+    #     except Exception as e:
+    #         print(f"Error processing taxid {taxid}: {e}")
 
-    # Convert the list of dictionaries to a DataFrame
-    accessions_df = pd.DataFrame(accessions_list)
+    # # Convert the list of dictionaries to a DataFrame
+    # accessions_df = pd.DataFrame(accessions_list)
 
-    accessions_df_links = generate_download_links(accessions_df)
+    # accessions_df_links = generate_download_links(accessions_df)
 
-    # Define the output path for the JSON file
-    output_path = args.output + ".json"
+    # # Define the output path for the JSON file
+    # output_path = args.output + ".json"
 
-    # Save the results to JSON
-    save_to_json(accessions_df_links, output_path)
+    # # Save the results to JSON
+    # save_to_json(accessions_df_links, output_path)
+
+    output_553 = get_longest_accession(ref_gen_match[ref_gen_match['taxid'] == 553])
 
 if __name__ == "__main__":
     main()

@@ -3,43 +3,48 @@ import pandas as pd
 
 #A script to look at the species present in the download json output 
 
-# Read the JSON file
-with open("test_download.json", "r") as file:
+# Read the new JSON file
+with open("test131224_download.json", "r") as file:
     json_data = json.load(file)
 
 # Convert JSON data to a pandas DataFrame
-df_json = pd.DataFrame(json_data)
+new_json = pd.DataFrame(json_data)
 
-# Extract species from the JSON DataFrame
-species_json = set(df_json['species'])
-print(species_json)
+#read older json file
+with open("download_R.json", "r") as file:
+    old_json_data = json.load(file)
 
+# Convert JSON data to a pandas DataFrame
+old_json = pd.DataFrame(old_json_data)
+
+# Extract species from the JSON DataFrame (set means only unique)
+taxid_new_json = set(new_json['organism_name'])
+old_json['species'] = old_json['species'].apply(lambda x: ' '.join(x.split()[:3]))
+taxid_old_json = set(old_json['species'])
 
 #Script to compare original download.txt and download.json
-# # Read the download.txt file
+# Read the download.txt file
 # df_txt = pd.read_csv("download.txt", sep='\t', header=None, names=['species', 'taxid', 'assembly_accession', 'md5_url', 'fasta_url'])
-# # Extract species from the download.txt DataFrame
-# species_txt = set(df_txt['species'])
+# # Extract species from the download.txt DataFrame and trim
+# df_txt['species'] = df_txt['species'].apply(lambda x: ' '.join(x.split()[:3]))
+# taxid_txt = set(df_txt['species'])
 
-# Count the number of unique species in the JSON
-# species_count = df_json['species'].value_counts()
-# unique_species_count = df_json['species'].nunique()
+# Find species that are in new JSON but not older
+taxa_only_in_new_json = taxid_new_json - taxid_old_json
+#and reverse
+taxa_only_in_old_json = taxid_old_json - taxid_new_json
 
-# # Find species that are in JSON but not in download.txt
-# species_only_in_json = species_json - species_txt
+# Find species that are in download.txt but not in JSON
+# taxa_only_in_txt = taxid_txt - taxid_json
 
-# # Find species that are in download.txt but not in JSON
-# species_only_in_txt = species_txt - species_json
+# Print the results
+print("Species only in new JSON:")
+for species in taxa_only_in_new_json:
+    print(species)
 
-# # Print the count
-# print("Number of species:", len(species_count))
-# print("Number of unique species:", unique_species_count)
+print(len(taxa_only_in_new_json))
 
-# # Print the results
-# print("Species only in JSON:")
-# for species in species_only_in_json:
-#     print(species)
-
-# print("\nSpecies only in download.txt:")
-# for species in species_only_in_txt:
-#     print(species)
+print("\nSpecies only in old JSON:")
+for species in taxa_only_in_old_json:
+    print(species)
+print(len(taxa_only_in_old_json))
