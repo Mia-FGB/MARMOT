@@ -4,14 +4,14 @@ import pandas as pd
 #A script to look at the species present in the download json output 
 
 # Read the new JSON file
-with open("test131224_download.json", "r") as file:
+with open("test161224_download.json", "r") as file:
     json_data = json.load(file)
 
 # Convert JSON data to a pandas DataFrame
 new_json = pd.DataFrame(json_data)
 
 #read older json file
-with open("download_R.json", "r") as file:
+with open("test131224_download.json", "r") as file:
     old_json_data = json.load(file)
 
 # Convert JSON data to a pandas DataFrame
@@ -19,8 +19,7 @@ old_json = pd.DataFrame(old_json_data)
 
 # Extract species from the JSON DataFrame (set means only unique)
 taxid_new_json = set(new_json['organism_name'])
-old_json['species'] = old_json['species'].apply(lambda x: ' '.join(x.split()[:3]))
-taxid_old_json = set(old_json['species'])
+taxid_old_json = set(old_json['organism_name'])
 
 #Script to compare original download.txt and download.json
 # Read the download.txt file

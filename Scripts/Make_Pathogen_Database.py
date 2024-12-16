@@ -47,14 +47,23 @@ def get_best_genome_for_taxid(taxid, ref_gen_df):
     # Assign priorities
     genomes['priority'] = genomes['assembly_level'].map(priority_map).fillna(5)
 
-    # Check for reference genomes
-    ref_genomes = genomes[genomes['refseq_category'] == 'reference genome'].copy()  # Create a copy here
-    if not ref_genomes.empty:
-        genomes = ref_genomes
-
-    # Sort by priority and filter the top priority group
+    # Step 1: Check for a reference genome
+    ref_genome = genomes[genomes['refseq_category'] == 'reference genome']
+    if not ref_genome.empty:
+        # Directly return the single reference genome
+        ref_genome = ref_genome.iloc[0]
+        return (
+            int(ref_genome['taxid']),
+            ref_genome['organism_name'],
+            ref_genome['assembly_accession'],
+            ref_genome['ftp_path'],
+            ref_genome['assembly_level']
+        )
+    
+    # If no reference genomes then sort by priority and filter the top priority group
     genomes = genomes.sort_values(by='priority')
-    top_priority_genomes = genomes[genomes['priority'] == genomes.iloc[0]['priority']]
+    top_priority = genomes.iloc[0]['priority']  # Get the top priority value (e.g. complete genome / chromosme...)
+    top_priority_genomes = genomes[genomes['priority'] == top_priority]  # Filter only rows with top priority
 
     # Select the best genome (longest if ties exist)
     if len(top_priority_genomes) > 1:
@@ -244,38 +253,36 @@ def main():
     #Only take rows with an https entry
     ref_gen_match = ref_gen_match[ref_gen_match['ftp_path'].str.contains("https://")]
 
-    # # Create a list to store the data
-    # accessions_list = []
-    # # Iterate over the unique taxids in ref_gen_match and call the function
-    # for taxid in sorted(ref_gen_match['taxid'].unique()):
-    #     print(f"Processing taxid {taxid}")
-    #     try:
-    #         # Call your function to get the best genome
-    #         taxid, organism_name, assembly_accession, ftp_path, genome_type = get_best_genome_for_taxid(taxid, ref_gen_match)
+    # Create a list to store the data
+    accessions_list = []
+    # Iterate over the unique taxids in ref_gen_match and call the function
+    for taxid in sorted(ref_gen_match['taxid'].unique()):
+        print(f"Processing taxid {taxid}")
+        try:
+            # Call your function to get the best genome
+            taxid, organism_name, assembly_accession, ftp_path, genome_type = get_best_genome_for_taxid(taxid, ref_gen_match)
             
-    #         # Append the result as a dictionary to the list
-    #         accessions_list.append({
-    #             'taxid': taxid,
-    #             'organism_name': organism_name,
-    #             'assembly_accession': assembly_accession,
-    #             'ftp_path': ftp_path,
-    #             'type': genome_type
-    #         })
-    #     except Exception as e:
-    #         print(f"Error processing taxid {taxid}: {e}")
+            # Append the result as a dictionary to the list
+            accessions_list.append({
+                'taxid': taxid,
+                'organism_name': organism_name,
+                'assembly_accession': assembly_accession,
+                'ftp_path': ftp_path,
+                'type': genome_type
+            })
+        except Exception as e:
+            print(f"Error processing taxid {taxid}: {e}")
 
-    # # Convert the list of dictionaries to a DataFrame
-    # accessions_df = pd.DataFrame(accessions_list)
+    # Convert the list of dictionaries to a DataFrame
+    accessions_df = pd.DataFrame(accessions_list)
 
-    # accessions_df_links = generate_download_links(accessions_df)
+    accessions_df_links = generate_download_links(accessions_df)
 
-    # # Define the output path for the JSON file
-    # output_path = args.output + ".json"
+    # Define the output path for the JSON file
+    output_path = args.output + ".json"
 
-    # # Save the results to JSON
-    # save_to_json(accessions_df_links, output_path)
-
-    output_553 = get_longest_accession(ref_gen_match[ref_gen_match['taxid'] == 553])
+    # Save the results to JSON
+    save_to_json(accessions_df_links, output_path)
 
 if __name__ == "__main__":
     main()
