@@ -30,7 +30,7 @@ JOBID1=$(sbatch --mem 1G \
     -o "barcode${barcode_number}/logs/${barcode_number}_prepreads.out" \
     --error "barcode${barcode_number}/logs/${barcode_number}_prepreads.err" \
     --job-name="${barcode_number}_prepreads" \
-    --wrap "/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/nanopore_PHIbase_analysis_scripts/prep_reads.sh $barcode_number $location $filter_length $scratch_dir" | awk '{print $NF}')
+    --wrap "/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/nanopore_PHIbase_analysis_scripts/Scripts/prep_reads.sh $barcode_number $location $filter_length $scratch_dir" | awk '{print $NF}')
 
 # Check if the job submission was successful
 if [ -z "$JOBID1" ]; then
@@ -105,7 +105,7 @@ echo "The minimap job (${JOBID2}) completed successfully."
 #     -o "$barcode_dir/logs/${barcode_number}_paf_parse.out" \
 #     --error "$barcode_dir/logs/${barcode_number}_paf_parse.err" \
 #     --job-name="${barcode_number}_paf_parse" \
-#     --wrap "/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/nanopore_PHIbase_analysis_scripts/paf_parse.py -b ${barcode_number}" | awk '{print $NF}')
+#     --wrap "/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/nanopore_PHIbase_analysis_scripts/Scripts/paf_parse.py -b ${barcode_number}" | awk '{print $NF}')
 
 # # Check if the job submission was successful
 # if [ -z "$JOBID3" ]; then
@@ -124,7 +124,7 @@ JOBID4=$(sbatch \
     -o "$barcode_dir/logs/${barcode_number}_lcaparse.out" \
     --error "$barcode_dir/logs/${barcode_number}_lcaparse.err" \
     --job-name="${barcode_number}_lcaparse" \
-    --wrap "/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/nanopore_PHIbase_analysis_scripts/run_lcaparse.sh $barcode_number" | awk '{print $NF}')
+    --wrap "/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/nanopore_PHIbase_analysis_scripts/Scripts/run_lcaparse.sh $barcode_number" | awk '{print $NF}')
 
 # Check if the job submission was successful
 if [ -z "$JOBID4" ]; then
@@ -176,7 +176,7 @@ JOBID5=$(sbatch --dependency=afterok:$JOBID4 \
     -o "$barcode_dir/logs/${barcode_number}_write_files.out" \
     -e "$barcode_dir/logs/${barcode_number}_write_files.err" \
     --job-name="${barcode_number}_write_files" \
-    --wrap "/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/nanopore_PHIbase_analysis_scripts/write_files.sh $barcode_number" | awk '{print $NF}')
+    --wrap "/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/nanopore_PHIbase_analysis_scripts/Scripts/write_files.sh $barcode_number" | awk '{print $NF}')
 
 echo "Submitted write_files job with JOBID: ($JOBID5)"
 
