@@ -31,21 +31,29 @@ barcode_dir="./barcode${barcode_number}"
 mkdir -p "$scratch_dir"
 
 # Concatenate the pass files based on the provided barcode number and location 
-# only unzips when necessary 
-# outputs the new concatenated file into scratch area
-for file in "$location/fastq_pass/barcode${barcode_number}"/* "$location/fastq/barcode${barcode_number}"/*; do
-    if [[ "$file" == *.fastq || "$file" == *.fq ]]; then
-        cat "$file" >> "$scratch_dir/${barcode_number}_barcode.fastq"
-    elif [[ "$file" == *.gz ]]; then
-        zcat "$file" >> "$scratch_dir/${barcode_number}_barcode.fastq"
-    else
-        echo "Warning: Skipping unrecognized file format '$file'."
-    fi
-done
-
-# Check if the concatenated file exists
-if [ ! -e "$scratch_dir/${barcode_number}_barcode.fastq" ]; then
-    echo "Error: Concatenated FASTQ file '$scratch_dir/${barcode_number}_barcode.fastq' not found."
+# only unzips when necessary and outputs the new concatenated file into scratch area
+if [ -d "$location/fastq_pass/barcode${barcode_number}" ]; then
+    for file in "$location/fastq_pass/barcode${barcode_number}"/*; do
+        if [[ "$file" == *.fastq || "$file" == *.fq ]]; then
+            cat "$file" >> "$scratch_dir/${barcode_number}_barcode.fastq"
+        elif [[ "$file" == *.gz ]]; then
+            zcat "$file" >> "$scratch_dir/${barcode_number}_barcode.fastq"
+        else
+            echo "Warning: Skipping unrecognized file format '$file'."
+        fi
+    done
+elif [ -d "$location/fastq/barcode${barcode_number}" ]; then
+    for file in "$location/fastq/barcode${barcode_number}"/*; do
+        if [[ "$file" == *.fastq || "$file" == *.fq ]]; then
+            cat "$file" >> "$scratch_dir/${barcode_number}_barcode.fastq"
+        elif [[ "$file" == *.gz ]]; then
+            zcat "$file" >> "$scratch_dir/${barcode_number}_barcode.fastq"
+        else
+            echo "Warning: Skipping unrecognized file format '$file'."
+        fi
+    done
+else
+    echo "Error: Neither fastq or fastq_pass directory exists for location ${location} and barcode ${barcode_number}."
     exit 1
 fi
 
