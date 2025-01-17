@@ -19,7 +19,5 @@ lcaparse -input $barcode_dir/${barcode_number}_mapped.paf \
 -taxonomy /ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/taxonomy/taxdmp_2024-04-01 \
 -mapfile /ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/lcaparse/mapfiles/accession_map_2024-04_eukaryota.txt \
 -format PAF \
--minidentity 80 \
--mincoverage 50 \
--mincombined 50 \
+-minidentity 85 \
 -minlength 150 

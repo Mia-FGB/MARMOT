@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+#Now use lca parse instead of this script as it provides a better output
 #A script to parse paf files from minimap output
 #Filters for mapping quality 
 #attempts to choose best mapping for reads which map to multiple taxa
