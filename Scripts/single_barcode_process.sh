@@ -20,7 +20,8 @@ fi
 
 # Calculate the barcode directory path
 barcode_dir="barcode${barcode_number}"
-# Create log directory if it doesn't exist
+# Create barcode &  log directory if they don't exist
+mkdir -p "$barcode_dir"
 mkdir -p "$barcode_dir/logs"
 
 # Execute the prep_reads.sh script with the barcode and location
@@ -96,24 +97,24 @@ done
 
 echo "The minimap job (${JOBID2}) completed successfully."
 
-#Submit job for paf_parse script
-JOBID3=$(sbatch \
-    --dependency=afterok:$JOBID2 \
-    --mem 2G \
-    -p ei-short \
-    -o "$barcode_dir/logs/${barcode_number}_paf_parse.out" \
-    --error "$barcode_dir/logs/${barcode_number}_paf_parse.err" \
-    --job-name="${barcode_number}_paf_parse" \
-    --wrap "/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/nanopore_PHIbase_analysis_scripts/paf_parse.py -b ${barcode_number}" | awk '{print $NF}')
+#Submit job for paf_parse script - no longer needed
+# JOBID3=$(sbatch \
+#     --dependency=afterok:$JOBID2 \
+#     --mem 2G \
+#     -p ei-short \
+#     -o "$barcode_dir/logs/${barcode_number}_paf_parse.out" \
+#     --error "$barcode_dir/logs/${barcode_number}_paf_parse.err" \
+#     --job-name="${barcode_number}_paf_parse" \
+#     --wrap "/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/nanopore_PHIbase_analysis_scripts/paf_parse.py -b ${barcode_number}" | awk '{print $NF}')
 
-# Check if the job submission was successful
-if [ -z "$JOBID3" ]; then
-    echo "Error: Failed to submit the paf_parse job."
-    exit 1
-fi
+# # Check if the job submission was successful
+# if [ -z "$JOBID3" ]; then
+#     echo "Error: Failed to submit the paf_parse job."
+#     exit 1
+# fi
 
-echo "Submitted paf_parse ($JOBID3) will run when minimap ($JOBID2) finishes"
-echo "Barcode ${barcode_number} paf file is being parsed"
+# echo "Submitted paf_parse ($JOBID3) will run when minimap ($JOBID2) finishes"
+# echo "Barcode ${barcode_number} paf file is being parsed"
 
 #Submit job for lca_parse script
 JOBID4=$(sbatch \
@@ -134,22 +135,22 @@ fi
 echo "Submitted lca_parse ($JOBID4) will run when minimap ($JOBID2) finishes"
 echo "Barcode ${barcode_number} minimap paf file is being lca parsed"
 
-while true; do
-    JOB3_STATUS=$(sacct -j $JOBID3 | awk 'NR==3 {print $6}')
-    #echo "Job status for $JOBID3 is $JOB3_STATUS" # Uncomment for debugging
-    if [[ "$JOB3_STATUS" == *COMPLETED* ]]; then
-        echo "paf_parse Job has finished."
-        break
-    elif [[ "$JOB3_STATUS" == *FAILED* ]]; then
-        echo "Error: The paf_parse job ($JOBID3) failed."
-        exit 1
-    elif [[ "$JOB3_STATUS" == *RUNNING* || "$JOB3_STATUS" == *PENDING* ]]; then
-        echo "paf_parse Job still running/pending..."
-        sleep 120
-    fi
-done
+# while true; do
+#     JOB3_STATUS=$(sacct -j $JOBID3 | awk 'NR==3 {print $6}')
+#     #echo "Job status for $JOBID3 is $JOB3_STATUS" # Uncomment for debugging
+#     if [[ "$JOB3_STATUS" == *COMPLETED* ]]; then
+#         echo "paf_parse Job has finished."
+#         break
+#     elif [[ "$JOB3_STATUS" == *FAILED* ]]; then
+#         echo "Error: The paf_parse job ($JOBID3) failed."
+#         exit 1
+#     elif [[ "$JOB3_STATUS" == *RUNNING* || "$JOB3_STATUS" == *PENDING* ]]; then
+#         echo "paf_parse Job still running/pending..."
+#         sleep 120
+#     fi
+# done
 
-echo "The paf_parse job ($JOBID3) completed successfully."
+# echo "The paf_parse job ($JOBID3) completed successfully."
 
 while true; do
     JOB4_STATUS=$(sacct -j $JOBID4 | awk 'NR==3 {print $6}')

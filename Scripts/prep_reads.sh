@@ -25,7 +25,6 @@ fi
 
 # Create the barcode directory in current directory if it doesn't exist (-p flag)
 barcode_dir="./barcode${barcode_number}"
-mkdir -p "$barcode_dir"
 
 # Create the concatenated read output directory if it doesn't exist (-p flag)
 #This should be scratch area 
