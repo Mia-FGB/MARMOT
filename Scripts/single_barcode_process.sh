@@ -63,7 +63,7 @@ echo "The prep_reads job ($JOBID1) completed successfully."
 JOBID2=$(sbatch \
     --dependency=afterok:$JOBID1 \
     --mem 50G \
-    -p ei-medium \ 
+    -p ei-medium \
     -o "$barcode_dir/logs/${barcode_number}_minimap.out" \
     --error "$barcode_dir/logs/${barcode_number}_minimap.err" \
     --job-name="${barcode_number}_minimap2" \
