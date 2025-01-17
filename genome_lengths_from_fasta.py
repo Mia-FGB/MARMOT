@@ -1,4 +1,4 @@
-#this script doesn't work on the hpc without a singualrity container for BIO
+#this script doesn't work on the hpc without a singualrity container for BIO - but can run on local
 import sys
 from Bio import SeqIO  # Biopython library for parsing FASTA files
 

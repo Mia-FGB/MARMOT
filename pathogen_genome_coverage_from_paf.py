@@ -43,7 +43,7 @@ def process_paf_file(pafFilename, genome_lengths): #Function to process paf file
             # if coverage > 110:
             #     print (f"Warning: coverage for read {read_id} is greater than 110% ({coverage:.2f}%)")
 
-            if coverage >= 80 and identity >= 80: #change as needed
+            if coverage >= 80 and identity >= 90: #change as needed
                 if (read_id, taxaID) not in processed_reads: #only count each read aligning to same taxa once
                     if taxaID not in taxa_mapped_bases:
                         taxa_mapped_bases[taxaID] = 0 #initialize taxaID in dictionary
