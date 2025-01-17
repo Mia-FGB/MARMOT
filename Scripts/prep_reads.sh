@@ -23,7 +23,7 @@ if [ ! -d "$location" ]; then
     exit 1
 fi
 
-# Create the barcode directory in current directory if it doesn't exist (-p flag)
+# Specify barcode directory
 barcode_dir="./barcode${barcode_number}"
 
 # Create the concatenated read output directory if it doesn't exist (-p flag)
@@ -31,8 +31,9 @@ barcode_dir="./barcode${barcode_number}"
 mkdir -p "$scratch_dir"
 
 # Concatenate the pass files based on the provided barcode number and location 
+# only unzips when necessary 
 # outputs the new concatenated file into scratch area
-for file in "$location/fastq_pass/barcode${barcode_number}"/*; do
+for file in "$location/fastq_pass/barcode${barcode_number}"/* "$location/fastq/barcode${barcode_number}"/*; do
     if [[ "$file" == *.fastq || "$file" == *.fq ]]; then
         cat "$file" >> "$scratch_dir/${barcode_number}_barcode.fastq"
     elif [[ "$file" == *.gz ]]; then
