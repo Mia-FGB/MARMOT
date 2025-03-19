@@ -1,3 +1,14 @@
+# Script to be run on local
+
+#Python script to generate a list of download links for the genomes of pathogens in PHIbase and DEFRA Risk Register databases
+#The script reads in the PHIbase and DEFRA Risk Register databases and extracts the species names
+#It then uses the NCBI Taxonomy database to get the TaxID for each species
+#The script then reads in the RefSeq and GenBank assembly databases and filters for the species present in the PHIbase and DEFRA databases
+#The script then selects the best genome for each species based on the assembly level and refseq category
+#The script then generates download links for the genomes and MD5 checksum files
+#The output is a JSON file with the download links for the genomes and MD5 checksum files
+
+
 import pandas as pd 
 import json
 import csv
