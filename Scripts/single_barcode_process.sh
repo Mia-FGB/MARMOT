@@ -1,7 +1,7 @@
 #!/bin/bash
 # Check for the correct number of arguments
-if [ "$#" -ne 5 ]; then
-    echo "Usage: $0 <barcode_number> <location> <filter_length> <reference_database> <scratch_dir>"
+if [ "$#" -ne 8 ]; then
+    echo "Usage single_barcode_process.sh: $0 <barcode_number> <location> <filter_length> <reference_database> <scratch_dir> <output_dir> <concatenated> <contig_stats>"
     exit 1
 fi
 
@@ -11,6 +11,9 @@ location="$2"
 filter_length="$3"
 reference_database="$4"
 scratch_dir="$5"
+output_dir="$6"
+concatenated="$7"
+contig_stats="$8"
 
 # Check if the specified location exists
 if [ ! -d "$location" ]; then
@@ -19,7 +22,7 @@ if [ ! -d "$location" ]; then
 fi
 
 # Calculate the barcode directory path
-barcode_dir="barcode${barcode_number}"
+barcode_dir="$output_dir/barcode${barcode_number}"
 # Create barcode &  log directory if they don't exist
 mkdir -p "$barcode_dir"
 mkdir -p "$barcode_dir/logs"
@@ -30,7 +33,7 @@ JOBID1=$(sbatch --mem 1G \
     -o "barcode${barcode_number}/logs/${barcode_number}_prepreads.out" \
     --error "barcode${barcode_number}/logs/${barcode_number}_prepreads.err" \
     --job-name="${barcode_number}_prepreads" \
-    --wrap "/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/nanopore_PHIbase_analysis_scripts/Scripts/prep_reads.sh $barcode_number $location $filter_length $scratch_dir" | awk '{print $NF}')
+    --wrap "/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/nanopore_PHIbase_analysis_scripts/Scripts/prep_reads.sh $barcode_number $location $filter_length $scratch_dir $output_dir $concatenated $contig_stats" | awk '{print $NF}')
 
 # Check if the job submission was successful
 if [ -z "$JOBID1" ]; then

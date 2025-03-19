@@ -12,16 +12,28 @@ Linked to - ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/nano
 
 ## Usage
 
-To use the pipeline, ensure the `submit_batch_jobs.sh` script is configured correctly with:
-- **Barcode numbers**
+To use the pipeline, ensure the `config_template.sh` script is configured correctly with:
+- **Raw Read Location**
+ - Raw reads / rebasecalled on the HPC, level above fastq folders
 - **Pre-filter length**
+ - Reads shorter than this length will be removed before alignment (e.g. 300bp)
 - **Reference database path**
-- **Raw read path**
+ - Location of the reference database .fa file
+- **Scratch Output Directory**
+ -  Directory where concatenated reads can outpu to
+- **Output Directory**
+ - Where the output of the pipline will be written
+ - It is recommended to run the script from here so the submission log is written to the same place
+- **Barcode List**
+ - Barcodes to analyse, can be as a sequence or list of specific barcodes 
+ - e.g. barcode_list=("01" "02" "05 "08) or barcode_list=($(seq -w 01 88))
+
 
 Then, run the script from your desired output directory:
 ```sh
-/path/to/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/nanopore_PHIbase_analysis_scripts/submit_batch_jobs.sh
+/path/to/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/nanopore_PHIbase_analysis_scripts/submit_batch_jobs.sh config_template.sh
 ```
+Can use array=1-num_barcodes, to ensure nly the correct number of jobs are submitted
 
 ## Updating the Reference Database
 

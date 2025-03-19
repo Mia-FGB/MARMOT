@@ -1,0 +1,14 @@
+Bin size is 100
+NumContigs:	11
+TotalSum:	24969
+MeanLength:	2269.91
+MedianLength	0
+ModeLength:	0
+Shortest:	162
+Longest:	10393
+N50Length:	3438
+N50Count:	2
+N90Length:	1070
+N90Count:	7
+Headings:	NumContigs	TotalSum	MeanLength	Shortest	Longest	N50Length	N50Count	N90Length	N90Count
+AllFields:	11	24969	2269.91	162	10393	3438	2	1070	7
