@@ -2,7 +2,7 @@
 #SBATCH -J emerge_pipeline                    # Job name
 #SBATCH -o logs/emerge_pipeline_sub_%a.out     # Output for each job
 #SBATCH -e logs/emerge_pipeline_sub_%a.err     # Error for each job
-#SBATCH -p ei-short                            # For testing on short
+#SBATCH -p ei-medium                            
 #SBATCH -c 1                                    # Number of CPU cores
 #SBATCH --mem=2G                                # Memory size - optimise later
 #SBATCH --mail-type=END,FAIL                    # Notifications for job done & fail 
