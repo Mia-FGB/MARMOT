@@ -1,7 +1,7 @@
 #!/bin/bash
 # Check for the correct number of arguments
-if [ "$#" -ne 8 ]; then
-    echo "Usage single_barcode_process.sh: $0 <barcode_number> <location> <filter_length> <reference_database> <scratch_dir> <output_dir> <concatenated> <contig_stats>"
+if [ "$#" -ne 9 ]; then
+    echo "Usage single_barcode_process.sh: $0 <barcode_number> <location> <filter_length> <reference_database> <scratch_dir> <output_dir> <concatenated> <contig_stats> <genome_lengths_file>"
     exit 1
 fi
 
@@ -14,6 +14,7 @@ scratch_dir="$5"
 output_dir="$6"
 concatenated="$7"
 contig_stats="$8"
+genome_lengths_file="$9"
 
 # Check if the specified location exists
 if [ ! -d "$location" ]; then
@@ -26,6 +27,7 @@ barcode_dir="$output_dir/barcode${barcode_number}"
 # Create barcode &  log directory if they don't exist
 mkdir -p "$barcode_dir"
 mkdir -p "$barcode_dir/logs"
+
 
 # Execute the prep_reads.sh script with the barcode and location
 JOBID1=$(sbatch --mem 1G \
@@ -61,12 +63,11 @@ done
 echo "The prep_reads job ($JOBID1) completed successfully."
 
 
-# #Minimap Job after JOB1 is finished - specific parameters -N 100, -c and -x map-ont
-#May be able to move this to ei-short now that is gets 12 hours
+# Minimap Job after JOB1 is finished - specific parameters -N 100, -c and -x map-ont
 JOBID2=$(sbatch \
     --dependency=afterok:$JOBID1 \
     --mem 50G \
-    -p ei-medium \
+    -p ei-short \
     -o "$barcode_dir/logs/${barcode_number}_minimap.out" \
     --error "$barcode_dir/logs/${barcode_number}_minimap.err" \
     --job-name="${barcode_number}_minimap2" \
@@ -101,27 +102,8 @@ done
 
 echo "The minimap job (${JOBID2}) completed successfully."
 
-#Submit job for paf_parse script - no longer needed
-# JOBID3=$(sbatch \
-#     --dependency=afterok:$JOBID2 \
-#     --mem 2G \
-#     -p ei-short \
-#     -o "$barcode_dir/logs/${barcode_number}_paf_parse.out" \
-#     --error "$barcode_dir/logs/${barcode_number}_paf_parse.err" \
-#     --job-name="${barcode_number}_paf_parse" \
-#     --wrap "/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/nanopore_PHIbase_analysis_scripts/Scripts/paf_parse.py -b ${barcode_number}" | awk '{print $NF}')
-
-# # Check if the job submission was successful
-# if [ -z "$JOBID3" ]; then
-#     echo "Error: Failed to submit the paf_parse job."
-#     exit 1
-# fi
-
-# echo "Submitted paf_parse ($JOBID3) will run when minimap ($JOBID2) finishes"
-# echo "Barcode ${barcode_number} paf file is being parsed"
-
 #Submit job for lca_parse script
-JOBID4=$(sbatch \
+JOBID3=$(sbatch \
     --dependency=afterok:$JOBID2 \
     --mem 75G \
     -p ei-short \
@@ -131,49 +113,41 @@ JOBID4=$(sbatch \
     --wrap "/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/nanopore_PHIbase_analysis_scripts/Scripts/run_lcaparse.sh $barcode_number" | awk '{print $NF}')
 
 # Check if the job submission was successful
-if [ -z "$JOBID4" ]; then
+if [ -z "$JOBID3" ]; then
     echo "Error: Failed to submit the lca_parse job."
     exit 1
 fi
 
-echo "Submitted lca_parse ($JOBID4) will run when minimap ($JOBID2) finishes"
+echo "Submitted lca_parse ($JOBID3) will run when minimap ($JOBID2) finishes"
 echo "Barcode ${barcode_number} minimap paf file is being lca parsed"
 
-# while true; do
-#     JOB3_STATUS=$(sacct -j $JOBID3 | awk 'NR==3 {print $6}')
-#     #echo "Job status for $JOBID3 is $JOB3_STATUS" # Uncomment for debugging
-#     if [[ "$JOB3_STATUS" == *COMPLETED* ]]; then
-#         echo "paf_parse Job has finished."
-#         break
-#     elif [[ "$JOB3_STATUS" == *FAILED* ]]; then
-#         echo "Error: The paf_parse job ($JOBID3) failed."
-#         exit 1
-#     elif [[ "$JOB3_STATUS" == *RUNNING* || "$JOB3_STATUS" == *PENDING* ]]; then
-#         echo "paf_parse Job still running/pending..."
-#         sleep 120
-#     fi
-# done
-
-# echo "The paf_parse job ($JOBID3) completed successfully."
-
 while true; do
-    JOB4_STATUS=$(sacct -j $JOBID4 | awk 'NR==3 {print $6}')
+    JOB3_STATUS=$(sacct -j $JOBID3 | awk 'NR==3 {print $6}')
     #echo "Job status for $JOBID3 is $JOB3_STATUS" # Uncomment for debugging
-    if [[ "$JOB4_STATUS" == *COMPLETED* ]]; then
+    if [[ "$JOB3_STATUS" == *COMPLETED* ]]; then
         echo "lca_parse job has completed."
         break
-    elif [[ "$JOB4_STATUS" == *FAILED* ]]; then
-        echo "Error: The lca_parse job ($JOBID4) failed."
+    elif [[ "$JOB3_STATUS" == *FAILED* ]]; then
+        echo "Error: The lca_parse job ($JOBID3) failed."
         exit 1
-    elif [[ "$JOB4_STATUS" == *RUNNING* || "$JOB4_STATUS" == *PENDING* ]]; then
+    elif [[ "$JOB3_STATUS" == *RUNNING* || "$JOB3_STATUS" == *PENDING* ]]; then
         echo "lca_parse Job still running/pending..."
         sleep 120
     fi
 done
 
-echo "The lca_parse job ($JOBID4) completed successfully."
+echo "The lca_parse job ($JOBID3) completed successfully."
 
-#Once minimap & lcaparse are complete run write_files.sh
+# Genome coverage script - may need changing not sure if it should have "python"
+JOBID4=$(sbatch --dependency=afterok:$JOBID3 \
+    -p ei-short \
+    --mem 2G \
+    -o "$barcode_dir/logs/${barcode_number}_genome_coverage.out" \
+    -e "$barcode_dir/logs/${barcode_number}_genome_coverage.err" \
+    --job-name="${barcode_number}_genome_coverage" \
+    --wrap "python /ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/nanopore_PHIbase_analysis_scripts/Scripts/pathogen_genome_coverage_from_paf.py $barcode_number $genome_lengths_file" | awk '{print $NF}')
+
+#Once genome coverage is complete run write_files.sh
 JOBID5=$(sbatch --dependency=afterok:$JOBID4 \
     -p ei-short \
     --mem 2G \
@@ -190,7 +164,7 @@ if [ -z "$JOBID5" ]; then
     exit 1
 fi
 
-echo "Submitted write_files ($JOBID5) will run when lca_parse ($JOBID4) finishes, assuming paf parse will also be completed by this step"
+echo "Submitted write_files ($JOBID5) will run when genome coverage ($JOBID4) finishes"
 
 while true; do
     JOB5_STATUS=$(sacct -j $JOBID5 | awk 'NR==3 {print $6}')

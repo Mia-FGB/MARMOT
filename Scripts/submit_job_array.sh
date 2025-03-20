@@ -2,7 +2,7 @@
 #SBATCH -J emerge_pipeline                    # Job name
 #SBATCH -o logs/emerge_pipeline_sub_%a.out     # Output for each job
 #SBATCH -e logs/emerge_pipeline_sub_%a.err     # Error for each job
-#SBATCH -p ei-medium                            
+#SBATCH -p ei-short                           
 #SBATCH -c 1                                    # Number of CPU cores
 #SBATCH --mem=2G                                # Memory size - optimise later
 #SBATCH --mail-type=END,FAIL                    # Notifications for job done & fail 
@@ -36,14 +36,16 @@ cd $output_dir
 touch ./percent_reads_retained_length_filter.txt
 touch ./no_fail_reads.txt
 touch ./no_reads_ignored_parse_filter.txt
-touch ./all_taxaID_count.tsv
 touch ./lcaparse_summary.txt
 touch ./lcaparse_perread.txt
+touch ./genome_coverage_all.txt
 
 # Add a header line to lcaparse_summary.txt if it doesn't already exist
 grep -q "Barcode\tRead_Count\tPercentage_of_Reads\tTaxon_ID\tTaxon_Path\tTaxon_Rank" ./lcaparse_summary.txt || printf "Barcode\tRead_Count\tPercentage_of_Reads\tTaxon_ID\tTaxon_Path\tTaxon_Rank\n" > ./lcaparse_summary.txt
 # Add a header line to lcaparse_perread.txt if it doesn't already exist
 grep -q "Barcode\tRead_ID\tTaxon_ID\tTaxon_Name\tTaxon_Rank\tMean_Identity\tMaxMeanIdentity" ./lcaparse_perread.txt || printf "Barcode\tRead_ID\tTaxon_ID\tTaxon_Name\tTaxon_Rank\tMean_Identity\tMaxMeanIdentity\n" > ./lcaparse_perread.txt
+# Add a header line to genome_coverage_all.txt if it doesn't already exist
+grep -q "Barcode\ttaxaID\tmapped_bases\tgenome_length\tcoverage_percentage\tnum_reads" ./genome_coverage_all.txt || printf "Barcode\ttaxaID\tmapped_bases\tgenome_length\tcoverage_percentage\tnum_reads\n" > ./genome_coverage_all.txt
 
 # Get the barcode corresponding to this task ID
 barcode_number="${barcode_list[$((SLURM_ARRAY_TASK_ID - 1))]}"
@@ -56,10 +58,10 @@ barcode_dir="barcode${barcode_number}"
 
 # Execute the main processing script 
  /ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/nanopore_PHIbase_analysis_scripts/Scripts/single_barcode_process.sh \
-    $barcode_number $location $filter_length $reference_database $scratch_dir $output_dir $concatenated $contig_stats
+    $barcode_number $location $filter_length $reference_database $scratch_dir $output_dir $concatenated $contig_stats $genome_lengths_file
 
 # Check if the job script encountered an error and handle cancellation
 if [ $? -ne 0 ]; then
-    echo "Error detected for barcode ${barcode_number}. Cancelling job ${SLURM_JOB_ID}."
-    scancel "$SLURM_JOB_ID"
+    echo "Error detected for barcode ${barcode_number}. Cancelling job ${SLURM_JOB_ID}_${SLURM_ARRAY_TASK_ID}."
+    scancel "${SLURM_JOB_ID}_${SLURM_ARRAY_TASK_ID}"
 fi

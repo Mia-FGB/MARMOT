@@ -29,6 +29,12 @@ fi
 # Specify barcode directory - created in current directory 
 barcode_dir="$output_dir/barcode${barcode_number}"
 
+#Check if the flag file exists and exit without error if it does
+if [ -f "$barcode_dir/prep_reads_finished.flag" ]; then
+    echo "Flag file prep_reads_finished.flag already exists for barcode ${barcode_number}. Exiting"
+    exit 0
+fi
+
 # Create scratch directory if it doesn't exist
 mkdir -p "$scratch_dir"
 
@@ -162,4 +168,6 @@ if ! get_contig_stats.pl -q -i "$scratch_dir/${barcode_number}_barcode_${filter_
     exit 1
 fi
 
-
+# Create the flag file to indicate successful completion
+echo "prep_reads.sh has finished successfully, writing prep_reads_finished.flag"
+touch "$barcode_dir/prep_reads_finished.flag"

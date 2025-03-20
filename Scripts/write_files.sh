@@ -24,11 +24,14 @@ fi
 # Append number of ignored reads after paf parse to file
 echo "Barcode_${barcode_number}:" "$(cat "${barcode_dir}/${barcode_number}_number_ignored_reads.tsv")" >> "no_reads_ignored_parse_filter.txt"
 
-# Append the taxaID_count file to all taxaID_count file from paf parse
-echo "$(cat "${barcode_dir}/${barcode_number}_taxaID_counts.tsv")" >> "all_taxaID_count.tsv"
-
 # Add a barcode column to the lcaparse_summary file
 awk 'BEGIN {OFS="\t"} {print "'${barcode_number}'", $0}' "${barcode_dir}/${barcode_number}_lcaparse_summary.txt" >> "lcaparse_summary.txt"
 
 # Add a barcode column to the lcaparse_perread file
 awk 'BEGIN {OFS="\t"} {print "'${barcode_number}'", $0}' "${barcode_dir}/${barcode_number}_lcaparse_perread.txt" >> "lcaparse_perread.txt"
+
+# Process the genome coverage file to add a barcode column and append only the first five columns (skipping readIDS)
+input_file="${barcode_dir}/${barcode_number}_coverage.tsv"
+output_file="genome_coverage_all.txt"
+
+awk -v barcode="${barcode_number}" 'BEGIN {OFS="\t"} {print barcode, $1, $2, $3, $4, $5}' "${input_file}" >> "${output_file}"

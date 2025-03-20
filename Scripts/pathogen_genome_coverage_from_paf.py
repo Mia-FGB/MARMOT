@@ -5,6 +5,8 @@
 #Should be run from directory which contains barcode directories
 #Uses a genome_lengths_file generated with genome_lengths_from_fasta.py script using the reference database used for mapping
 
+#Usage: python pathogen_genome_coverage_from_paf.py <barcode_number> <genome_lengths_file>
+
 import sys, os, csv
 
 #Opening a tab delimited file with taxaID and reference genome length
