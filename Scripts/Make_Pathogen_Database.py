@@ -16,6 +16,9 @@ import argparse
 from ete3 import NCBITaxa
 import requests
 
+# Usage
+# python Make_Pathogen_Database.py --phibase <phibase.csv> --risk_register <Risk_Register.csv> --output <output_prefix>
+
 # Initialize NCBI Taxa object ===
 # this is instead of accessionTaxa.sql in R script
 ncbi = NCBITaxa()

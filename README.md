@@ -38,14 +38,22 @@ Can use array=1-num_barcodes, to ensure nly the correct number of jobs are submi
 ## Updating the Reference Database
 
 The emergent pathogen database should be updated regularly. The latest update was on **08/05/24**.
+The reference database can be updated using the following scripts, usually on local machine with interent access.
+Conda environment - `pathogen_database`
+**`Make_Pathogen_Database.py`** 
+- Takes CSV files from DEFRA & PHIbase as an input
+- Outputs a JSON file with the download links for the genomes and MD5 checksum files
+**`download.py`**
+ - Uses the Output JSON file to download the reference genomes and create the reference database
+
 
 ## Output Structure
 
 The pipeline generates the following output:
-- **A directory for each barcode** containing result files.
-- **A log directory** storing output/error messages for each batch job.
+- **A directory for each barcode** containing result files and output/error messages for the individual jobs.
+- **A log directory** storing output/error messages for each submission batch job.
 - **Above the barcode directories:**
-  - `all_taxaID_counts.tsv`: Contains statistics for each barcode.
+  - ` lcaparse_summary.txt`: Contains the Barcode, Read Count and % of reads assigned to each Taxa
   - Other summary statistics files.
   
 ## Scripts Overview
@@ -95,8 +103,9 @@ Unzips and concatenates pass reads, generates contig statistics, and applies len
 Located in `barcodeXX` directory:
 - `XX_contig_stats.txt`
 - `XX_barcode.fastq` (all pass reads)
-- `XX_num_fail.txt` (number of failed reads)
-- `XX_barcode_300bp.fastq`
+- `XX_num_fail.txt` (number of failed reads, only possible if there is a fastq_fail directory)
+In Scratch_Dir
+- `XX_barcode_300bp.fastq` (Reads filtered >300bp)
 
 ---
 ### `paf_parse.py`

@@ -1,9 +1,10 @@
 import json
 import pandas as pd
 
-#A script to look at the species present in the download json output 
+#A script to look at the species present in the download json output
+# Created from download.sh or download.py script 
 
-# Read the new JSON file
+# Read the new JSON file - harcoded path
 with open("test161224_download.json", "r") as file:
     json_data = json.load(file)
 

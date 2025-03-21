@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
-#run in Conda environment = pathogen_database
+# run in Conda environment = pathogen_database
+# Usage
+#  python download.py --input <JSON_file> --date <MMYYYY>
 
 import os
 import hashlib
