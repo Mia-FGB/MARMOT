@@ -1,7 +1,7 @@
-# Emergent Pathogen pipeline scripts 
+# 🐹 MARMOT
 
-This repository contains scripts for detecting emergent pathogens in nanopore sequencing data. The pipeline processes raw nanopore reads, applies quality filtering, maps reads to a reference database, and generates statistics for downstream analysis.
-Linked to - ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/nanopore_PHIbase_analysis_scripts
+Metagenomic Alignment and Reporting for Monitoring Of Threats
+MARMOT is a modular pipeline for detecting potential pathogens from Nanopore sequencing data. It performs quality filtering, alignment, and summary reporting — making it easy to go from raw reads to actionable microbial insights.
 
 ## Table of Contents
 - [Usage](#usage)
