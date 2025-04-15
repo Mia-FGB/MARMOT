@@ -1,0 +1,529 @@
+Type of pest,Pest Name,UK,Likelihood (unmitigated),Impact (unmitigated),Risk Rating (unmitigated),Regulation,Likelihood (mitigated),Impact (mitigated),Risk Rating (mitigated),Scenario for Risk Register,Species,Regulated,Natural Spread
+Bacterium,Candidatus Liberibacter africanus,Absent,,,1.0,Regulated quarantine pest (NI only),,,1.0,Pest is introduced,Candidatus Liberibacter,Yes,No
+Bacterium,Candidatus Liberibacter americanus,Absent,,,1.0,QP (NI only). Prohibition of key pathway.,,,1.0,Pest is introduced,Candidatus Liberibacter,Yes,No
+Bacterium,Candidatus Liberibacter asiaticus,Absent,0.0,0.0,1.0,Regulated quarantine pest (NI),0.0,0.0,1.0,Pest is introduced,Candidatus Liberibacter,Yes,No
+Bacterium,Candidatus Phlomobacter fragariae,Unknown,,,,,,,,,Candidatus Phlomobacter,No,No
+Phytoplasma,Candidatus Phytoplasma americanum,Absent,,,,Regulated quarantine pest (Northern Ireland),,,,,Candidatus Phytoplasma,Yes,No
+Phytoplasma,Candidatus Phytoplasma asteris in carrot,Present (Limited),3.0,2.0,24.0,Regulated non quarantine pest ,3.0,2.0,24.0,Pest spreads to maximum extent,Candidatus Phytoplasma,No,No
+Phytoplasma,Candidatus Phytoplasma asteris in potato,Present (Limited),4.0,3.0,60.0,Regulated non quarantine pest,2.0,3.0,30.0,Pest is introduced,Candidatus Phytoplasma,No,No
+Phytoplasma,Candidatus Phytoplasma aurantifolia,Absent,4.0,3.0,60.0,Regulated quarantine pest (as witches' broom disease of lime phytoplasma in NI),2.0,3.0,30.0,Pest is introduced,Candidatus Phytoplasma,Yes,No
+Phytoplasma,Candidatus Phytoplasma australiense,Absent,3.0,4.0,60.0,Regulated quarantine pest,2.0,4.0,40.0,Pest is introduced with vector or finds vector,Candidatus Phytoplasma,Yes,No
+Phytoplasma,Candidatus Phytoplasma cocosnigeriae,Absent,0.0,0.0,1.0,,0.0,0.0,1.0,Pest is introduced,Candidatus Phytoplasma,No,No
+Phytoplasma,Candidatus Phytoplasma fragariae,Present (Limited),2.0,2.0,12.0,Regulated non quarantine pest,2.0,2.0,12.0,Pest spreads to maximum extent,Candidatus Phytoplasma,No,No
+,Candidatus Phytoplasma fragariae - related strains of Solanum tuberosum L. and other tuber forming Solanum spp.,Absent,,,,,,,,Pest is introduced,Candidatus Phytoplasma,Yes,No
+Phytoplasma,Candidatus Phytoplasma fraxini,Absent,3.0,4.0,60.0,Temporary prohibiton pending PRA on some hosts. Regulated quarantine pest (Northern Ireland). Provisional quarantine pest (Great Britain).,2.0,4.0,40.0,Pest is introduced,Candidatus Phytoplasma,Yes,No
+Phytoplasma,Candidatus Phytoplasma hispanicum (Mexican periwinkle virescence phytoplasma),Absent,,,,Regulated quarantine pest (Northern Ireland),,,,,Candidatus Phytoplasma,Yes,No
+Phytoplasma,Candidatus Phytoplasma mali,Absent,4.0,4.0,64.0,Regulated quarantine pest (Great Britain). Northern Ireland: Regulated non quarantine pest,3.0,4.0,48.0,Pest is introduced,Candidatus Phytoplasma,Yes,No
+Phytoplasma,Candidatus Phytoplasma noviguineense,Absent,,,,Regulated quarantine pest (Northern Ireland),,,,,Candidatus Phytoplasma,Yes,No
+Phytoplasma,Candidatus Phytoplasma palmae,Absent,1.0,2.0,4.0,Regulated quarantine pest (Northern Ireland),1.0,2.0,4.0,Pest is introduced with vector or finds vector,Candidatus Phytoplasma,Yes,No
+Phytoplasma,Candidatus Phytoplasma phoenicium,Absent,2.0,4.0,8.0,Regulated quarantine pest (GB &amp; NI),2.0,4.0,8.0,Pest is introduced,Candidatus Phytoplasma,Yes,No
+Phytoplasma,Candidatus Phytoplasma pini,Absent,4.0,1.0,20.0,,4.0,1.0,20.0,Pest is introduced,Candidatus Phytoplasma,No,No
+Phytoplasma,Candidatus Phytoplasma pruni,Absent,3.0,3.0,27.0,Regulated quarantine pest (Great Britain); Northern Ireland: RNQP,2.0,3.0,18.0,Pest is introduced,Candidatus Phytoplasma,Yes,No
+Phytoplasma,Candidatus Phytoplasma prunorum,Present (Limited),4.0,5.0,60.0,Regulated quarantine pest (Great Britain); Northern Ireland: Regulated non quarantine pest,2.0,5.0,30.0,Pest spreads to maximum extent,Candidatus Phytoplasma,Yes,No
+Phytoplasma,Candidatus Phytoplasma pyri on dessert pears,Present (Limited),2.0,3.0,12.0,Regulated non quarantine pest,2.0,3.0,12.0,Pest spreads to maximum extent,Candidatus Phytoplasma,No,No
+Phytoplasma,Candidatus Phytoplasma pyri on perry pears,Present (Limited),2.0,5.0,20.0,Regulated non quarantine pest,2.0,5.0,20.0,Pest spreads to maximum extent,Candidatus Phytoplasma,No,No
+Phytoplasma,Candidatus Phytoplasma rubi,Present (Limited),,,,,,,,,Candidatus Phytoplasma,No,No
+Phytoplasma,Candidatus Phytoplasma solani,Absent,3.0,4.0,60.0,Regulated quarantine pest (Great Britain) Northern Ireland: Regulated non quarantine pest,3.0,4.0,60.0,Pest is introduced,Candidatus Phytoplasma,Yes,Yes
+Phytoplasma,Candidatus Phytoplasma ulmi,Absent,4.0,3.0,36.0,Regulated quarantine pest (Great Britain) Regulated pest free area pest (NI),4.0,3.0,36.0,Pest is introduced,Candidatus Phytoplasma,Yes,No
+Phytoplasma,Candidatus Phytoplasma vitis,Absent,4.0,5.0,40.0,Regulated quarantine pest,2.0,5.0,20.0,Pest is introduced,Candidatus Phytoplasma,Yes,No
+Phytoplasma,Candidatus Phytoplasma ziziphi (Jujube witches broom phytoplasma),Absent,,,,Regulated quarantine pest (Northern Ireland),,,,,Candidatus Phytoplasma,Yes,No
+Bacterium,Acidovorax citrulli,Absent,2.0,2.0,12.0,,2.0,2.0,12.0,Pest is introduced,Acidovorax citrulli,No,No
+Fungus,Aculeastrum americanum (synonym Pucciniastrum americanum),,3.0,4.0,48.0,,3.0,4.0,48.0,Pest is introduced,Aculeastrum americanum,No,No
+Other,Acute Oak Decline,Present (Limited),3.0,5.0,75.0,,3.0,5.0,75.0,Pest spreads to maximum extent,Acute Oak,No,No
+Bacterium,Agrobacterium spp.,Present (Widespread),,,,,,,,,Agrobacterium spp.,No,No
+Bacterium,Agrobacterium tumefaciens,Present (Widespread),,,,,,,,,Agrobacterium tumefaciens,No,No
+Virus or Viroid,Alphacarmovirus calibrachoae,Present (Unknown Distribution),1.0,1.0,1.0,,1.0,1.0,1.0,Pest spreads to maximum extent,Alphacarmovirus calibrachoae,No,No
+Virus or Viroid,Alstroemeria necrotic streak virus ,Absent,4.0,2.0,24.0,,3.0,2.0,18.0,Pest is introduced,Alstroemeria necrotic,No,No
+Fungus,Alternaria gaisen,Absent,3.0,3.0,9.0,,3.0,3.0,9.0,Pest is introduced,Alternaria gaisen,No,No
+Fungus,Alternaria linicola,Present (Widespread),,,,,,,,,Alternaria linicola,No,No
+Fungus,Alternaria mali,Absent,3.0,2.0,24.0,Provisional quarantine pest (Great Britain) ,1.0,2.0,8.0,Pest is introduced,Alternaria mali,No,No
+Fungus,Alternaria panax,Absent,3.0,4.0,24.0,,3.0,4.0,24.0,Pest is introduced,Alternaria panax,No,No
+Fungus,Alternaria sp. (leaf spot of Impatiens),Absent,3.0,1.0,6.0,,3.0,1.0,6.0,Pest is introduced,Alternaria sp.,No,No
+Virus or Viroid,American plum line pattern virus,Absent,4.0,2.0,16.0,Regulated quarantine pest,2.0,2.0,8.0,Pest is introduced,American plum,Yes,No
+Virus or Viroid,Andean potato latent virus,Absent,3.0,3.0,45.0,Regulated quarantine pest,1.0,3.0,15.0,Pest is introduced,Andean potato,Yes,No
+Virus or Viroid,Andean potato mild mosaic virus,Absent,3.0,3.0,45.0,Regulated quarantine pest (in NI as potato viruses; viroids and phytoplasmas),1.0,3.0,15.0,Pest is introduced,Andean potato,Yes,No
+Virus or Viroid,Andean potato mottle virus,Absent,3.0,3.0,45.0,Regulated quarantine pest,1.0,3.0,15.0,Pest is introduced,Andean potato,Yes,No
+Fungus,Anisogramma anomala,Absent,3.0,5.0,45.0,Regulated quarantine pest,2.0,5.0,30.0,Pest is introduced,Anisogramma anomala,Yes,No
+Fungus,Apiosporina morbosa,Absent,3.0,3.0,18.0,Regulated quarantine pest,2.0,3.0,12.0,Pest is introduced,Apiosporina morbosa,Yes,No
+,Apple bumpy fruit of Ben Davis disease,Unknown,,,,,,,,,Apple bumpy,No,No
+Virus or Viroid,Apple chat fruit agent,Present (Limited),,,,,,,,,Apple chat,No,No
+Virus or Viroid,Apple chlorotic leaf spot virus,Present (Unknown Distribution),,,,,,,,,Apple chlorotic,No,No
+Virus or Viroid,Apple dimple fruit viroid,Absent,3.0,2.0,24.0,Provisional quarantine pest (Great Britain). NI: Regulated non quarantine pest,3.0,2.0,24.0,Pest is introduced,Apple dimple,No,No
+Virus or Viroid,Apple flat limb agent,Present (Unknown Distribution),,,,,,,,,Apple flat,No,No
+Virus or Viroid,Apple fruit crinkle viroid,Absent,,,,Regulated quarantine pest (Northern Ireland),,,,,Apple fruit,Yes,No
+Virus or Viroid,Apple green crinkle agent,Present (Unknown Distribution),,,,,,,,,Apple green,No,No
+Virus or Viroid,Apple leaf pucker agent,Present (Unknown Distribution),,,,,,,,,Apple leaf,No,No
+Virus or Viroid,Apple mosaic virus,Present (Widespread),,,,,,,,,Apple mosaic,No,No
+Virus or Viroid,Apple necrotic mosaic virus,Absent,,,,Regulated quarantine pest (Northern Ireland),,,,,Apple necrotic,Yes,No
+Virus or Viroid,Apple rough skin agent,Absent,3.0,2.0,24.0,Regulated non quarantine pest,3.0,2.0,24.0,Pest is introduced,Apple rough,No,No
+Virus or Viroid,Apple rubbery wood disease,Present (Limited),,,,,,,,,Apple rubbery,No,No
+Virus or Viroid,Apple russet wart disease,Unknown,,,,,,,,,Apple russet,No,No
+Virus or Viroid,Apple scar skin viroid,Present (Unknown Distribution),,,,,,,,,Apple scar,No,No
+Virus or Viroid,Apple star crack virus,Present (Unknown Distribution),,,,,,,,,Apple star,No,No
+Virus or Viroid,Apple stem grooving virus,Present (Unknown Distribution),,,,,,,,,Apple stem,No,No
+Virus or Viroid,Apple stem pitting virus,Present (Widespread),,,,,,,,,Apple stem,No,No
+Virus or Viroid,Apricot latent virus,Absent,3.0,1.0,3.0,RNQP (NI) - but infections are asymptomatic,3.0,1.0,3.0,Pest is introduced,Apricot latent,No,No
+Oomycete,Aquilegia downy mildew,Present (Widespread),5.0,4.0,20.0,,5.0,4.0,20.0,Pest spreads to maximum extent,Aquilegia downy,No,No
+Virus or Viroid,Arabis mosaic virus,Present (Limited),3.0,3.0,45.0,Regulated non quarantine pest,2.0,3.0,30.0,Pest spreads to maximum extent,Arabis mosaic,No,No
+Other,Arion vulgaris ,Present (Limited),4.0,3.0,60.0,,4.0,3.0,60.0,Pest spreads to maximum extent,Arion vulgaris,No,No
+Fungus,Armillaria mellea,Present (Widespread),,,,,,,,,Armillaria mellea,No,No
+Virus or Viroid,Arracacha virus B; oca strain,Absent,3.0,2.0,30.0,Regulated quarantine pest (Great Britain),1.0,2.0,10.0,Pest is introduced,Arracacha virus,Yes,No
+Fungus,Atropellis apiculata,Absent,1.0,2.0,2.0,Regulated quarantine pest,1.0,1.0,2.0,Pest is introduced,Atropellis apiculata,Yes,No
+Fungus,Atropellis pinicola,Absent,2.0,3.0,30.0,Regulated quarantine pest,1.0,3.0,15.0,Pest is introduced,Atropellis pinicola,Yes,No
+Fungus,Atropellis piniphila,Absent,4.0,4.0,80.0,Regulated quarantine pest,1.0,4.0,20.0,Pest is introduced,Atropellis piniphila,Yes,No
+Fungus,Atropellis tingens,Absent,3.0,2.0,30.0,Regulated quarantine pest,1.0,2.0,10.0,Pest is introduced,Atropellis tingens,Yes,No
+Virus or Viroid,Badnavirus betamaculaflavicannae,Present (Unknown Distribution),1.0,3.0,3.0,,1.0,3.0,3.0,Pest spreads to maximum extent,Badnavirus betamaculaflavicannae,No,No
+Virus or Viroid,Bean golden mosaic virus,Absent,3.0,3.0,18.0,Regulated quarantine pest under the category of begomoviruses,2.0,3.0,12.0,Pest is introduced,Bean golden,Yes,No
+Virus or Viroid,Beet curly top virus,Absent,3.0,4.0,60.0,Regulated quarantine pest,2.0,4.0,40.0,Pest is introduced,Beet curly,Yes,No
+Virus or Viroid,Beet leaf curl virus,Absent,0.0,0.0,,,0.0,0.0,,Pest is introduced,Beet leaf,No,No
+Virus or Viroid,Beet necrotic yellow vein benyvirus,Present (Limited),5.0,3.0,75.0,Regulated protected zone quarantine pest (Northern Ireland),2.0,3.0,30.0,Pest spreads to maximum extent,Beet necrotic,No,No
+Virus or Viroid,Black raspberry necrosis virus,Present (Widespread),,,,,,,,,Black raspberry,No,No
+Virus or Viroid,Blackcurrant reversion virus ,Present (Widespread),,,,,,,,,Blackcurrant reversion,No,No
+Virus or Viroid,Blackcurrant yellows agent and Aucuba mosaic agent; combined,Unknown,,,,Regulated non quarantine pest (Northern Ireland),,,,,Blackcurrant yellows,No,No
+Virus or Viroid,Blueberry leaf mottle virus,Absent,3.0,4.0,36.0,Regulated quarantine pest,2.0,4.0,24.0,Pest is introduced,Blueberry leaf,Yes,No
+Virus or Viroid,Blueberry mosaic associated virus,Absent,3.0,2.0,18.0,Regulated non quarantine pest,3.0,2.0,18.0,Pest is introduced with vector or finds vector,Blueberry mosaic,No,No
+Virus or Viroid,Blueberry red ringspot virus,Absent,3.0,2.0,18.0,,3.0,2.0,18.0,Pest is introduced,Blueberry red,No,No
+Virus or Viroid,Blueberry scorch virus,Absent,3.0,3.0,27.0,Regulated quarantine pest (Great Britain) Northern Ireland: Regulated non quarantine pest,3.0,3.0,27.0,Pest is introduced,Blueberry scorch,Yes,No
+Virus or Viroid,Blueberry shock virus,Absent,3.0,3.0,27.0,BlShV is currently listed in GB in Annex 4 Part I as an RNQP on Vaccinium with 0 % tolerance in The Plant Health (Phytosanitary Conditions) (Amendment) (EU Exit) Regulations 2020. Similar requirements apply to Northern Ireland.      Mitigations onSpecial requirements for plants for planting of Vaccinium exist in The Plant Health (Phytosanitary Conditions) (Amendment) (EU Exit) Regulations 2020 for ?Candidatus Phytoplasma solani? (which is present in Europe); Grapholita packardi (Lepidoptera) (present in parts of Canada; USA and Mexico); and Diaporthe vaccinii (Fungi) (present in parts of Canada and USA).  ,3.0,3.0,27.0,Pest is introduced,Blueberry shock,No,No
+Virus or Viroid,Blueberry shoestring sobemovirus,Absent,4.0,4.0,48.0,Regulated quarantine pest (Great Britain). Northern Ireland: Regulated non quarantine pest,4.0,4.0,48.0,Pest is introduced with vector or finds vector,Blueberry shoestring,Yes,No
+Fungus,Boeremia linicola,Present (Unknown Distribution),,,,,,,,,Boeremia linicola,No,No
+Fungus,Botryosphaeria kuwatsukai,Absent,3.0,3.0,36.0,Regulated quarantine pest,1.0,3.0,12.0,Pest is introduced,Botryosphaeria kuwatsukai,Yes,No
+Fungus,Botryosphaeria laricina,Absent,3.0,3.0,45.0,Regulated quarantine pest,2.0,3.0,30.0,Pest is introduced,Botryosphaeria laricina,Yes,No
+Fungus,Botrytis cinerea,Present (Widespread),,,,,,,,,Botrytis cinerea,No,No
+Bacterium,Brenneria salicis,Present (Limited),2.0,4.0,8.0,,2.0,4.0,8.0,Pest spreads to maximum extent,Brenneria salicis,No,Yes
+Fungus,Bretziella fagacearum,Absent,4.0,5.0,100.0,Regulated quarantine pest,2.0,5.0,50.0,Pest is introduced,Bretziella fagacearum,Yes,No
+Phytoplasma,Buckland valley grapevine yellows phytoplasma,Absent,,,,Regulated quarantine pest (Northern Ireland),,,,,Buckland valley,Yes,No
+Bacterium,Burkholderia caryophylli,Absent,4.0,3.0,12.0,,2.0,3.0,6.0,Pest is introduced,Burkholderia caryophylli,No,No
+Bacterium,Candidatus Liberibacter solanacearum,Absent,3.0,5.0,75.0,Regulated non quarantine pest,3.0,5.0,75.0,Pest is introduced with vector or finds vector,Candidatus Liberibacter,No,No
+,Candidatus Phytoplasma pruni-related strains of Solanum tuberosum L. and other tuber-forming Solanum spp.,Absent,,,,Great Britain regulated quarantine pest (as potato viruses; viroids and phytoplasmas such as). Northern Ireland regulated quarantine pest,,,,Pest is introduced,Candidatus Phytoplasma,Yes,No
+Virus or Viroid,Carrot thin leaf virus,Absent,3.0,1.0,12.0,,3.0,1.0,12.0,Pest is introduced,Carrot thin,No,No
+Other,Cathaica fasciola,Absent,4.0,2.0,40.0,,4.0,2.0,40.0,Pest is introduced,Cathaica fasciola,No,No
+Fungus,Ceratocystis platani,Absent,4.0,5.0,80.0,Regulated quarantine pest. Specific measures differ between GB and NI.,2.0,5.0,40.0,Pest is introduced,Ceratocystis platani,Yes,No
+Fungus,Ceropsora weirii,Absent,3.0,2.0,30.0,Pathway prohibition on Picea plants in both GB &amp; NI,1.0,2.0,10.0,Pest is introduced,Ceropsora weirii,No,No
+Virus or Viroid,Cherry green ring mottle virus,Absent,4.0,2.0,16.0,The RNQP measures will not affect entry; as the virus may enter as latent infections on other hosts; but are likely to reduce the level of impacts on UK cherry production. ,4.0,1.0,8.0,Pest is introduced,Cherry green,No,No
+Virus or Viroid,Cherry leaf roll virus,Present (Unknown Distribution),2.0,3.0,30.0,Regulated non quarantine pest for Juglans regia; Olea europaea; Prunus avium; Prunus cerasus ,2.0,3.0,30.0,Pest spreads to maximum extent,Cherry leaf,No,No
+Virus or Viroid,Cherry mottle leaf virus,Absent,,,,,,,,,Cherry mottle,No,No
+Virus or Viroid,Cherry necrotic rusty mottle virus,Present (Widespread),,,,,,,,,Cherry necrotic,No,No
+Virus or Viroid,Cherry rasp leaf virus,Absent,3.0,2.0,24.0,Regulated quarantine pest,2.0,2.0,16.0,Pest is introduced,Cherry rasp,Yes,No
+Virus or Viroid,Cherry rosette virus,Absent,,,,Regulated quarantine pest (Northern Ireland),,,,,Cherry rosette,Yes,No
+Virus or Viroid,Cherry rusty mottle associated virus,,,,,Regulated quarantine pest (Northern Ireland),,,,,Cherry rusty,Yes,No
+Virus or Viroid,Cherry twisted leaf associated virus,Absent,,,,Regulated quarantine pest (Northern Ireland),,,,,Cherry twisted,Yes,No
+Virus or Viroid,Chilli leaf curl virus,Absent,,,,Regulated quarantine pest (In Great Britain under the listing &quot;Begomoviruses&quot;),,,,,Chilli leaf,Yes,No
+Virus or Viroid,Chilli veinal mottle virus,Absent,3.0,3.0,27.0,Provisional quarantine pest (Great Britain); prohibition on solanaceous planting material from outside Europe,2.0,3.0,18.0,Pest is introduced,Chilli veinal,No,No
+Fungus,Chondrostereum purpureum,Present (Widespread),,,,,,,,,Chondrostereum purpureum,No,No
+Virus or Viroid,Chrysanthemum stem necrosis virus,Absent,4.0,4.0,48.0,Regulated quarantine pest,3.0,4.0,36.0,Pest is introduced,Chrysanthemum stem,Yes,No
+Virus or Viroid,Chrysanthemum stunt viroid,Present (Limited),3.0,2.0,18.0,Regulated non quarantine pest,2.0,2.0,12.0,Pest spreads to maximum extent,Chrysanthemum stunt,No,No
+Fungus,Chrysomyxa arctostaphyli,Absent,3.0,3.0,45.0,Regulated quarantine pest,2.0,3.0,30.0,Pest is introduced,Chrysomyxa arctostaphyli,Yes,No
+Fungus,Chrysomyxa ledicola,Absent,3.0,2.0,30.0,Picea prohibited from outside Europe. Labrador tea can still  be imported.,2.0,2.0,20.0,Pest is introduced,Chrysomyxa ledicola,No,No
+Fungus,Ciborinia camelliae,Present (Limited),2.0,2.0,4.0,,2.0,2.0,4.0,Pest spreads to maximum extent,Ciborinia camelliae,No,No
+Virus or Viroid,Citrus bark cracking viroid,Absent,3.0,4.0,24.0,Regulated non quarantine pest (Northern Ireland) on Humulus lupulus. ,2.0,4.0,16.0,Pest is introduced,Citrus bark,No,No
+Virus or Viroid,Citrus blight agent,Absent,0.0,0.0,1.0,,0.0,0.0,1.0,Pest is introduced,Citrus blight,No,No
+Virus or Viroid,Citrus chlorotic spot dichorhavirus,Absent,,,,Regulated quarantine pest (Northern Ireland),,,,,Citrus chlorotic,Yes,No
+Virus or Viroid,Citrus cristacortis agent,,,,,,,,,,Citrus cristacortis,No,No
+Virus or Viroid,Citrus exocortis viroid,Absent,3.0,2.0,18.0,Regulated quarantine pest (Great Britain); Northern Ireland: Regulated non quarantine pest,3.0,2.0,18.0,Pest is introduced,Citrus exocortis,Yes,No
+Virus or Viroid,Citrus impietratura agent,Absent,,,,,,,,,Citrus impietratura,No,No
+Virus or Viroid,Citrus leaf blotch virus,Absent,,,,,,,,,Citrus leaf,No,No
+Virus or Viroid,Citrus leprosis viruses,Absent,0.0,0.0,1.0,Regulated quarantine pest (Northern Ireland) (only CiLV-C; CiLV-C2; HGSV-2; Citrus strain of OFV; CiLV-N sensu novo),0.0,0.0,1.0,Pest is introduced,Citrus leprosis,Yes,No
+Virus or Viroid,Citrus mosaic virus,Absent,0.0,0.0,1.0,Regulated quarantine pest ,0.0,0.0,1.0,Pest is introduced,Citrus mosaic,Yes,No
+Virus or Viroid,Citrus psorosis ophiovirus,Absent,0.0,0.0,1.0,Regulated non quarantine pest (Northern Ireland),0.0,0.0,1.0,Pest is introduced,Citrus psorosis,No,No
+Virus or Viroid,Citrus tatter leaf virus,Absent,0.0,0.0,1.0,,0.0,0.0,1.0,Pest is introduced,Citrus tatter,No,No
+Virus or Viroid,Citrus tristeza virus European isolates,Absent,0.0,0.0,1.0,Regulated non quarantine pest (Northern Ireland). Regulated pest free area pest (Malta),0.0,0.0,1.0,Pest is introduced,Citrus tristeza,No,No
+Virus or Viroid,Citrus tristeza virus non-European isolates,Absent,0.0,0.0,1.0,Regulated quarantine pest (Northern Ireland),0.0,0.0,1.0,Pest is introduced,Citrus tristeza,Yes,No
+Virus or Viroid,Citrus variegation virus,Absent,,,,,,,,,Citrus variegation,No,No
+Virus or Viroid,Citrus vein enation woody gall,Absent,0.0,0.0,1.0,,0.0,0.0,1.0,Pest is introduced,Citrus vein,No,No
+Bacterium,Clavibacter michiganensis subsp. insidiosus,Unknown,1.0,2.0,2.0,Regulated non quarantine pest,1.0,2.0,2.0,Pest spreads to maximum extent,Clavibacter michiganensis,No,No
+Bacterium,Clavibacter michiganensis subsp. michiganensis,Present (Limited),3.0,4.0,48.0,Regulated non quarantine pest,2.0,3.0,24.0,Pest spreads to maximum extent,Clavibacter michiganensis,No,No
+Bacterium,Clavibacter sepedonicus,Absent,5.0,5.0,125.0,Regulated quarantine pest,2.0,4.0,40.0,Pest is introduced,Clavibacter sepedonicus,Yes,No
+Phytoplasma,Clover phyllody phytoplasma,Present (Limited),,,,,,,,,Clover phyllody,No,No
+Virus or Viroid,Clover yellow mosaic virus,Absent,2.0,2.0,16.0,,2.0,2.0,16.0,Pest is introduced,Clover yellow,No,No
+Virus or Viroid,Coconut cadang-cadang viroid,Absent,0.0,0.0,1.0,Regulated quarantine pest (NI),0.0,0.0,1.0,Pest is introduced,Coconut cadang-cadang,Yes,No
+Fungus,Coleosporium asterum,Absent,3.0,2.0,30.0,Prohibition of planting matierial of conifers; other than bonsai derogations; Provisional quarantine pest (Great Britain);,3.0,2.0,30.0,Pest is introduced,Coleosporium asterum,No,No
+Fungus,Coleosporium eupatorii,Absent,3.0,3.0,45.0,Bonsai derogations; conifer prohibition otherwise; PQP in GB,2.0,3.0,30.0,Pest is introduced,Coleosporium eupatorii,No,No
+Fungus,Coleosporium paederiae,Absent,3.0,3.0,45.0,Provisional quarantine pest (Great Britain). Conifer prohibition &amp; bonsai derogations,2.0,3.0,30.0,Pest is introduced,Coleosporium paederiae,No,No
+Fungus,Coleosporium phellodendri,Absent,3.0,3.0,45.0,bonsai derogations; otherwise coniferous planting material prohibition; PQP for GB,2.0,3.0,30.0,Pest is introduced,Coleosporium phellodendri,No,No
+Fungus,Coleosporium plectranthi,Absent,3.0,2.0,12.0,Conifer prohibition,2.0,2.0,8.0,Pest is introduced,Coleosporium plectranthi,No,No
+Fungus,Colletotrichum acutatum,Present (Widespread),3.0,4.0,60.0,Regulated non quarantine pest,2.0,4.0,40.0,Pest spreads to maximum extent,Colletotrichum acutatum,No,No
+Fungus,Colletotrichum boninense,Unknown,4.0,2.0,32.0,,4.0,2.0,32.0,Pest is introduced,Colletotrichum boninense,No,No
+Fungus,Colletotrichum chlorophyti,Unknown,,,,,,,,,Colletotrichum chlorophyti,No,No
+Fungus,Colletotrichum chrysophilum,Unknown,,,,,,,,,Colletotrichum chrysophilum,No,No
+Fungus,Colletotrichum cymbidiicola,Unknown,,,,,,,,,Colletotrichum cymbidiicola,No,No
+Fungus,Colletotrichum fructicola,Unknown,,,,,,,,,Colletotrichum fructicola,No,No
+Fungus,Colletotrichum gloeosporioides,Present (Widespread),,,,,,,,,Colletotrichum gloeosporioides,No,No
+Fungus,Colletotrichum karsti,Unknown,,,,,,,,,Colletotrichum karsti,No,No
+Fungus,Colletotrichum linicola,Present (Unknown Distribution),,,,,,,,,Colletotrichum linicola,No,No
+Fungus,Colletotrichum scovillei,Unknown,,,,,,,,,Colletotrichum scovillei,No,No
+Fungus,Colletotrichum siamense,Unknown,,,,,,,,,Colletotrichum siamense,No,No
+Fungus,Colletotrichum theobromicola,Unknown,,,,,,,,,Colletotrichum theobromicola,No,No
+Fungus,Colletotrichum truncatum,Unknown,,,,,,,,,Colletotrichum truncatum,No,No
+Virus or Viroid,Colombian datura virus,Unknown,5.0,3.0,45.0,,5.0,3.0,45.0,Pest is introduced,Colombian datura,No,No
+Virus or Viroid,Columnea latent viroid,Absent,4.0,4.0,48.0,Regulated quarantine pest (Great Britain),3.0,4.0,36.0,Pest is introduced,Columnea latent,Yes,No
+Fungus,Coniferiporia sulphurascens,Absent,2.0,4.0,40.0,Regulated quarantine pest.,2.0,4.0,40.0,Pest is introduced,Coniferiporia sulphurascens,Yes,No
+Fungus,Coniferiporia weirii,Absent,2.0,4.0,40.0,Regulated quarantine pest,2.0,4.0,40.0,Pest is introduced,Coniferiporia weirii,Yes,No
+Fungus,Corinectria fuckeliana ,Present (Limited),3.0,3.0,45.0,,3.0,3.0,45.0,Pest spreads to maximum extent,Corinectria fuckeliana,No,No
+Virus or Viroid,Cowpea mild mottle virus,Absent,2.0,1.0,6.0,Regulated quarantine pest (Northern Ireland),2.0,1.0,6.0,Pest is introduced,Cowpea mild,Yes,No
+Phytoplasma,Cranberry false blossom phytoplasma,Absent,,,,,,,,,Cranberry false,No,No
+Fungus,Cronartium coleosporioides,Absent,3.0,3.0,45.0,Regulated quarantine pest,1.0,3.0,15.0,Pest is introduced,Cronartium coleosporioides,Yes,No
+Fungus,Cronartium comandrae,Absent,3.0,3.0,45.0,Regulated quarantine pest,1.0,3.0,15.0,Pest is introduced,Cronartium comandrae,Yes,No
+Fungus,Cronartium comptoniae,Absent,3.0,4.0,60.0,Regulated quarantine pest,1.0,4.0,20.0,Pest is introduced,Cronartium comptoniae,Yes,No
+Fungus,Cronartium harknessii,Absent,3.0,5.0,75.0,Regulated quarantine pest.,1.0,5.0,25.0,Pest is introduced,Cronartium harknessii,Yes,No
+Fungus,Cronartium himalayense,Absent,2.0,3.0,6.0,Regulated quarantine pest,1.0,3.0,3.0,Pest is introduced,Cronartium himalayense,Yes,No
+Fungus,Cronartium kamtschaticum,Absent,3.0,3.0,27.0,Regulated quarantine pest,1.0,3.0,9.0,Pest is introduced,Cronartium kamtschaticum,Yes,No
+Fungus,Cronartium quercuum,Absent,3.0,3.0,45.0,Regulated quarantine pest,1.0,3.0,15.0,Pest is introduced,Cronartium quercuum,Yes,No
+Fungus,Cronartium quercuum f. sp. fusiforme,Absent,3.0,3.0,45.0,Regulated quarantine pest,1.0,3.0,15.0,Pest is introduced,Cronartium quercuum,Yes,No
+Fungus,Cryphonectria parasitica,Absent,4.0,5.0,60.0,Regulated quarantine pest (Great Britain). Northern Ireland: Regulated pest free area pest. Regulated non quarantine pest,2.0,5.0,30.0,Pest is introduced,Cryphonectria parasitica,Yes,No
+Fungus,Cryptocline taxicola,Present (Limited),2.0,3.0,18.0,,2.0,3.0,18.0,Pest spreads to maximum extent,Cryptocline taxicola,No,Yes
+Virus or Viroid,Cucumber mosaic virus,Present (Widespread),,,,,,,,,Cucumber mosaic,No,No
+Virus or Viroid,Cucumber vein yellowing virus,Absent,4.0,3.0,36.0,Regulated quarantine pest (Great Britain). Pest free area for the vector (NI),3.0,3.0,27.0,Pest is introduced,Cucumber vein,Yes,No
+Virus or Viroid,Cucurbit yellow stunting disorder virus,Absent,4.0,3.0,36.0,Regulated quarantine pest (Great Britain). Protected Zone for vector Bemisia tabaci (NI),3.0,3.0,27.0,Pest is introduced,Cucurbit yellow,Yes,No
+Bacterium,Curtobacterium flaccumfaciens pv. flaccumfaciens,Absent,2.0,3.0,12.0,,2.0,3.0,12.0,Pest is introduced,Curtobacterium flaccumfaciens,Yes,No
+Bacterium,Curtobacterium flaccumfaciens pv. poinsettiae,Absent,3.0,2.0,18.0,,2.0,2.0,12.0,Pest is introduced,Curtobacterium flaccumfaciens,No,No
+Fungus,Davidsoniella virescens,Absent,2.0,3.0,6.0,Regulated quarantine pest,2.0,3.0,6.0,Pest is introduced,Davidsoniella virescens,Yes,No
+Fungus,Dematophora necatrix,Present (Widespread),,,,,,,,,Dematophora necatrix,No,No
+Fungus,Diaporthe amygdali,Absent,3.0,2.0,18.0,,3.0,2.0,18.0,Pest is introduced,Diaporthe amygdali,No,No
+Fungus,Diaporthe caulivora,Absent,1.0,2.0,2.0,Regulated non quarantine pest (Northern Ireland),1.0,2.0,2.0,Pest is introduced,Diaporthe caulivora,No,No
+Fungus,Diaporthe chamaeropis,Absent,3.0,2.0,12.0,,4.0,2.0,12.0,Pest is introduced,Diaporthe chamaeropis,No,No
+Fungus,Diaporthe strumella,Present (Widespread),,,,,,,,,Diaporthe strumella,No,No
+Bacterium,Dickeya dianthicola,Present (Limited),5.0,4.0,100.0,Regulated non quarantine pest.  Statutory Certification,2.0,2.0,20.0,Pest spreads to maximum extent,Dickeya dianthicola,No,No
+Bacterium,Dickeya solani,Absent,5.0,4.0,100.0,Regulated non quarantine pest (as Dickeya spp.),3.0,3.0,45.0,Pest is introduced,Dickeya solani,No,No
+Fungus,Diplocarpon mali ,Absent,3.0,3.0,36.0,,3.0,3.0,36.0,Pest is introduced,Diplocarpon mali,No,No
+Fungus,Diplodia corticola,Absent,2.0,2.0,20.0,,2.0,2.0,20.0,Pest is introduced,Diplodia corticola,No,No
+Fungus,Diplodia quercivora,Absent,2.0,2.0,20.0,,2.0,2.0,20.0,Pest is introduced,Diplodia quercivora,No,No
+Fungus,Dothistroma pini,Absent,3.0,3.0,45.0,Regulated quarantine pest (Great Britain) Northern Ireland: Regulated non quarantine pest,2.0,3.0,30.0,Pest is introduced,Dothistroma pini,Yes,No
+Fungus,Dothistroma septosporum,Present (Limited),3.0,5.0,75.0,Regulated non quarantine pest,2.0,5.0,50.0,Pest spreads to maximum extent,Dothistroma septosporum,No,No
+Virus or Viroid,Eggplant mottled dwarf nucleorhabdovirus ,Absent,3.0,2.0,18.0,,3.0,2.0,18.0,Pest is introduced,Eggplant mottled,No,No
+Fungus,Elsinoe australis,Absent,0.0,0.0,1.0,Regulated quarantine pest (Northern Ireland),0.0,0.0,1.0,Pest is introduced,Elsinoe australis,Yes,No
+Fungus,Elsinoe coryli,Absent,4.0,2.0,8.0,,4.0,2.0,8.0,Pest is introduced,Elsinoe coryli,No,No
+Fungus,Elsinoe fawcettii,Absent,0.0,0.0,1.0,Regulated quarantine pest (Northern Ireland),0.0,0.0,1.0,Pest is introduced,Elsinoe fawcettii,Yes,No
+Fungus,Elsino� citricola,Present,,,1.0,Regulated quarantine pest (Northern Ireland). ,,,1.0,Pest is introduced,Elsino� citricola,Yes,No
+Fungus,Entoleuca mammata,Present (Limited),3.0,4.0,36.0,Regulated protected zone quarantine pest (Northern Ireland),2.0,4.0,24.0,Pest spreads to maximum extent,Entoleuca mammata,No,No
+Bacterium,Erwinia amylovora,Present (Widespread),5.0,2.0,40.0,Regulated non quarantine pest.,2.0,2.0,16.0,Pest spreads to maximum extent,Erwinia amylovora,No,No
+Bacterium,Erwinia pyrifoliae ,Absent,4.0,3.0,60.0,,3.0,3.0,45.0,Pest is introduced,Erwinia pyrifoliae,No,No
+Fungus,Erysiphe euphorbiicola,Absent,3.0,2.0,18.0,,2.0,2.0,12.0,Pest is introduced,Erysiphe euphorbiicola,No,No
+Virus or Viroid,Euphorbia mosaic virus,Absent,3.0,3.0,9.0,Regulated quarantine pest (as a Begomovirus),2.0,3.0,6.0,Pest is introduced,Euphorbia mosaic,Yes,No
+Virus or Viroid,European mountain ash ringspot associated virus,Present (Unknown Distribution),2.0,3.0,24.0,,2.0,3.0,24.0,Pest spreads to maximum extent,European mountain,No,No
+Fungus,Eutypella parasitica,Absent,3.0,2.0,30.0,,3.0,2.0,30.0,Pest is introduced,Eutypella parasitica,No,Yes
+Fungus,Exobasidium vaccinii,Present (Widespread),,,,Regulated non quarantine pest,,,,,Exobasidium vaccinii,No,No
+Virus or Viroid,Fig mosaic agent,Present (Unknown Distribution),,,,Regulated non quarantine pest (Northern Ireland),,,,,Fig mosaic,No,No
+Virus or Viroid,Fig mosaic virus,Present (Unknown Distribution),2.0,1.0,2.0,,2.0,1.0,2.0,Pest spreads to maximum extent,Fig mosaic,No,No
+Fungus,Fusarium agapanthi,Present (Unknown Distribution),4.0,2.0,8.0,,4.0,2.0,8.0,Pest spreads to maximum extent,Fusarium agapanthi,No,No
+Fungus,Fusarium circinatum,Absent,2.0,3.0,30.0,Regulated quarantine pest. ,2.0,3.0,30.0,Pest is introduced,Fusarium circinatum,Yes,No
+Fungus,Fusarium euwallaceae (Neocosmospora euwallaceae),Absent,,,,Provisional quarantine pest (Great Britain); regulated quarantine pest (Northern Ireland),,,,,Fusarium euwallaceae,Yes,No
+Fungus,Fusarium foetens,Absent,5.0,4.0,40.0,,3.0,4.0,24.0,Pest is introduced,Fusarium foetens,No,No
+Fungus,Fusarium miscanthi,Present (Unknown Distribution),5.0,1.0,5.0,,5.0,1.0,5.0,Pest spreads to maximum extent,Fusarium miscanthi,No,No
+Fungus,Fusarium oxysporum f. sp. albedinis,Absent,0.0,0.0,1.0,Regulated quarantine pest (Northern Ireland),0.0,0.0,1.0,Pest is introduced,Fusarium oxysporum,Yes,No
+Fungus,Fusarium oxysporum f. sp. basilici,Absent,4.0,3.0,12.0,,3.0,3.0,9.0,Pest is introduced,Fusarium oxysporum,No,No
+Fungus,Fusarium oxysporum f. sp. cubense ,Unknown,3.0,2.0,6.0,,2.0,2.0,4.0,Pest is introduced,Fusarium oxysporum,No,No
+Fungus,Fusarium oxysporum f. sp. lactucae,Present (Limited),4.0,5.0,80.0,,3.0,4.0,48.0,Pest spreads to maximum extent,Fusarium oxysporum,No,No
+Fungus,Geosmithia morbida,Absent,4.0,4.0,16.0,Regulated quarantine pest,2.0,4.0,8.0,Pest is introduced with vector or finds vector,Geosmithia morbida,Yes,No
+Fungus,Gibberella fujikuroi (only for Bakanae disease of rice on Oryza),Absent,,,,Regulated non quarantine pest (Northern Ireland),,,,,Gibberella fujikuroi,No,No
+Fungus,Glomerella gossypii,Absent,0.0,0.0,1.0,,0.0,0.0,1.0,Pest is introduced,Glomerella gossypii,No,No
+Fungus,Gnomoniopsis idaeicola,Present,4.0,2.0,24.0,,4.0,2.0,24.0,Pest spreads to maximum extent,Gnomoniopsis idaeicola,No,No
+Fungus,Gnomoniopsis smithogilvyi,Present (Unknown Distribution),3.0,4.0,36.0,,3.0,4.0,36.0,Pest spreads to maximum extent,Gnomoniopsis smithogilvyi,No,No
+Fungus,Godronia cassandrae,Present (Limited),,,,,,,,,Godronia cassandrae,No,No
+Virus or Viroid,Gooseberry vein banding associated virus,Present (Unknown Distribution),,,,,,,,,Gooseberry vein,No,No
+Virus or Viroid,Grapevine Pinot gris virus,Present (Unknown Distribution),3.0,2.0,12.0,,3.0,2.0,12.0,Pest is introduced,Grapevine Pinot,No,No
+Virus or Viroid,Grapevine Syrah virus 1,Absent,4.0,1.0,8.0,,4.0,1.0,8.0,Pest is introduced,Grapevine Syrah,No,No
+Virus or Viroid,Grapevine ajinashika virus,Absent,3.0,2.0,12.0,Regulated quarantine pest (NI; as non-European viruses; viroids and phytoplasmas of  Cydonia; Fragaria; Malus; Prunus; Pyrus and Vitis) and Vitis prohibition,1.0,2.0,4.0,Pest is introduced,Grapevine ajinashika,Yes,No
+Virus or Viroid,Grapevine berry inner necrosis trichovirus,Absent,,,,Regulated quarantine pest (Northern Ireland),,,,,Grapevine berry,Yes,No
+Virus or Viroid,Grapevine fanleaf virus,Present (Limited),3.0,2.0,12.0,Regulated non quarantine pest,2.0,2.0,8.0,Pest spreads to maximum extent,Grapevine fanleaf,No,No
+Virus or Viroid,Grapevine fleck virus,Present (Limited),,,,,,,,,Grapevine fleck,No,No
+Virus or Viroid,Grapevine leaf roll-associated virus 1,Present (Limited),,,,,,,,,Grapevine leaf,No,No
+Virus or Viroid,Grapevine leaf roll-associated virus 3,Present (Unknown Distribution),3.0,3.0,27.0,RNQP,2.0,3.0,18.0,,Grapevine leaf,No,No
+Virus or Viroid,Grapevine red blotch-associated virus,Absent,3.0,3.0,18.0,Vine prohibition. Regulated quarantine pest (Northern Ireland). ,1.0,3.0,6.0,Pest is introduced,Grapevine red,Yes,No
+Virus or Viroid,Grapevine roditis leaf discoloration-associated virus,Absent,3.0,1.0,6.0,,3.0,1.0,6.0,Pest is introduced,Grapevine roditis,No,No
+Virus or Viroid,Grapevine stunt agent,Absent,3.0,3.0,18.0,Prohibition of Vitis from non-EU other than Switzerland,1.0,3.0,6.0,Pest is introduced,Grapevine stunt,No,No
+Virus or Viroid,Grapevine vein clearing virus,Absent,,,,Regulated quarantine pest (Northern Ireland),,,,,Grapevine vein,Yes,No
+Fungus,Gremmeniella abietina,Present,3.0,5.0,75.0,,2.0,5.0,50.0,Pest spreads to maximum extent,Gremmeniella abietina,No,No
+Fungus,Grosmannia wageneri,Absent,3.0,5.0,75.0,Prohibition of conifers,1.0,5.0,25.0,Pest is introduced,Grosmannia wageneri,No,No
+Virus or Viroid,Groundnut bud necrosis virus,Absent,4.0,3.0,48.0,Provisional quarantine pest (Great Britain). Regulation of main vector (Thrips palmi); which is absent from the UK,3.0,3.0,36.0,Pest is introduced with vector or finds vector,Groundnut bud,No,No
+Virus or Viroid,Groundnut ringspot virus,Absent,4.0,3.0,48.0,Provisional quarantine pest (Great Britain).,3.0,3.0,36.0,Pest is introduced,Groundnut ringspot,No,No
+Fungus,Gymnosporangium asiaticum,Absent,3.0,2.0,12.0,Regulated quarantine pest (as Gymnosporangium spp.),1.0,2.0,4.0,Pest is introduced,Gymnosporangium asiaticum,Yes,No
+Fungus,Gymnosporangium clavipes,Absent,3.0,4.0,48.0,Regulated quarantine pest (as Gymnosporangium spp.),2.0,4.0,32.0,Pest is introduced,Gymnosporangium clavipes,Yes,No
+Fungus,Gymnosporangium globosum,Absent,3.0,3.0,36.0,Regulated quarantine pest (as Gymnosporangium spp.),2.0,3.0,24.0,Pest is introduced,Gymnosporangium globosum,Yes,No
+Fungus,Gymnosporangium juniperi-virginianae,Absent,3.0,3.0,36.0,Regulated quarantine pest  (as Gymnosporangium spp.),1.0,3.0,12.0,Pest is introduced,Gymnosporangium juniperi-virginianae,Yes,No
+Fungus,Gymnosporangium libocedri,Absent,3.0,3.0,36.0,Regulated quarantine pest (as Gymnosporangium spp.),2.0,3.0,24.0,Pest is introduced,Gymnosporangium libocedri,Yes,No
+Fungus,Gymnosporangium monticola,Absent,1.0,1.0,1.0,Regulated quarantine pest (as Gymnosporangium spp.),1.0,1.0,1.0,Pest is introduced,Gymnosporangium monticola,Yes,No
+Fungus,Gymnosporangium tremelloides,Absent,4.0,1.0,16.0,,4.0,1.0,16.0,Pest is introduced,Gymnosporangium tremelloides,No,No
+Fungus,Gymnosporangium yamadae,Absent,3.0,3.0,36.0,Regulated quarantine pest (as Gymnosporangium spp.). The import of both Malus and Juniperus are already restricted from outside Europe. However; the bonsai derogations permit some juniper import.,1.0,3.0,12.0,Pest is introduced,Gymnosporangium yamadae,Yes,No
+Fungus,Helicobasidium purpureum,Present (Widespread),,,,,,,,,Helicobasidium purpureum,No,No
+Fungus,Heterobasidion abietinum,Absent,2.0,2.0,8.0,,2.0,2.0,8.0,Pest is introduced,Heterobasidion abietinum,No,No
+Fungus,Heterobasidion insulare species complex,Absent,2.0,1.0,10.0,,2.0,1.0,10.0,Pest is introduced,Heterobasidion insulare,No,No
+Fungus,Heterobasidion irregulare,Absent,3.0,5.0,75.0,Provisional quarantine pest (Great Britain). Prohibibition of many coniferous hosts,3.0,4.0,60.0,Pest is introduced,Heterobasidion irregulare,No,No
+Fungus,Heterobasidion occidentale,Absent,2.0,3.0,30.0,Conifer prohibitions. Provisional quarantine pest (Great Britain).,1.0,3.0,15.0,Pest is introduced,Heterobasidion occidentale,No,No
+Fungus,Heterobasidion parviporum,Absent,2.0,4.0,40.0,,2.0,4.0,40.0,Pest is introduced,Heterobasidion parviporum,No,No
+Virus or Viroid,Hop stunt viroid,Absent,4.0,4.0,48.0,Regulated non quarantine pest (Northern Ireland),3.0,4.0,36.0,Pest is introduced,Hop stunt,No,No
+Virus or Viroid,Hosta virus X,Present (Limited),2.0,3.0,12.0,,2.0,3.0,12.0,Pest spreads to maximum extent,Hosta virus,No,No
+Fungus,Hymenoscyphus albidoides,Absent,2.0,1.0,2.0,,2.0,1.0,2.0,Pest is introduced,Hymenoscyphus albidoides,No,No
+Fungus,Hymenoscyphus fraxineus,Present (Widespread),4.0,5.0,100.0,Prohibition on Fraxinus from outside Europe,4.0,4.0,80.0,Pest spreads to maximum extent,Hymenoscyphus fraxineus,No,No
+Virus or Viroid,Impatiens necrotic spot virus,Present (Widespread),3.0,3.0,45.0,Regulated non quarantine pest,2.0,3.0,30.0,Pest spreads to maximum extent,Impatiens necrotic,No,No
+Virus or Viroid,Iresine viroid 1,Unknown,4.0,1.0,4.0,,4.0,1.0,4.0,Pest is introduced,Iresine viroid,No,No
+Virus or Viroid,Iris yellow spot virus,Absent,5.0,2.0,40.0,,5.0,2.0,40.0,Pest is introduced,Iris yellow,No,No
+Fungus,Kabatiella zeae,Present (Limited),2.0,3.0,18.0,,2.0,3.0,18.0,Pest spreads to maximum extent,Kabatiella zeae,No,No
+Fungus,Lecanosticta acicola,Absent,4.0,3.0,60.0,Regulated quarantine pest (Great Britain.) Northern Ireland: Regulated non quarantine pest,3.0,3.0,45.0,Pest is introduced,Lecanosticta acicola,Yes,No
+Virus or Viroid,Leek yellow stripe virus,Unknown,3.0,2.0,18.0,,3.0,2.0,18.0,Pest is introduced,Leek yellow,No,No
+Virus or Viroid,Lettuce infectious yellows virus,Absent,3.0,3.0,36.0,Regulated quarantine pest,2.0,3.0,24.0,Pest is introduced,Lettuce infectious,Yes,No
+Fungus,Leveillula clavata,Absent,4.0,2.0,24.0,,2.0,2.0,12.0,Pest is introduced,Leveillula clavata,No,No
+Fungus,Leveillula taurica,Present (Limited),3.0,3.0,27.0,,3.0,3.0,27.0,Pest spreads to maximum extent,Leveillula taurica,No,No
+Virus or Viroid,Little cherry virus 1,Present (Limited),2.0,3.0,12.0,Regulated non quarantine pest,2.0,3.0,12.0,Pest spreads to maximum extent,Little cherry,No,No
+Virus or Viroid,Little cherry virus 2,Present (Limited),2.0,4.0,16.0,Regulated non quarantine pest,2.0,4.0,16.0,Pest spreads to maximum extent,Little cherry,No,No
+Bacterium,Lonsdalea populi,Absent,4.0,4.0,64.0,,4.0,4.0,64.0,Pest is introduced,Lonsdalea populi,No,No
+Bacterium,Lonsdalea quercina,Absent,2.0,3.0,30.0,Populus is a temporarily prohibited host. Measures on wood. ,1.0,3.0,15.0,Pest is introduced with vector or finds vector,Lonsdalea quercina,No,No
+Fungus,Melampsora farlowii,Absent,2.0,4.0,8.0,Regulated quarantine pest,1.0,4.0,4.0,Pest is introduced,Melampsora farlowii,Yes,No
+Fungus,Melampsora medusae,Absent,4.0,3.0,36.0,Regulated quarantine pest,2.0,3.0,18.0,Pest is introduced,Melampsora medusae,Yes,No
+Fungus,Melampsoridium hiratsukanum,Present (Limited),4.0,3.0,36.0,,4.0,3.0,36.0,Pest spreads to maximum extent,Melampsoridium hiratsukanum,No,No
+Virus or Viroid,Melon yellowing-associated virus,Absent,1.0,2.0,2.0,Regulated quarantine pest. Measures against Bemisia tabaci.,1.0,2.0,2.0,Pest is introduced,Melon yellowing-associated,Yes,No
+Fungus,Microsphaera grossulariae,Present (Widespread),,,,,,,,,Microsphaera grossulariae,No,No
+Virus or Viroid,Mint vein banding-associated virus,Absent,3.0,2.0,6.0,,3.0,2.0,6.0,Pest is introduced,Mint vein,No,No
+Fungus,Monilinia fructicola,Absent,4.0,2.0,24.0,,4.0,2.0,24.0,Pest is introduced,Monilinia fructicola,No,No
+Fungus,Monilinia polystroma,Absent,4.0,2.0,32.0,,4.0,2.0,32.0,Pest is introduced,Monilinia polystroma,No,No
+Fungus,Mycodiella laricis-leptolepidis,Absent,3.0,3.0,45.0,Regulated quarantine pest,1.0,3.0,15.0,Pest is introduced,Mycodiella laricis-leptolepidis,Yes,No
+Virus or Viroid,Myrobalan latent ringspot virus,Absent,,,,,,,,,Myrobalan latent,No,No
+Fungus,Neocosmospora ambrosia,Absent,,,,Regulated quarantine pest (Northern Ireland),,,,,Neocosmospora ambrosia,Yes,No
+Fungus,Neofabraea malicorticis,Present (Widespread),,,,,,,,,Neofabraea malicorticis,No,No
+Fungus,Neofabraea vagabunda,Present (Unknown Distribution),,,,,,,,,Neofabraea vagabunda,No,No
+Fungus,Neofusicoccum australe,Present (Unknown Distribution),3.0,2.0,30.0,,3.0,2.0,30.0,Pest spreads to maximum extent,Neofusicoccum australe,No,No
+Fungus,Neofusicoccum luteum,Absent,5.0,2.0,50.0,,5.0,2.0,50.0,Pest is introduced,Neofusicoccum luteum,No,No
+Fungus,Neofusicoccum parvum,Present (Unknown Distribution),3.0,2.0,30.0,,3.0,2.0,30.0,Pest spreads to maximum extent,Neofusicoccum parvum,No,No
+Fungus,Neonectria ditissima,Present (Widespread),,,,,,,,,Neonectria ditissima,No,No
+Fungus,Neonectria neomacrospora,Present (Unknown Distribution),4.0,3.0,36.0,,4.0,3.0,36.0,Pest spreads to maximum extent,Neonectria neomacrospora,No,No
+Other,Non-native terrestrial slugs and snails,Absent,,,,,,,,Pest is introduced,Non-native terrestrial,No,No
+Virus or Viroid,Olive leaf yellowing- associated virus,Absent,4.0,2.0,16.0,OLYaV is an RNQP with 0% tolerance on Olea europaea fruit propagating material or plants intended for fruit propagation.,4.0,2.0,16.0,Pest is introduced,Olive leaf,No,No
+Virus or Viroid,Olive vein yellowing associated virus,Absent,4.0,2.0,16.0,Regulated non quarantine pest (Northern Ireland),4.0,2.0,16.0,Pest is introduced,Olive vein,No,No
+Virus or Viroid,Olive yellow mottling and decline associated virus,Absent,3.0,2.0,12.0,Regulated non quarantine pest,3.0,2.0,12.0,Pest is introduced,Olive yellow,No,No
+Virus or Viroid,Onion yellow dwarf virus,Present (Limited),,,,,,,,,Onion yellow,No,No
+Fungus,Ophiognomonia clavigignenti-juglandacearum,Absent,3.0,5.0,15.0,Juglans is a high risk host; temporarily prohibited,1.0,5.0,5.0,Pest is introduced,Ophiognomonia clavigignenti-juglandacearum,No,No
+Fungus,Ophiostoma novo-ulmi,Present (Widespread),4.0,4.0,48.0,UK General Powers / Dutch Elm Disease (Local Authorities) Order 1984,3.0,4.0,36.0,Pest spreads to maximum extent,Ophiostoma novo-ulmi,No,Yes
+Other,Ovachlamys fulgens,Absent,3.0,2.0,6.0,,3.0,2.0,6.0,Pest is introduced,Ovachlamys fulgens,No,No
+Bacterium,Pantoea stewartii subsp. stewartii,Absent,2.0,2.0,12.0,Regulated quarantine pest,2.0,2.0,12.0,Pest is introduced,Pantoea stewartii,Yes,No
+Virus or Viroid,Passiflora chlorosis virus ,Present (Unknown Distribution),4.0,2.0,8.0,,4.0,2.0,8.0,Pest spreads to maximum extent,Passiflora chlorosis,No,No
+Virus or Viroid,Pea necrotic yellow dwarf virus,Absent,2.0,3.0,18.0,,2.0,3.0,18.0,Pest is introduced,Pea necrotic,No,Yes
+Virus or Viroid,Peach latent mosaic viroid,Absent,,,,,,,,,Peach latent,No,No
+Virus or Viroid,Peach mosaic virus,Absent,3.0,1.0,3.0,Regulated quarantine pest,2.0,1.0,2.0,Pest is introduced,Peach mosaic,Yes,No
+Virus or Viroid,Peach rosette mosaic virus,Absent,2.0,1.0,2.0,Regulated quarantine pest,2.0,1.0,2.0,Pest is introduced,Peach rosette,Yes,No
+Phytoplasma,Peach rosette phytoplasma,Absent,2.0,2.0,4.0,Regulated quarantine pest (as viruses; viroids and phytoplasmas of Cydonia; Fragaria; Malus; Prunus; Pyrus; Ribes; Rubus and Vitis). ,2.0,2.0,4.0,Pest is introduced,Peach rosette,No,No
+Phytoplasma,Peach yellows phytoplasma,Absent,2.0,2.0,4.0,Regulated quarantine pest (as viruses; viroids and phytoplasmas of Cydonia; Fragaria; Malus; Prunus; Pyrus; Ribes; Rubus and Vitis). ,2.0,2.0,4.0,Pest is introduced,Peach yellows,No,No
+Virus or Viroid,Pear bark necrosis agent,Absent,,,,,,,,,Pear bark,No,No
+Virus or Viroid,Pear bark split agent,Absent,,,,,,,,,Pear bark,No,No
+Virus or Viroid,Pear blister canker viroid,Present (Limited),,,,,,,,,Pear blister,No,No
+Virus or Viroid,Pear rough bark agent,,,,,,,,,,Pear rough,No,No
+Bacterium,Pectobacterium aroidearum ,Absent,3.0,2.0,30.0,prohibition on import of seed tubers from current range of pest. ,2.0,2.0,20.0,Pest is introduced,Pectobacterium aroidearum,No,No
+Virus or Viroid,Pepino mosaic virus,Present (Limited),4.0,3.0,36.0,Regulated non quarantine pest. ,3.0,3.0,27.0,Pest spreads to maximum extent,Pepino mosaic,No,No
+Virus or Viroid,Pepper chat fruit viroid,Absent,3.0,3.0,36.0,Regulated quarantine pest (Great Britain),3.0,3.0,36.0,Pest is introduced,Pepper chat,Yes,No
+Virus or Viroid,Pepper mild tigre virus,Absent,3.0,3.0,27.0,Regulated quarantine pest (as Begomoviruses),1.0,3.0,9.0,Pest is introduced,Pepper mild,Yes,No
+Virus or Viroid,Pepper vein yellows virus ,Absent,4.0,3.0,36.0,Prohibition on solanaceous planting material,4.0,3.0,36.0,Pest is introduced,Pepper vein,No,No
+Oomycete,Peronospora belbahrii,Present (Unknown Distribution),2.0,1.0,4.0,,2.0,1.0,4.0,Pest spreads to maximum extent,Peronospora belbahrii,No,No
+Fungus,Peronospora sparsa (synonym Peronospora rubi),Present (Widespread),,,,,,,,,Peronospora sparsa,No,No
+Fungus,Petrakia liobae,Absent,4.0,2.0,40.0,,4.0,2.0,40.0,Pest is introduced,Petrakia liobae,No,No
+Fungus,Phacidiopycnis washingtonensis,Present (Unknown Distribution),4.0,2.0,24.0,,4.0,2.0,24.0,Pest spreads to maximum extent,Phacidiopycnis washingtonensis,No,No
+Fungus,Phaeoacremonium viticola ,Unknown,4.0,2.0,16.0,,4.0,2.0,16.0,Pest is introduced,Phaeoacremonium viticola,No,No
+Fungus,Phellinus everhartii,Absent,3.0,2.0,30.0,There are extensive requirements for the import of woodchip from USA. There are also specific measures against Quercus woodchip. ,2.0,2.0,20.0,Pest is introduced,Phellinus everhartii,No,No
+Fungus,Phellinus spiculosus ,Absent,3.0,2.0,30.0,Extensive requirements on the import of woodchips from North America. ,2.0,2.0,20.0,Pest is introduced,Phellinus spiculosus,No,No
+Fungus,Phialophora cinerescens,Present (Limited),2.0,3.0,6.0,,2.0,2.0,4.0,Pest spreads to maximum extent,Phialophora cinerescens,No,No
+Fungus,Phoma commelinicola,Absent,3.0,2.0,6.0,,3.0,2.0,6.0,Pest is introduced,Phoma commelinicola,No,No
+Fungus,Phomopsis phaseoli,Absent,2.0,3.0,18.0,,2.0,3.0,18.0,Pest is introduced,Phomopsis phaseoli,No,No
+Fungus,Phomopsis vaccinii,Absent,4.0,3.0,36.0,Regulated quarantine pest (Great Britain.) Northern Ireland: Regulated non quarantine pest,2.0,3.0,18.0,Pest is introduced,Phomopsis vaccinii,Yes,No
+Fungus,Phyllachora maydis and Microdochium maydis,Absent,2.0,4.0,24.0,,1.0,4.0,12.0,Pest is introduced,Phyllachora maydis,No,No
+Fungus,Phyllosticta citricarpa,Absent,0.0,0.0,1.0,Regulated quarantine pest (Northern Ireland),0.0,0.0,1.0,Pest is introduced,Phyllosticta citricarpa,Yes,No
+Fungus,Phyllosticta solitaria,Absent,3.0,2.0,24.0,Regulated quarantine pest,2.0,2.0,16.0,Pest is introduced,Phyllosticta solitaria,Yes,No
+Fungus,Phymatotrichopsis omnivora,Absent,1.0,2.0,10.0,Regulated quarantine pest,1.0,2.0,10.0,Pest is introduced,Phymatotrichopsis omnivora,Yes,No
+Oomycete,Phytophthora acerina,Absent,2.0,3.0,30.0,,2.0,3.0,30.0,Pest is introduced,Phytophthora acerina,No,No
+Oomycete,Phytophthora alni,Present (Widespread),4.0,4.0,48.0,,4.0,4.0,48.0,Pest spreads to maximum extent,Phytophthora alni,No,Yes
+Oomycete,Phytophthora austrocedri,Present (Limited),4.0,4.0,48.0,Regulated non quarantine pest (Great Britain),3.0,4.0,36.0,Pest spreads to maximum extent,Phytophthora austrocedri,No,No
+Oomycete,Phytophthora bisheria,Unknown,5.0,1.0,25.0,,5.0,1.0,25.0,Pest is introduced,Phytophthora bisheria,No,No
+Fungus,Phytophthora cactorum,Present (Widespread),,,,,,,,,Phytophthora cactorum,No,No
+Fungus,Phytophthora cambivora,Present (Widespread),,,,,,,,,Phytophthora cambivora,No,No
+Oomycete,Phytophthora chrysanthemi,Absent,3.0,2.0,18.0,,3.0,2.0,18.0,Pest is introduced,Phytophthora chrysanthemi,No,No
+Fungus,Phytophthora cinnamomi,Present (Widespread),,,,,,,,,Phytophthora cinnamomi,No,No
+Oomycete,Phytophthora citrophthora,Present (Unknown Distribution),,,,,,,,,Phytophthora citrophthora,No,No
+Fungus,Phytophthora cryptogea,Present (Widespread),,,,,,,,,Phytophthora cryptogea,No,No
+Oomycete,Phytophthora foliorum,Absent,3.0,1.0,6.0,,3.0,1.0,6.0,Pest is introduced,Phytophthora foliorum,No,No
+Oomycete,Phytophthora fragariae,Present (Widespread),2.0,5.0,50.0,Regulated non quarantine pest,1.0,4.0,20.0,Pest spreads to maximum extent,Phytophthora fragariae,No,No
+Oomycete,Phytophthora fragariaefolia ,Absent,3.0,3.0,45.0,,2.0,3.0,30.0,Pest is introduced,Phytophthora fragariaefolia,No,No
+Oomycete,Phytophthora kernoviae,Present (Limited),4.0,5.0,100.0,Provisional quarantine pest (Great Britain),2.0,4.0,40.0,Pest spreads to maximum extent,Phytophthora kernoviae,No,No
+Oomycete,Phytophthora lateralis,Present (Limited),5.0,3.0,30.0,Regulated non quarantine pest (Great Britain),4.0,3.0,24.0,Pest spreads to maximum extent,Phytophthora lateralis,No,No
+Oomycete,Phytophthora nicotianae var. parasitica,Present (Widespread),,,,,,,,,Phytophthora nicotianae,No,No
+Oomycete,Phytophthora pinifolia,Absent,3.0,4.0,60.0,Conifer prohibitons from outside Europe,1.0,4.0,20.0,Pest is introduced,Phytophthora pinifolia,No,No
+Oomycete,Phytophthora pluvialis ,Present (Limited),3.0,4.0,60.0,Conifer prohibition,2.0,4.0,40.0,Pest is introduced,Phytophthora pluvialis,No,No
+Oomycete,Phytophthora polonica,Absent,4.0,1.0,20.0,,4.0,1.0,20.0,Pest is introduced,Phytophthora polonica,No,No
+Oomycete,Phytophthora pseudosyringae,Present (Limited),3.0,3.0,36.0,,2.0,3.0,24.0,Pest spreads to maximum extent,Phytophthora pseudosyringae,No,No
+Oomycete,Phytophthora ramorum,Present (Limited),5.0,5.0,125.0,Great Britain: regulated quarantine pest (non-European isolates); provisional quarantine pest (European isolates).  Northern Ireland: regulated quarantine pest (non-EU isolates); regulated non quarantine pest (EU isolates). ,4.0,4.0,80.0,Pest spreads to maximum extent,Phytophthora ramorum,Yes,No
+Oomycete,Phytophthora rubi,Present (Widespread),2.0,5.0,40.0,RNQP,1.0,4.0,16.0,Pest spreads to maximum extent,Phytophthora rubi,No,No
+Oomycete,Phytophthora siskiyouensis ,Present (Unknown Distribution),3.0,4.0,36.0,,3.0,4.0,36.0,Pest spreads to maximum extent,Phytophthora siskiyouensis,No,No
+Fungus,Phytophthora spp.,Unknown,,,,,,,,,Phytophthora spp.,No,No
+Oomycete,Phytophthora tentaculata,Absent,5.0,3.0,45.0,,5.0,3.0,45.0,Pest is introduced,Phytophthora tentaculata,No,No
+Virus or Viroid,Plantago asiatica mosaic virus,Unknown,5.0,3.0,30.0,,5.0,3.0,36.0,Pest is introduced,Plantago asiatica,No,No
+Oomycete,Plasmopara halstedii,Absent,2.0,3.0,6.0,Regulated non quarantine pest,2.0,3.0,6.0,Pest is introduced,Plasmopara halstedii,No,No
+Oomycete,Plasmopara obducens,Present (Unknown Distribution),3.0,4.0,12.0,,3.0,4.0,12.0,Pest spreads to maximum extent,Plasmopara obducens,No,No
+Fungus,Plenodomus tracheiphilus,Absent,0.0,0.0,1.0,Regulated non quarantine pest (Northern Ireland),0.0,0.0,1.0,Pest is introduced,Plenodomus tracheiphilus,No,No
+Virus or Viroid,Plum pox virus,Present (Limited),4.0,4.0,32.0,Regulated non quarantine pest,3.0,4.0,24.0,Pest spreads to maximum extent,Plum pox,No,No
+Fungus,Podosphaera aphanis,Present (Widespread),,,,,,,,,Podosphaera aphanis,No,No
+Fungus,Podosphaera euphorbiae strains pathogenic to poinsettia,Present (Unknown Distribution),2.0,3.0,18.0,,2.0,3.0,18.0,Pest spreads to maximum extent,Podosphaera euphorbiae,No,No
+Fungus,Podosphaera mors-uvae,Present (Widespread),,,,,,,,,Podosphaera mors-uvae,No,No
+Other,Pomacea spp.,Absent,4.0,3.0,24.0,Regulated quarantine pest (Northern Ireland),2.0,2.0,8.0,Pest is introduced,Pomacea spp.,Yes,No
+Virus or Viroid,Potato black ringspot virus,Absent,3.0,2.0,30.0,Regulated quarantine pest (as potato viruses; viroids and phytoplasmas),1.0,2.0,10.0,Pest is introduced,Potato black,Yes,No
+Virus or Viroid,Potato deforming mosaic virus Argentina,Absent,3.0,3.0,45.0,Regulated quarantine pest (as potato viruses; viroids and phytoplasmas),1.0,3.0,15.0,Pest is introduced,Potato deforming,Yes,No
+Virus or Viroid,Potato leaf roll virus (non-European),Absent,3.0,4.0,60.0,Regulated quarantine pest (non-European isolates). Regulated non quarantine pest (European isolates).,1.0,4.0,20.0,Pest is introduced,Potato leaf,Yes,No
+Virus or Viroid,Potato spindle tuber viroid,Present (Unknown Distribution),5.0,3.0,75.0,Regulated non quarantine pest,3.0,3.0,45.0,Pest is introduced,Potato spindle,No,No
+Virus or Viroid,Potato virus A (non-European strains),Absent,3.0,3.0,45.0,Regulated quarantine pest (non-European isolates) (Great Britain),1.0,3.0,15.0,Pest is introduced,Potato virus,Yes,No
+Virus or Viroid,Potato virus B,Absent,,,,Regulated quarantine pest (Northern Ireland). Regulated quarantine pest (Great Britain; under the broad heading &quot;Potato viruses; viroids and phytoplasmas such as&quot;),,,,,Potato virus,Yes,No
+Virus or Viroid,Potato virus H,Absent,,,,Regulated quarantine pest (Northern Ireland). Regulated quarantine pest (Great Britain; under the broad heading &quot;Potato viruses; viroids and phytoplasmas such as&quot;),,,,,Potato virus,Yes,No
+Virus or Viroid,Potato virus M (non-European strains),Absent,3.0,3.0,45.0,Regulated quarantine pest (non-European isolates) (Great Britain) ,1.0,3.0,15.0,Pest is introduced,Potato virus,Yes,No
+Virus or Viroid,Potato virus P,Absent,,,,Regulated quarantine pest (Northern Ireland),,,,,Potato virus,Yes,No
+Virus or Viroid,Potato virus S (non-European strains),Absent,3.0,3.0,45.0,Regulated quarantine pest (non-European isolates),1.0,3.0,15.0,Pest is introduced,Potato virus,Yes,No
+Virus or Viroid,Potato virus T,Absent,3.0,2.0,30.0,Regulated quarantine pest ,1.0,2.0,10.0,Pest is introduced,Potato virus,Yes,No
+Virus or Viroid,Potato virus V (non-European strains),Absent,3.0,3.0,45.0,Regulated quarantine pest (non-European isolates) (Great Britain),1.0,3.0,15.0,Pest is introduced,Potato virus,Yes,No
+Virus or Viroid,Potato virus X (non-European strains),Absent,3.0,2.0,30.0,Regulated quarantine pest (non-European isolates),1.0,2.0,10.0,Pest is introduced,Potato virus,Yes,No
+Virus or Viroid,Potato virus Y (non-European strains),Absent,3.0,3.0,45.0,Regulated quarantine pest (non-European isolates) (Great Britain),1.0,3.0,15.0,Pest is introduced,Potato virus,Yes,No
+Virus or Viroid,Potato yellow dwarf virus,Absent,3.0,3.0,45.0,Regulated quarantine pest (as potato viruses; viroids and phytoplasmas in GB),1.0,3.0,15.0,Pest is introduced,Potato yellow,Yes,No
+Virus or Viroid,Potato yellow mosaic virus,Absent,,,,Regulated quarantine pest (Northern Ireland). Regulated quarantine pest (Great Britain; under the broad heading &quot;Potato viruses; viroids and phytoplasmas such as&quot; and also under the listing &quot;begomoviruses&quot;),,,,,Potato yellow,Yes,No
+Virus or Viroid,Potato yellow vein virus,Absent,3.0,3.0,45.0,Regulated quarantine pest,1.0,3.0,15.0,Pest is introduced,Potato yellow,Yes,No
+Virus or Viroid,Potato yellowing virus,Absent,3.0,3.0,45.0,Regulated quarantine pest,1.0,3.0,15.0,Pest is introduced,Potato yellowing,Yes,No
+Virus or Viroid,Prune dwarf virus,Present (Widespread),,,,,,,,,Prune dwarf,No,No
+Virus or Viroid,Prunus necrotic ringspot virus,Present (Widespread),5.0,2.0,50.0,Regulated non quarantine pest,4.0,2.0,40.0,Pest spreads to maximum extent,Prunus necrotic,No,No
+Fungus,Pseudocercospora angolensis,Absent,0.0,0.0,1.0,Regulated quarantine pest (Northern Ireland),0.0,0.0,1.0,Pest is introduced,Pseudocercospora angolensis,Yes,No
+Fungus,Pseudocercospora pini-densiflorae,Absent,3.0,3.0,45.0,Regulated quarantine pest,2.0,3.0,30.0,Pest is introduced,Pseudocercospora pini-densiflorae,Yes,No
+Bacterium,Pseudomonas avellanae,Absent,4.0,4.0,48.0,Provisional quarantine pest (Great Britain); regulated non quarantine pest (Northern Ireland),3.0,4.0,36.0,Pest is introduced,Pseudomonas avellanae,No,No
+Bacterium,Pseudomonas cannabina pv. alisalensis,Unknown,3.0,2.0,30.0,,3.0,2.0,30.0,Pest is introduced,Pseudomonas cannabina,No,No
+Bacterium,Pseudomonas savastanoi pv. savastanoi,Absent,3.0,3.0,18.0,Regulated non quarantine pest (Northern Ireland),3.0,3.0,18.0,Pest is introduced,Pseudomonas savastanoi,No,No
+Bacterium,Pseudomonas syringae pv. actinidiae,Absent,3.0,3.0,9.0,Regulated quarantine pest (Great Britain); regulated non quarantine pest (Northern Ireland).,2.0,3.0,6.0,Pest is introduced,Pseudomonas syringae,Yes,No
+Bacterium,Pseudomonas syringae pv. aesculi,Present (Widespread),5.0,4.0,40.0,,5.0,4.0,40.0,Pest spreads to maximum extent,Pseudomonas syringae,No,Yes
+Bacterium,Pseudomonas syringae pv. morsprunorum,Present (Widespread),,,,,,,,,Pseudomonas syringae,No,No
+Bacterium,Pseudomonas syringae pv. persicae,Absent,2.0,3.0,6.0,Regulated quarantine pest (Great Britain). Regulated non quarantine pest (Northern Ireland). ,2.0,3.0,6.0,Pest is introduced,Pseudomonas syringae,Yes,No
+Bacterium,Pseudomonas syringae pv. syringae,Present (Widespread),,,,,,,,,Pseudomonas syringae,No,No
+Bacterium,Pseudomonas syringae pv. ulmi ,Unknown,3.0,3.0,27.0,,3.0,3.0,27.0,Pest is introduced,Pseudomonas syringae,No,No
+Bacterium,Pseudomonas viridiflava,Present (Widespread),,,,,,,,,Pseudomonas viridiflava,No,No
+Fungus,Puccinia emaculata,Absent,3.0,1.0,3.0,UK general powers  (unlisted),2.0,1.0,2.0,Pest is introduced,Puccinia emaculata,No,No
+Fungus,Puccinia graminis f. sp. tritici UG99,Absent,1.0,3.0,15.0,,1.0,2.0,10.0,Pest is introduced,Puccinia graminis,No,Yes
+Fungus,Puccinia hemerocallidis,Absent,3.0,3.0,9.0,,3.0,3.0,9.0,Pest is introduced,Puccinia hemerocallidis,No,No
+Fungus,Puccinia horiana,Present (Limited),3.0,2.0,18.0,Regulated non quarantine pest,2.0,2.0,12.0,Pest spreads to maximum extent,Puccinia horiana,No,No
+Fungus,Puccinia pittieriana,Absent,3.0,4.0,60.0,Regulated quarantine pest.,1.0,4.0,20.0,Pest is introduced,Puccinia pittieriana,Yes,No
+Fungus,Puccinia psidii,Absent,4.0,3.0,24.0,,4.0,3.0,24.0,Pest is introduced,Puccinia psidii,No,No
+Fungus,Pyricularia grisea,Absent,2.0,3.0,30.0,,2.0,3.0,30.0,Pest is introduced,Pyricularia grisea,No,No
+Fungus,Pyricularia oryzae (Triticum pathotype),Absent,2.0,3.0,30.0,,2.0,3.0,30.0,Pest is introduced,Pyricularia oryzae,No,No
+Fungus,Quambalaria eucalypti,Absent,3.0,1.0,6.0,,3.0,1.0,6.0,Pest is introduced,Quambalaria eucalypti,No,No
+Fungus,Raffaelea lauricola ,Absent,3.0,2.0,6.0,Vector is regulated (non-European Scolytinae); now also specifically listed as a provisional quarantine pest (Great Britain),3.0,2.0,6.0,Pest is introduced,Raffaelea lauricola,No,No
+Fungus,Raffaelea quercivora,Absent,2.0,4.0,40.0,Provisional quarantine pest (Great Britain),2.0,4.0,40.0,Pest is introduced with vector or finds vector,Raffaelea quercivora,No,No
+Bacterium,Ralstonia pseudosolanacearum,Absent,3.0,3.0,36.0,Regulated quarantine pest; measures on some hosts,2.0,3.0,24.0,Pest is introduced,Ralstonia pseudosolanacearum,Yes,No
+Bacterium,Ralstonia solanacearum,Present (Limited),4.0,5.0,100.0,Regulated quarantine pest.,2.0,3.0,30.0,Pest spreads to maximum extent,Ralstonia solanacearum,Yes,No
+Bacterium,Ralstonia syzygii subsp. celebesensis,Absent,1.0,2.0,2.0,Regulated quarantine pest,1.0,2.0,2.0,Pest is introduced,Ralstonia syzygii,Yes,No
+Bacterium,Ralstonia syzygii subsp. indonesiensis,Absent,2.0,3.0,30.0,Regulated quarantine pest,1.0,2.0,10.0,Pest is introduced,Ralstonia syzygii,Yes,No
+Bacterium,Ralstonia syzygii subsp. syzygii,Absent,1.0,2.0,2.0,,1.0,2.0,2.0,Pest is introduced,Ralstonia syzygii,No,No
+Fungus,Ramularia endophylla (synonym Mycosphaerella punctiformis),Present (Widespread),,,,,,,,,Ramularia endophylla,No,No
+Virus or Viroid,Raspberry bushy dwarf virus,Present (Widespread),,,,,,,,,Raspberry bushy,No,No
+Virus or Viroid,Raspberry latent virus,Absent,,,,Regulated quarantine pest (Northern Ireland),,,,,Raspberry latent,Yes,No
+Virus or Viroid,Raspberry leaf curl virus,Absent,4.0,5.0,80.0,Regulated quarantine pest,2.0,4.0,32.0,Pest is introduced,Raspberry leaf,Yes,No
+Virus or Viroid,Raspberry leaf mottle virus,Present (Widespread),,,,,,,,,Raspberry leaf,No,No
+Virus or Viroid,Raspberry ringspot virus,Present (Limited),2.0,4.0,40.0,Regulated non quarantine pest,1.0,3.0,15.0,Pest spreads to maximum extent,Raspberry ringspot,No,No
+Virus or Viroid,Raspberry vein chlorosis virus,Present (Unknown Distribution),,,,,,,,,Raspberry vein,No,No
+Virus or Viroid,Raspberry yellow spot agent,Absent,,,,,,,,,Raspberry yellow,No,No
+Bacterium,Rathayibacter toxicus,Absent,2.0,2.0,20.0,,2.0,2.0,20.0,Pest is introduced,Rathayibacter toxicus,No,No
+Fungus,Rhizoctonia fragariae,Unknown,3.0,3.0,45.0,Regulated non quarantine pest; prohibitions on key pathway (Fragaria planting material),2.0,3.0,30.0,Pest is introduced,Rhizoctonia fragariae,No,No
+Fungus,Rhizoctonia solani,Present (Widespread),,,,,,,,,Rhizoctonia solani,No,No
+Bacterium,Rhodococcus fascians,Present (Widespread),,,,,,,,,Rhodococcus fascians,No,No
+Virus or Viroid,Rose rosette virus,Absent,3.0,4.0,36.0,Regulated quarantine pest (Great Britain); Northern Ireland: Emergency measures ,2.0,4.0,24.0,Pest is introduced with vector or finds vector,Rose rosette,Yes,No
+Virus or Viroid,Rubus yellow net virus,Present (Widespread),,,,,,,,,Rubus yellow,No,No
+Virus or Viroid,Satsuma dwarf virus,Absent,0.0,0.0,1.0,Regulated quarantine pest (Northern Ireland),0.0,0.0,1.0,Pest is introduced,Satsuma dwarf,Yes,No
+Fungus,Sclerophora pallida,Present (Limited),,,,This species is not a plant pathogenic fungus but a lichen species.  Please note; there is a separate species; the cause of grapevine root rot pathogen - Roesleria subterranea - &quot;The name R. pallida had been miss-used frequently to refer to a fungus which is in reality R. subterranea (= Roesleria hypogaea) (Beckwith 1924). Dennis (1978) considered R. pallida as a synonym of R. hypogaea. However; the name Roesleria pallida (Pers.) Sacc. based on Calicium pallidum Pers. is not applicable to the grape root parasite (Redhead 1984; Beckwith 1924). Its current name is Sclerophora pallida (Pers.) Y.J. Yao &amp; Spooner. According to Redhead (1984); Dennis (1978) gave a description of R. subterranea under the name R. pallida. &quot; (http://www.padil.gov.au/pests-and-diseases/pest/main/136618/4410) Therefore; we are unclear if the correct organism has been legislated for.,,,,,Sclerophora pallida,No,No
+Fungus,Sclerotinia sclerotiorum,Present (Widespread),,,,,,,,,Sclerotinia sclerotiorum,No,No
+Fungus,Septoria malagutii,Absent,3.0,3.0,45.0,Regulated quarantine pest,1.0,3.0,15.0,Pest is introduced,Septoria malagutii,Yes,No
+,Sirex nitobei,Absent,,,,Provisional quarantine pest (Great Britain),,,,,Sirex nitobei,No,No
+Fungus,Sirococcus piceicola,Absent,4.0,2.0,40.0,Prohibition of Pica from outside Europe (Switzerland permitted),4.0,2.0,40.0,Pest is introduced,Sirococcus piceicola,No,No
+Fungus,Sirococcus tsugae,Present (Unknown Distribution),5.0,4.0,60.0,,5.0,4.0,60.0,Pest spreads to maximum extent,Sirococcus tsugae,No,No
+Virus or Viroid,Southern tomato virus,Unknown,5.0,1.0,15.0,,5.0,1.0,15.0,Pest spreads to maximum extent,Southern tomato,No,No
+Fungus,Sphaerulina musiva,Absent,3.0,3.0,27.0,Regulated quarantine pest,2.0,3.0,18.0,Pest is introduced,Sphaerulina musiva,Yes,No
+Virus or Viroid,Spiranthes Mosaic Virus 3 ,Unknown,4.0,2.0,16.0,,4.0,2.0,16.0,Pest is introduced,Spiranthes Mosaic,No,No
+Bacterium,Spiroplasma citri,Absent,3.0,2.0,24.0,Regulated non quarantine pest (Northern Ireland),3.0,2.0,24.0,Pest is introduced,Spiroplasma citri,No,No
+Fungus,Splanchnonema platani ,Present (Limited),4.0,3.0,48.0,,3.0,2.0,24.0,Pest spreads to maximum extent,Splanchnonema platani,No,Yes
+Fungus,Spongospora subterranea,Present (Widespread),,,,,,,,,Spongospora subterranea,No,No
+Virus or Viroid,Squash leaf curl virus,Absent,2.0,3.0,6.0,Regulated quarantine pest (as Begomoviruses),2.0,3.0,6.0,Pest is introduced,Squash leaf,Yes,No
+Virus or Viroid,Squash vein yellowing virus,Absent,2.0,3.0,18.0,Regulated quarantine pest. Main vector is regulated (Bemisia tabaci),2.0,3.0,18.0,Pest is introduced,Squash vein,Yes,No
+Fungus,Stagonosporopsis andigena,Absent,3.0,5.0,75.0,Regulated quarantine pest,1.0,5.0,25.0,Pest is introduced,Stagonosporopsis andigena,Yes,No
+Fungus,Stagonosporopsis chrysanthemi,Present (Limited),4.0,4.0,48.0,,2.0,4.0,24.0,Pest spreads to maximum extent,Stagonosporopsis chrysanthemi,No,No
+Fungus,Stegophora ulmea,Absent,3.0,3.0,27.0,Regulated quarantine pest,2.0,3.0,18.0,Pest is introduced,Stegophora ulmea,Yes,No
+Fungus,Stemphylium vesicarium,Present (Widespread),3.0,3.0,36.0,,3.0,3.0,36.0,Pest spreads to maximum extent,Stemphylium vesicarium,No,No
+Fungus,Stenocarpella macrospora,Absent,1.0,2.0,6.0,,1.0,2.0,6.0,Pest is introduced,Stenocarpella macrospora,No,No
+Fungus,Stenocarpella maydis,Present (Unknown Distribution),3.0,2.0,18.0,,3.0,2.0,18.0,Pest is introduced,Stenocarpella maydis,No,No
+Virus or Viroid,Strawberry chlorotic fleck-associated virus,Absent,,,,Regulated quarantine pest (Northern Ireland),,,,,Strawberry chlorotic,Yes,No
+Virus or Viroid,Strawberry crinkle virus,Present (Widespread),4.0,3.0,60.0,Regulated non quarantine pest,3.0,3.0,45.0,Pest spreads to maximum extent,Strawberry crinkle,No,No
+Virus or Viroid,Strawberry latent C virus,Absent,0.0,0.0,,,0.0,0.0,0.0,Pest is introduced,Strawberry latent,No,No
+Virus or Viroid,Strawberry latent ringspot virus,Present (Limited),2.0,3.0,30.0,Regulated non quarantine pest,1.0,3.0,15.0,Pest spreads to maximum extent,Strawberry latent,No,No
+Virus or Viroid,Strawberry leaf curl virus,Absent,,,,Regulated quarantine pest (Northern Ireland),,,,,Strawberry leaf,Yes,No
+Virus or Viroid,Strawberry mild yellow edge virus,Present (Limited),4.0,3.0,60.0,Regulated non quarantine pest,2.0,3.0,30.0,Pest spreads to maximum extent,Strawberry mild,No,No
+Virus or Viroid,Strawberry mottle virus,Present (Widespread),,,,,,,,,Strawberry mottle,No,No
+Phytoplasma,Strawberry multiplier disease phytoplasma,Absent,,,,,,,,,Strawberry multiplier,No,No
+Virus or Viroid,Strawberry necrotic shock virus,Absent,,,,Regulated quarantine pest (Northern Ireland),,,,,Strawberry necrotic,Yes,No
+Virus or Viroid,Strawberry vein banding virus,Present (Limited),4.0,3.0,60.0,Regulated quarantine pest (Great Britain) Northern Ireland: Regulated non quarantine pest,2.0,3.0,30.0,Pest is introduced,Strawberry vein,Yes,No
+Phytoplasma,Strawberry witches broom phytoplasma,Absent,3.0,2.0,30.0,Regulated quarantine pest (Great Britain),2.0,2.0,20.0,Pest is introduced,Strawberry witches,Yes,No
+Fungus,Stromatinia cepivora,Present (Widespread),,,,,,,,,Stromatinia cepivora,No,No
+Virus or Viroid,Sweet potato chlorotic stunt virus,Absent,1.0,1.0,1.0,,1.0,1.0,1.0,Pest is introduced,Sweet potato,Yes,No
+Phytoplasma,Sweet potato little leaf phytoplasma,Absent,,,,Regulated quarantine pest (Northern Ireland),,,,,Sweet potato,Yes,No
+Virus or Viroid,Sweet potato mild mottle virus,Absent,2.0,1.0,2.0,regulated quarantine pest,2.0,1.0,2.0,Pest is introduced,Sweet potato,Yes,No
+Fungus,Synchytrium endobioticum,Present (Limited),3.0,3.0,45.0,Regulated quarantine pest.,1.0,3.0,15.0,Pest spreads to maximum extent,Synchytrium endobioticum,Yes,No
+Bacterium,Syndrome des Basses Richesses ,Absent,1.0,3.0,15.0,,1.0,3.0,15.0,Pest is introduced,Syndrome des,No,Yes
+Phytoplasma,Tanzanian lethal decline phytoplasma,Absent,0.0,0.0,1.0,Regulated quarantine pest (Northern Ireland; as 'Candidatus Phytoplasma cocostanzania'),0.0,0.0,1.0,Pest is introduced,Tanzanian lethal,Yes,No
+Virus or Viroid,Temperate fruit decay-associated virus,Absent,,,,Regulated quarantine pest (Northern Ireland),,,,,Temperate fruit,Yes,No
+Phytoplasma,Texas Phoenix palm decline ,Absent,1.0,2.0,4.0,,1.0,2.0,4.0,Pest is introduced with vector or finds vector,Texas Phoenix,No,No
+Fungus,Thecaphora solani,Absent,3.0,4.0,60.0,Regulated quarantine pest,1.0,4.0,20.0,Pest is introduced,Thecaphora solani,Yes,No
+Fungus,Thekopsora minima,Present (Unknown Distribution),4.0,3.0,36.0,Regulated non-quarantine pest (Great Britain). Conifer prohibition from outside Europe. Vaccinium is a known host of Xylella;,4.0,3.0,36.0,Pest is introduced,Thekopsora minima,No,No
+Fungus,Tilletia indica,Absent,4.0,4.0,80.0,Regulated quarantine pest,2.0,4.0,40.0,Pest is introduced,Tilletia indica,Yes,No
+Virus or Viroid,Tobacco mild green mosaic virus,Absent,4.0,3.0,48.0,Regulated non quarantine pest (Great Britain). ,3.0,3.0,36.0,Pest is introduced,Tobacco mild,No,No
+Virus or Viroid,Tobacco ringspot virus,Present (Unknown Distribution),4.0,2.0,24.0,Regulated quarantine pest,4.0,2.0,24.0,Pest spreads to maximum extent,Tobacco ringspot,Yes,No
+Virus or Viroid,Tobacco streak ilarvirus potato strain,Absent,3.0,3.0,45.0,Regulated quarantine pest (as potato viruses; viroids and phytoplasmas),1.0,3.0,15.0,Pest is introduced,Tobacco streak,Yes,No
+Virus or Viroid,Tobacco streak virus black raspberry latent strain ,Absent,4.0,1.0,16.0,Regulated quarantine pest (as Black raspberry latent virus in NI),2.0,1.0,8.0,Pest is introduced,Tobacco streak,Yes,No
+Virus or Viroid,Tomato apical stunt viroid,Present (Unknown Distribution),5.0,3.0,45.0,Regulated non quarantine pest (Great Britain). ,3.0,3.0,27.0,Pest is introduced with vector or finds vector,Tomato apical,No,No
+Virus or Viroid,Tomato black ring virus,Present (Limited),2.0,3.0,30.0,Regulated non quarantine pest,1.0,3.0,15.0,Pest spreads to maximum extent,Tomato black,No,No
+Virus or Viroid,Tomato brown rugose fruit virus ,Absent,3.0,4.0,48.0,Regulated quarantine pest (Great Britain); Northern Ireland: emergency measures,3.0,4.0,48.0,Pest is introduced,Tomato brown,Yes,No
+Virus or Viroid,Tomato chlorosis virus,Absent,4.0,3.0,36.0,Provisional quarantine pest (Great Britain),4.0,3.0,36.0,Pest is introduced,Tomato chlorosis,No,No
+Virus or Viroid,Tomato chlorotic dwarf viroid,Present (Unknown Distribution),2.0,3.0,24.0,Regulated non quarantine pest (Great Britain). ,2.0,3.0,24.0,Pest spreads to maximum extent,Tomato chlorotic,No,No
+Virus or Viroid,Tomato chocolate virus,Absent,2.0,3.0,18.0,Prohibition of key pathway (solanaceous planting material). Regulated quarantine pest.,1.0,3.0,9.0,Pest is introduced,Tomato chocolate,Yes,No
+Virus or Viroid,Tomato infectious chlorosis virus,Absent,3.0,3.0,27.0,Provisional quarantine pest (Great Britain),3.0,3.0,27.0,Pest is introduced,Tomato infectious,No,No
+Virus or Viroid,Tomato leaf curl New Delhi virus,Absent,4.0,3.0,48.0,Regulated quarantine pest. Also Bemisia tabaci requirements.,2.0,3.0,24.0,Pest is introduced with vector or finds vector,Tomato leaf,Yes,No
+Virus or Viroid,Tomato marchitez virus,Absent,2.0,3.0,18.0,Prohibition of key pathway (solanaceous plants for planting). Regulated quarantine pest.,1.0,3.0,9.0,Pest is introduced,Tomato marchitez,Yes,No
+Virus or Viroid,Tomato mild mottle virus,Absent,2.0,3.0,18.0,Prohibition of key pathway. Regulated quarantine pest. ,1.0,3.0,9.0,Pest is introduced,Tomato mild,Yes,No
+Virus or Viroid,Tomato mosaic Havana virus,Absent,,,,Regulated quarantine pest (in Great Britain; under the category &quot;begomoviruses&quot;),,,,,Tomato mosaic,Yes,No
+Virus or Viroid,Tomato mottle Taino virus,Absent,,,,Regulated quarantine pest (in Great Britain; under the category &quot;begomoviruses&quot;),,,,,Tomato mottle,Yes,No
+Virus or Viroid,Tomato mottle mosaic virus,Absent,3.0,2.0,24.0,prohibition on Solanaceae planting material; though this does not apply to Europe ,3.0,2.0,24.0,Pest is introduced,Tomato mottle,No,No
+Virus or Viroid,Tomato mottle virus,Absent,3.0,3.0,27.0,pathway prohibition.Regulated quarantine pest as a begomovirus.,1.0,3.0,9.0,Pest is introduced,Tomato mottle,Yes,No
+Virus or Viroid,Tomato planta macho viroid,Absent,3.0,3.0,27.0,Regulated quarantine pest (Great Britain),2.0,3.0,18.0,Pest is introduced,Tomato planta,Yes,No
+Virus or Viroid,Tomato ringspot virus,Present (Unknown Distribution),4.0,2.0,32.0,Regulated non quarantine pest (Great Britain); Northern Ireland: Regulated quarantine pest,3.0,2.0,24.0,Pest spreads to maximum extent,Tomato ringspot,Yes,No
+Virus or Viroid,Tomato severe rugose virus,Absent,,,,Regulated quarantine pest (in Great Britain; under the category &quot;begomoviruses&quot;),,,,,Tomato severe,Yes,No
+Virus or Viroid,Tomato spotted wilt virus,Present (Widespread),3.0,3.0,36.0,Regulated non quarantine pest,2.0,3.0,24.0,Pest spreads to maximum extent,Tomato spotted,No,No
+Virus or Viroid,Tomato torrado virus,Absent,3.0,4.0,36.0,Provisional quarantine pest (Great Britain),3.0,4.0,36.0,Pest is introduced,Tomato torrado,No,No
+Virus or Viroid,Tomato yellow leaf curl Sardinia virus,Absent,5.0,3.0,45.0,Bemisia tabaci listings. Virus is a provisional quarantine pest (Great Britain),2.0,3.0,18.0,Pest is introduced,Tomato yellow,No,No
+Virus or Viroid,Tomato yellow leaf curl virus,Absent,5.0,4.0,80.0,Provisional quarantine pest (Great Britain). NI: Regulated non quarantine pest,2.0,4.0,32.0,Pest is introduced,Tomato yellow,No,No
+Virus or Viroid,Tomato yellow ring virus,Absent,4.0,3.0,48.0,,4.0,3.0,48.0,Pest is introduced,Tomato yellow,No,No
+Virus or Viroid,Tomato yellow vein streak begomovirus,Absent,,,,Regulated quarantine pest (in Great Britain; under the category &quot;begomoviruses&quot;),,,,,Tomato yellow,Yes,No
+,Unknown,,,,,,,,,Pest is introduced,Unknown,No,No
+,Urocerus japonicus,Absent,,,,Provisional quarantine pest (Great Britain),,,,,Urocerus japonicus,No,No
+Fungus,Urocystis agropyri,Present (Widespread),2.0,1.0,10.0,,2.0,1.0,10.0,Pest spreads to maximum extent,Urocystis agropyri,No,No
+Fungus,Venturia nashicola,Absent,3.0,3.0,9.0,Regulated quarantine pest (Northern Ireland),1.0,3.0,3.0,Pest is introduced,Venturia nashicola,Yes,No
+Fungus,Verticillium albo-atrum,Present (Widespread),4.0,3.0,24.0,Regulated non quarantine pest,4.0,2.0,16.0,Pest spreads to maximum extent,Verticillium albo-atrum,No,No
+Fungus,Verticillium albo-atrum (sensu stricto),Present (Widespread),4.0,3.0,60.0,Regulated non quarantine pest,2.0,3.0,30.0,Pest spreads to maximum extent,Verticillium albo-atrum,No,No
+Fungus,Verticillium dahliae,Present (Widespread),4.0,3.0,60.0,Regulated non quarantine pest,2.0,3.0,30.0,Pest spreads to maximum extent,Verticillium dahliae,No,No
+Fungus,Verticillium nonalfalfae,Present (Unknown Distribution),4.0,3.0,24.0,RNQP,2.0,3.0,12.0,Pest spreads to maximum extent,Verticillium nonalfalfae,No,No
+Virus or Viroid,Watermelon silver mottle orthotospovirus,Absent,2.0,2.0,16.0,T. palmi is a quarantine pest,1.0,2.0,8.0,Pest is introduced,Watermelon silver,No,No
+Virus or Viroid,Wheat dwarf virus,Present (Unknown Distribution),2.0,2.0,20.0,,2.0,2.0,20.0,Pest spreads to maximum extent,Wheat dwarf,No,Yes
+Bacterium,Xanthomonas arboricola pv. corylina,Present (Limited),3.0,2.0,18.0,Regulated non quarantine pest,3.0,2.0,18.0,Pest spreads to maximum extent,Xanthomonas arboricola,No,No
+Bacterium,Xanthomonas arboricola pv. juglandis,Present (Unknown Distribution),,,,,,,,,Xanthomonas arboricola,No,No
+Bacterium,Xanthomonas arboricola pv. pruni,Absent,5.0,3.0,45.0,Regulated quarantine pest Great Britain. PZ Northern Ireland.,4.0,3.0,36.0,Pest is introduced,Xanthomonas arboricola,Yes,No
+Bacterium,Xanthomonas axonopodis pv. allii,Absent,1.0,3.0,9.0,,1.0,3.0,9.0,Pest is introduced,Xanthomonas axonopodis,No,No
+Bacterium,Xanthomonas axonopodis pv. citri,Absent,0.0,0.0,1.0,Regulated quarantine pest (NI),0.0,0.0,1.0,Pest is introduced,Xanthomonas axonopodis,Yes,No
+Bacterium,Xanthomonas axonopodis pv. dieffenbachiae,Absent,0.0,0.0,1.0,,0.0,0.0,1.0,Pest is introduced,Xanthomonas axonopodis,No,No
+Bacterium,Xanthomonas axonopodis pv. phaseoli,Unknown,2.0,3.0,18.0,Regulated non quarantine pest,2.0,3.0,18.0,Pest is introduced,Xanthomonas axonopodis,No,No
+Bacterium,Xanthomonas axonopodis pv. poinsettiicola,Absent,4.0,3.0,36.0,,3.0,2.0,18.0,Pest is introduced,Xanthomonas axonopodis,No,No
+Bacterium,Xanthomonas campestris pv. fici,Absent,2.0,2.0,4.0,Regulated non quarantine pest,2.0,2.0,4.0,Pest is introduced,Xanthomonas campestris,No,No
+Bacterium,Xanthomonas dyei,Unknown,2.0,2.0,16.0,,2.0,2.0,16.0,Pest spreads to maximum extent,Xanthomonas dyei,No,No
+Bacterium,Xanthomonas euvesicatoria,Absent,4.0,4.0,64.0,Regulated non quarantine pest,3.0,3.0,36.0,Pest is introduced,Xanthomonas euvesicatoria,No,No
+Bacterium,Xanthomonas fragariae,Absent,4.0,2.0,40.0,Regulated non quarantine pest,3.0,2.0,30.0,Pest is introduced,Xanthomonas fragariae,No,No
+Bacterium,Xanthomonas fuscans subsp. fuscans,Unknown,2.0,3.0,18.0,RNQP on vegetable seed of Phaseolus vulgaris; for which there is a 0% tolerance,2.0,3.0,18.0,Pest is introduced,Xanthomonas fuscans,No,No
+Bacterium,Xanthomonas gardneri,Absent,3.0,4.0,48.0,Regulated non quarantine pest,2.0,3.0,24.0,Pest is introduced,Xanthomonas gardneri,No,No
+Bacterium,Xanthomonas hydrangeae,Absent,4.0,2.0,16.0,,4.0,2.0,16.0,Pest is introduced,Xanthomonas hydrangeae,No,No
+Bacterium,Xanthomonas oryzae pv. oryzae,Absent,0.0,0.0,1.0,Regulated quarantine pest (NI),0.0,0.0,1.0,Pest is introduced,Xanthomonas oryzae,Yes,No
+Bacterium,Xanthomonas oryzae pv. oryzicola,Absent,0.0,0.0,1.0,Regulated quarantine pest (NI),0.0,0.0,1.0,Pest is introduced,Xanthomonas oryzae,Yes,No
+Bacterium,Xanthomonas perforans,Absent,3.0,4.0,48.0,Regulated non quarantine pest,2.0,3.0,24.0,Pest is introduced,Xanthomonas perforans,No,No
+Bacterium,Xanthomonas translucens pv. translucens,Absent,3.0,3.0,45.0,,2.0,3.0,30.0,Pest is introduced,Xanthomonas translucens,No,No
+Bacterium,Xanthomonas vesicatoria,Absent,5.0,4.0,80.0,Regulated non quarantine pest,2.0,3.0,24.0,Pest is introduced,Xanthomonas vesicatoria,No,No
+Bacterium,Xylella fastidiosa,Absent,4.0,3.0,60.0,QP for both GB and NI. Import regulations on planting material differ.,2.0,3.0,30.0,Pest is introduced,Xylella fastidiosa,Yes,No
+Bacterium,Xylella taiwanensis,Absent,3.0,3.0,45.0,,2.0,3.0,30.0,Pest is introduced,Xylella taiwanensis,No,No
+Bacterium,Xylophilus ampelinus,Absent,2.0,4.0,16.0,QP GB; RNQP NI,2.0,4.0,16.0,Pest is introduced,Xylophilus ampelinus,No,No
+Phytoplasma,Yucatan lethal decline phytoplasma,Absent,0.0,0.0,1.0,,0.0,0.0,1.0,Pest is introduced,Yucatan lethal,No,No
