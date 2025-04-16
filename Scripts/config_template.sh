@@ -1,29 +1,35 @@
-# Configuration file for the pipeline
+# Configuration file for MARMOT Pipeline
 
 # Pipeline parameters
-location="/ei/projects/7/78b740c8-8ef2-451f-a465-48c035f07ada/data/raw/rebasecalled_reads/RL_MaizeFirstWeek_24022025_sup"
-# location="/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/raw/RL_24hCubTests_21092023/RL_24hCubTests_21092023/20230921_1707_X4_FAW72641_f261fc8c"
+sample="marmot_cf_2023"
 
+# Location is the path to raw / rebasecalled reads 
+# Should be the level up to fastq
+location="/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/scratch/church_farm_2023/SubSamp_200k_CF_2023_Wkly_Comb_Reads_SUP"
+
+# Filter length - reads shorter than this will eb removed from analysis 
 filter_length="300"
 
-reference_database="/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/phibase/pathogen_database_080524.fa"
+# Path to the reference database for alignment 
+reference_database="/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/Pathogen_Database/Pathogen_Database_042025_v2/pathogen_database_042025.fa"
 
 # Directory for temporary files
-scratch_dir="/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/scratch/pipeline_test"
+scratch_dir="/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/scratch/MARMOT_Output/cf_2023"
 
 # Directory for output files
-output_dir="/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/scratch/pipeline_test"
+output_dir="/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/scratch/MARMOT_Output/cf_2023"
 
 # List of barcodes to process
 # Uncomment the following line to process a sequence of barcodes
-# barcode_list=($(seq -w 01 88))
+barcode_list=($(seq -w 01 39))
 # Uncomment and modify the following line to process only specific barcodes
-barcode_list=("11" "02" "05" "08")
+# barcode_list=("11" "02" "05" "08")
 
 # Set to "yes" if the reads are already concatenated into one file, else set to "no"
 concatenated="yes"
 
 # Set to "yes" if you want to calculate contig stats for the barcode, else set to "no"
-contig_stats="yes"
+contig_stats="no"
 
-genome_lengths_file="/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/phibase/080524_genome_lengths.tsv"
+# File that contains taxaIDS and genome lenghts, is created at the same time as the reference database
+genome_lengths_file="/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/Pathogen_Database/Pathogen_Database_042025_v2/042025_genome_lengths.tsv"

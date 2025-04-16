@@ -1,18 +1,9 @@
 #!/bin/bash
-#SBATCH -J emerge_pipeline                    # Job name
-#SBATCH -o logs/emerge_pipeline_sub_%a.out     # Output for each job
-#SBATCH -e logs/emerge_pipeline_sub_%a.err     # Error for each job
-#SBATCH -p ei-short                           
-#SBATCH -c 1                                    # Number of CPU cores
-#SBATCH --mem=2G                                # Memory size - optimise later
-#SBATCH --mail-type=END,FAIL                    # Notifications for job done & fail 
-#SBATCH --mail-user=mia.berelson@earlham.ac.uk  # Email address 
-#SBATCH --array=01-96%20                        # Array range and concurrency limit (Set array number during submission)
-
 
 #Usage------------
 # num_barcodes=1
 # sbatch array=1 submit_job_array.sh config_template.sh
+# This script is combined with a wrapper to submit a job array
 #--------------
 
 # Check if the configuration file is provided
