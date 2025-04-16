@@ -44,7 +44,7 @@ cat > "$temp_script" <<EOF
 #SBATCH --mail-user=mia.berelson@earlham.ac.uk
 #SBATCH --array=$array_range%20
 
-bash $(realpath submit_job_array.sh) $config
+bash $(submit_job_array.sh) $config
 EOF
 
 # Submit the generated script
