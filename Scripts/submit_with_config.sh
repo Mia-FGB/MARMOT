@@ -27,16 +27,16 @@ num_barcodes=${#barcode_list[@]}
 array_range=$(printf "01-%02d" "$num_barcodes")
 
 # Create logs directory if it doesn't exist
-mkdir -p logs/${job_name}
+mkdir -p logs/${sample}
 
 # Create a temporary SLURM script
 temp_script=$(mktemp)
 
 cat > "$temp_script" <<EOF
 #!/bin/bash
-#SBATCH -J $job_name
-#SBATCH -o logs/${job_name}/submission_%a.out
-#SBATCH -e logs/${job_name}/submission_%a.err
+#SBATCH -J $sample
+#SBATCH -o logs/${sample}/submission_%a.out
+#SBATCH -e logs/${sample}/submission_%a.err
 #SBATCH -p ei-short
 #SBATCH -c 1
 #SBATCH --mem=2G
