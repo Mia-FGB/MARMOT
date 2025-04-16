@@ -44,7 +44,8 @@ cat > "$temp_script" <<EOF
 #SBATCH --mail-user=mia.berelson@earlham.ac.uk
 #SBATCH --array=$array_range%20
 
-bash $(submit_job_array.sh) $config
+# This path to the script works because I added the PATH to the script in my ~/.bashrc
+bash $(submit_job_array.sh) $(realpath "$config")
 EOF
 
 # Submit the generated script
