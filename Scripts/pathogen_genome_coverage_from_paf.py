@@ -5,7 +5,7 @@
 #Should be run from directory which contains barcode directories
 #Uses a genome_lengths_file generated with genome_lengths_from_fasta.py script using the reference database used for mapping
 
-#Usage: python pathogen_genome_coverage_from_paf.py <barcode_number> <genome_lengths_file>
+#Usage: python pathogen_genome_coverage_from_paf.py <barcode_number> <genome_lengths_file> <output_dir>
 
 import sys, os, csv
 
@@ -91,15 +91,17 @@ def write_multi_taxa_reads(multi_taxa_reads_file, multi_taxa_reads):
                     multi_taxa_file.write(f"{read_id}\t{taxaID}\t{identity:.2f}\t{coverage:.2f}\n")
 
 def main():
-    if len(sys.argv) != 3:
-        print("Usage: python pathogen_genome_coverage_from_paf.py <barcode_number> <genome_lengths_file> <barcode_dir>")
+    if len(sys.argv) != 4:
+        print("Usage: python pathogen_genome_coverage_from_paf.py <barcode_number> <genome_lengths_file> <output_dir>")
         sys.exit(1)
 
     barcode_number = sys.argv[1]
     genome_lengths_file = sys.argv[2]
-    barcode_dir = sys.argv[3]
+    output_dir = sys.argv[3]
 
-    pafFilename = os.path.join(barcode_dir, f"/{barcode_number}_mapped.paf")
+    barcode_dir = os.path.join(output_dir, f"barcode{barcode_number}")
+
+    pafFilename = os.path.join(barcode_dir, f"{barcode_number}_mapped.paf")
 
     print(f"Processing genome coverage for barcode{barcode_number} from {pafFilename}")
 
