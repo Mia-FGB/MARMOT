@@ -145,7 +145,7 @@ JOBID4=$(sbatch --dependency=afterok:$JOBID3 \
     -o "$barcode_dir/logs/${barcode_number}_genome_coverage.out" \
     -e "$barcode_dir/logs/${barcode_number}_genome_coverage.err" \
     --job-name="${barcode_number}_genome_coverage" \
-    --wrap "python /ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/nanopore_PHIbase_analysis_scripts/Scripts/pathogen_genome_coverage_from_paf.py $barcode_number $genome_lengths_file" | awk '{print $NF}')
+    --wrap "python /ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/nanopore_PHIbase_analysis_scripts/Scripts/pathogen_genome_coverage_from_paf.py $barcode_number $genome_lengths_file $barcode_dir" | awk '{print $NF}')
 
 #Once genome coverage is complete run write_files.sh
 JOBID5=$(sbatch --dependency=afterok:$JOBID4 \

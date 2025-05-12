@@ -65,5 +65,16 @@ EOF
 # cat "$temp_script"
 # echo "-------------------------------"
 
-# Submit the job
-sbatch "$temp_script"
+# Submit the job and capture the job ID
+array_job_id=$(sbatch "$temp_script" | awk '{print $4}')
+echo "Submitted array job ID: $array_job_id"
+
+# Once the array job is submitted, we can submit the write_files job
+# This job will write the shared output files after all array jobs are done
+write_files_job_id=$(sbatch --dependency=afterok:$array_job_id --mem 1G \
+    -p ei-short \
+    -o "$log_dir/write_files.out" \
+    -e "$log_dir/write_files.err" \
+    --job-name="${sample}_write_files" \
+    --wrap "bash $(which write_files.sh) $(realpath "$config")" | awk '{print $4}')
+echo "Submitted write files job ID: $write_files_job_id"
