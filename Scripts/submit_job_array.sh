@@ -33,7 +33,6 @@ echo "Data will be written to: $output_dir"
 # Create txt files if they don't exist
 touch ./percent_reads_retained_length_filter.txt
 touch ./no_fail_reads.txt
-touch ./no_reads_ignored_parse_filter.txt
 touch ./lcaparse_summary.txt
 touch ./lcaparse_perread.txt
 touch ./genome_coverage_all.txt
