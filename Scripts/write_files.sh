@@ -36,3 +36,7 @@ output_file="genome_coverage_all.txt"
 
 awk -v barcode="${barcode_number}" 'BEGIN {OFS="\t"} NR>1 {print barcode, $1, $2, $3, $4, $5}' "${input_file}" >> "${output_file}"
 echo "${barcode_number}_genome_coverage.txt" added to "genome_coverage_all.txt"
+
+# Combine the separate read numbers into a single file
+cat "${barcode_dir}/${barcode_number}_read_no.tsv" >> read_numbers.tsv
+echo "${barcode_number}_read_no.tsv" appended to "read_numbers.tsv"

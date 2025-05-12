@@ -168,6 +168,12 @@ if ! get_contig_stats.pl -q -i "$scratch_dir/${barcode_number}_barcode_${filter_
     exit 1
 fi
 
+#Write a tsv file with the number of reads before and after filtering
+output_tsv="$barcode_dir/${barcode_number}_read_no.tsv"
+touch "$output_tsv"
+# Append the current barcode's data
+echo -e "${barcode_number}\t${total_reads}\t${retained_reads}" >> "$output_tsv"
+
 # Create the flag file to indicate successful completion
 echo "prep_reads.sh has finished successfully, writing prep_reads_finished.flag"
 touch "$barcode_dir/prep_reads_finished.flag"

@@ -37,6 +37,7 @@ touch ./no_reads_ignored_parse_filter.txt
 touch ./lcaparse_summary.txt
 touch ./lcaparse_perread.txt
 touch ./genome_coverage_all.txt
+touch ./read_numbers.tsv
 
 # Add a header line to lcaparse_summary.txt if it doesn't already exist
 grep -q "Barcode\tRead_Count\tPercentage_of_Reads\tTaxon_ID\tTaxon_Path\tTaxon_Rank" ./lcaparse_summary.txt || printf "Barcode\tRead_Count\tPercentage_of_Reads\tTaxon_ID\tTaxon_Path\tTaxon_Rank\n" > ./lcaparse_summary.txt
@@ -44,6 +45,8 @@ grep -q "Barcode\tRead_Count\tPercentage_of_Reads\tTaxon_ID\tTaxon_Path\tTaxon_R
 grep -q "Barcode\tRead_ID\tTaxon_ID\tTaxon_Name\tTaxon_Rank\tMean_Identity\tMaxMeanIdentity" ./lcaparse_perread.txt || printf "Barcode\tRead_ID\tTaxon_ID\tTaxon_Name\tTaxon_Rank\tMean_Identity\tMaxMeanIdentity\n" > ./lcaparse_perread.txt
 # Add a header line to genome_coverage_all.txt if it doesn't already exist
 grep -q "Barcode\ttaxaID\tmapped_bases\tgenome_length\tcoverage_percentage\tnum_reads" ./genome_coverage_all.txt || printf "Barcode\ttaxaID\tmapped_bases\tgenome_length\tcoverage_percentage\tnum_reads\n" > ./genome_coverage_all.txt
+# Add a header line to read_numbers.tsv if it doesn't already exist
+grep -q "Barcode\tRead_Count\tFilterReadCount" ./read_numbers.tsv || printf "Barcode\tRead_Count\tFilterReadCount\n" > ./read_numbers.tsv
 
 # Get the barcode corresponding to this task ID
 barcode_number="${barcode_list[$((SLURM_ARRAY_TASK_ID - 1))]}"
