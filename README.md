@@ -50,28 +50,50 @@ After configuring the file, submit your batch using the wrapper script:
 This wrapper will:
 - Determine the number of barcodes from your config
 - Create and submit a SLURM job array with the correct range (e.g. `--array=01-88`)
-- Organize log files under `logs/<job_name>/`
+- Organise log files under `logs/<job_name>/`
+- Submit the `write_files.sh` script to run after all the barcodes are complete, will populate the summarised files
 
 ## Output Structure
 
 The pipeline generates the following output:
-- **A directory for each barcode** containing result files and output/error messages for the individual jobs.
+- **A directory for each barcode**
+  - Containing result files
+  - Log directory with output/error messages for the individual jobs.
+  - Created in the specified output directory 
 - **A log directory** storing output/error messages for each submission batch job.
+  - Created where the job is submitted from
 - **Above the barcode directories:**
-  - ` lcaparse_summary.txt`: Contains the Barcode, Read Count and % of reads assigned to each Taxa
-  - Other summary statistics files.
+  - In the specified output directory there are a number of summary files
+  - `lcaparse_summary.txt`: Contains the Barcode, Read Count and % of reads assigned to each Taxa
+  - `lcaparse_perread.txt`: 
+  - `percent_reads_retained_length_filter.txt`: Percentage of reads retained after the removal of reads below the length filter threshold
+  - `no_fail_reads.txt`: Number of fail reads per barcode from the nanopore sequeincing run 
+    - Only created if fastq_fail directory is in the location input
+  - `genome_coverage_all.txt`
+  - `read_numbers.tsv`
+
+
+ ### Example Output Files for a Barcode Directory
+  Each barcode directory contains the following example files:
+
+  - **`02_barcode_percent_retained.txt`**: Percentage of reads retained after filtering.
+  - **`02_contig_stats_filtered_300.txt`**: Contig statistics for reads filtered to a minimum length of 300bp.
+  - **`02_read_no.tsv`**: Total pass reads before and after filtering
+  - **`02_mapped.paf`**: Mapped reads in Pairwise Alignment Format (PAF).
+
   
 ## Scripts Overview
 
-### `submit_batch_jobs.sh`
-Runs `single_barcode_process.sh` for each barcode provided.
+### `submit_with_config.sh`
+Creates a temporary script using the config file to submit `submit_batch_jobs.sh` with specified parameters.
+Also submits the `write_files.sh` script to run once all the barcodes are processed.
 
 #### **Inputs:**
-- Barcode numbers
-- Raw read location
-- Pre-filter length
-- Reference database
-- config
+- Config file
+
+
+### `submit_batch_jobs.sh`
+Runs `single_barcode_process.sh` for each barcode provided.
 
 #### **Outputs:**
 - Unzipped fastq file of all pass reads
@@ -83,6 +105,8 @@ Submits a sequence of sbatch jobs in the following order:
 1. `prep_reads.sh`
 2. `minimap2`
 3. `paf_parse.py`
+4. `run_lcaparse.sh`
+5. `pathogen_genome_coverage_from_paf.py`
 
 #### **Inputs:**
 Provided via `submit_batch_jobs.sh`:
@@ -110,7 +134,7 @@ Located in `barcodeXX` directory:
 - `XX_contig_stats.txt`
 - `XX_barcode.fastq` (all pass reads)
 - `XX_num_fail.txt` (number of failed reads, only possible if there is a fastq_fail directory)
-In Scratch_Dir
+In Scratch_Dir, above barcode directory 
 - `XX_barcode_300bp.fastq` (Reads filtered >300bp)
 
 ---

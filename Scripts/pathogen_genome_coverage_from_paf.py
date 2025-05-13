@@ -92,14 +92,12 @@ def write_multi_taxa_reads(multi_taxa_reads_file, multi_taxa_reads):
 
 def main():
     if len(sys.argv) != 4:
-        print("Usage: python pathogen_genome_coverage_from_paf.py <barcode_number> <genome_lengths_file> <output_dir>")
+        print("Usage: python pathogen_genome_coverage_from_paf.py <barcode_number> <genome_lengths_file> <barcode_dir>")
         sys.exit(1)
 
     barcode_number = sys.argv[1]
     genome_lengths_file = sys.argv[2]
-    output_dir = sys.argv[3]
-
-    barcode_dir = os.path.join(output_dir, f"barcode{barcode_number}")
+    barcode_dir = sys.argv[3]
 
     pafFilename = os.path.join(barcode_dir, f"{barcode_number}_mapped.paf")
 

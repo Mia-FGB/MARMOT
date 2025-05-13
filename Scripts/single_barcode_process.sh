@@ -22,7 +22,7 @@ if [ ! -d "$location" ]; then
     exit 1
 fi
 
-# Calculate the barcode directory path
+# Calculate the barcode directory path (output directory/barcode<barcode_number>)
 barcode_dir="$output_dir/barcode${barcode_number}"
 # Create barcode &  log directory if they don't exist
 mkdir -p "$barcode_dir"

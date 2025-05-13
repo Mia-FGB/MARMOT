@@ -134,8 +134,8 @@ if [ "$concatenated" == "yes" ]; then
     fi
 
     # Calculate the percentage of reads retained after filtering
-    total_reads=$(wc -l < "$file")
-    retained_reads=$(wc -l < "$scratch_dir/${barcode_number}_barcode_${filter_length}bp.fastq")
+    total_reads=$(($(wc -l < "$file") / 4))
+    retained_reads=$(($(wc -l < "$scratch_dir/${barcode_number}_barcode_${filter_length}bp.fastq") / 4))
 
     if ! echo "scale=2; (100 * $retained_reads / $total_reads)" | bc > "$barcode_dir/${barcode_number}_barcode_percent_retained.txt"; then
         echo "Error: Failed to calculate the percentage of reads retained after filtering."
