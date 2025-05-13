@@ -138,7 +138,7 @@ done
 
 echo "The lca_parse job ($JOBID3) completed successfully."
 
-# Genome coverage script - may need changing not sure if it should have "python"
+# Genome coverage script
 JOBID4=$(sbatch --dependency=afterok:$JOBID3 \
     -p ei-short \
     --mem 2G \
