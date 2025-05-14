@@ -141,7 +141,7 @@ echo "The lca_parse job ($JOBID3) completed successfully."
 # Genome coverage script
 JOBID4=$(sbatch --dependency=afterok:$JOBID3 \
     -p ei-short \
-    --mem 2G \
+    --mem 5G \
     -o "$barcode_dir/logs/${barcode_number}_genome_coverage.out" \
     -e "$barcode_dir/logs/${barcode_number}_genome_coverage.err" \
     --job-name="${barcode_number}_genome_coverage" \

@@ -49,7 +49,7 @@ cat > "$temp_script" <<EOF
 #SBATCH --mem=2G
 #SBATCH --mail-type=END,FAIL
 #SBATCH --mail-user=mia.berelson@earlham.ac.uk
-#SBATCH --array=$array_range%20
+#SBATCH --array=$array_range%30
 
 echo "Running SLURM task ID: \$SLURM_ARRAY_TASK_ID"
 echo "Loaded job for sample: $sample"
