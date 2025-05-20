@@ -71,7 +71,8 @@ echo "Submitted array job ID: $array_job_id"
 
 # Once the array job is submitted, we can submit the write_files job
 # This job will write the shared output files after all array jobs are done
-write_files_job_id=$(sbatch --dependency=afterok:$array_job_id --mem 1G \
+write_files_job_id=$(sbatch --dependency=afterok:$array_job_id \
+    --mem 1G \
     -p ei-short \
     -o "$log_dir/write_files.out" \
     -e "$log_dir/write_files.err" \
@@ -79,5 +80,13 @@ write_files_job_id=$(sbatch --dependency=afterok:$array_job_id --mem 1G \
     --wrap "bash $(which write_files.sh) $(realpath "$config")" | awk '{print $4}')
 echo "Submitted write files job ID: $write_files_job_id"
 
-# Add the R script create_risk_plots.R here
+# Create the risk plots job, run after write_files_job has completed
+create_plots_id=$(sbatch --dependency=afterok:$write_files_job_id  \
+    --mem=5G \
+    -p ei-short \
+    -o "$log_dir/riskplots.out" \
+    --error "$log_dir/riskplots.err" \
+    --job-name="riskplots" \
+    --wrap "source activate r-marmot_env && \
+            Rscript create_risk_plots.R $output_dir $risk_table_file" | awk '{print $4}')
 

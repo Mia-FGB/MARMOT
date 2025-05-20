@@ -9,6 +9,8 @@ library(stringr)
 library(RColorBrewer)
 library(viridis)
 
+cat("Commencing R script... \n")
+
 # Set paths and read in the data -----
 
 # Get command line arguments
@@ -32,11 +34,13 @@ if (!file.exists(risk_table)) {
   stop("Risk table file does not exist: ", risk_table)
 }
 
-# Read in the risk table
-risk_table <- read_input_file(risk_table, delim = "\t")
+cat("Reading in risk table ", risk_table, "\n")
 
-cat("Set paths and read in the data, output_dir ", output_dir)
-cat("Risk table ", risk_table)
+# Read in the risk table
+risk_table <- read_csv(risk_table)
+
+cat("Set paths and read in the data, output_dir ", output_dir , "\n")
+
 
 
 # Construct output directory path
@@ -79,7 +83,7 @@ risk_table <- risk_table %>%
 
 # Look at the risk data - see how many species are present more than once
 risk_counts <- risk_table %>%
-  count(Species, sort = TRUE) %>% 
+  count(Species, sort = TRUE) %>%
   filter(n > 1)
 
 # Candidatus Phytoplasma is in there 25 times, then 11 species present 2 - 6 times
@@ -89,20 +93,39 @@ risk_counts <- risk_table %>%
 collapsed_risk_table <- risk_table %>%
   group_by(Species) %>%
   summarise(
-    Regulation = paste(unique(na.omit(Regulation)), collapse = ";"),
+    Regulation = paste(
+      unique(na.omit(Regulation)), 
+      collapse = ";"
+    ),
     
-    Likelihood_unmitigated = if (all(is.na(Likelihood_unmitigated))) NA_real_ else max(Likelihood_unmitigated, na.rm = TRUE),
-    Impact_unmitigated = if (all(is.na(Impact_unmitigated))) NA_real_ else max(Impact_unmitigated, na.rm = TRUE),
-    Risk_Rating_unmitigated = if (all(is.na(Risk_Rating_unmitigated))) NA_real_ else max(Risk_Rating_unmitigated, na.rm = TRUE),
+    Likelihood_unmitigated = if (all(is.na(Likelihood_unmitigated))) NA_real_ 
+      else max(Likelihood_unmitigated, na.rm = TRUE),
+    Impact_unmitigated = if (all(is.na(Impact_unmitigated))) NA_real_ 
+      else max(Impact_unmitigated, na.rm = TRUE),
+    Risk_Rating_unmitigated = if (all(is.na(Risk_Rating_unmitigated))) NA_real_ 
+      else max(Risk_Rating_unmitigated, na.rm = TRUE),
     
-    Likelihood_mitigated = if (all(is.na(Likelihood_mitigated))) NA_real_ else max(Likelihood_mitigated, na.rm = TRUE),
-    Impact_mitigated = if (all(is.na(Impact_mitigated))) NA_real_ else max(Impact_mitigated, na.rm = TRUE),
-    Risk_Rating_mitigated = if (all(is.na(Risk_Rating_mitigated))) NA_real_ else max(Risk_Rating_mitigated, na.rm = TRUE),
+    Likelihood_mitigated = if (all(is.na(Likelihood_mitigated))) NA_real_ 
+      else max(Likelihood_mitigated, na.rm = TRUE),
+    Impact_mitigated = if (all(is.na(Impact_mitigated))) NA_real_ 
+      else max(Impact_mitigated, na.rm = TRUE),
+    Risk_Rating_mitigated = if (all(is.na(Risk_Rating_mitigated))) NA_real_ 
+      else max(Risk_Rating_mitigated, na.rm = TRUE),
     
-    Regulated = if_else(any(Regulated == "Yes", na.rm = TRUE), "Yes", "No"),
-    Natural_Spread = if_else(any(Natural_Spread == "Yes", na.rm = TRUE), "Yes", "No"),
+    Regulated = if_else(
+      any(Regulated == "Yes", na.rm = TRUE), 
+      "Yes", 
+      "No"
+    ),
+    Natural_Spread = if_else(
+      any(Natural_Spread == "Yes", na.rm = TRUE), 
+      "Yes", 
+      "No"
+    ),
     
-    UK = if (length(unique(na.omit(UK))) == 1) unique(na.omit(UK)) else "N/A",
+    UK = if (length(unique(na.omit(UK))) == 1) 
+      unique(na.omit(UK)) 
+      else "N/A",
     
     .groups = "drop"
   )
@@ -121,7 +144,7 @@ lcaparse_perread <- lcaparse_perread %>%
   )
 
 # Summarise and filter the file to have one row per species per barcode
-# Loose the taxonID in this step as it is complicated by the combined subspecies 
+# Lose the taxonID in this step as it is complicated by the combined subspecies 
 lcaparse <- lcaparse_perread %>%
   group_by(Barcode, Species) %>%
   summarise(
@@ -138,12 +161,12 @@ read_numbers <- read_numbers %>%
   rename(TotalReadCount = Read_Count)
 
 lcaparse <- lcaparse %>% 
-  left_join(read_numbers, by = "Barcode")  
+  left_join(read_numbers, by = "Barcode")
 
 #Create normalised read count columns 
 lcaparse <- lcaparse %>% 
   mutate(
-    HP100k = (Read_Count / TotalReadCount) * 100000, 
+    HP100k = (Read_Count / TotalReadCount) * 100000,
     Filtered_HP100k = (Read_Count / FilterReadCount) * 100000)
 
 
@@ -193,7 +216,7 @@ colours <- c(
 )
 
 # Plot stacked bar chart of defra risk categories --
-cat("Plotting risk plots...")
+cat("Plotting risk plots...\n")
 
 # Create new output subdirectory 
 risk_dir <- fs::path(graph_save_path, "defra_risk")
@@ -202,8 +225,9 @@ if (!dir.exists(risk_dir)) {
 }
 
 plot_risk_stacked <- function(data, y_col, save_path, colours) {
-  cat("Plotting graph: ", save_path)
-  p <- ggplot(data, aes(x = Barcode, y = .data[[y_col]], fill = Risk_Category)) +
+  cat("Plotting graph: ", save_path, "\n")
+  p <- ggplot(data, aes(x = Barcode, y = .data[[y_col]],
+    fill = Risk_Category)) +
     geom_bar(stat = "identity") +
     scale_fill_manual(values = colours) +
     labs(
@@ -214,9 +238,6 @@ plot_risk_stacked <- function(data, y_col, save_path, colours) {
     ) +
     scale_y_continuous(expand = c(0, 0), limits = c(0, NA)) +
     custom_theme
-  
-  # print(p)
-  
   ggsave(save_path, p, width = 12, height = 6)
 }
 
@@ -242,8 +263,9 @@ plot_risk_facet <- function(data, save_path, y_col, colours) {
     levels = c("Absent", "Present (Limited)", "Present (Unknown Distribution)",
                "Present (Widespread)", "N/A")
   )
-  cat("Plotting graph: ", save_path)
-  p <- ggplot(data, aes(x = Barcode, y = .data[[y_col]], fill = Risk_Category)) +
+  cat("Plotting graph: ", save_path, "\n")
+  p <- ggplot(data, aes(x = Barcode, y = .data[[y_col]],
+    fill = Risk_Category)) +
     facet_wrap(~ UK, scales = "fixed", ncol =2) +
     geom_bar(stat = "identity") +
     scale_fill_manual(values = colours) +
@@ -255,9 +277,7 @@ plot_risk_facet <- function(data, save_path, y_col, colours) {
     )  +
     scale_y_continuous(expand = c(0, 0), limits = c(0, NA)) +
     custom_theme
-  
-  # print(p)
-  
+
   ggsave(save_path, p, width = 14, height = 6)
 }
 
@@ -333,8 +353,7 @@ save_path <- fs::path(output_dir, "genus_summary.tsv")
 write_tsv(genus_export, save_path)
 
 
-cat("Genus summary saved to: ", save_path)
-
+cat("Genus summary saved to: ", save_path, "\n")
 
 
 
@@ -348,12 +367,12 @@ if (!dir.exists(pathogen_dir)) {
 }
 
 # Individual plot per pathogen 
-cat("Plotting pathogen plots...")
+cat("Plotting pathogen plots... \n")
 
 plot_pathogen_bar <- function(data,
-                              pathogen, 
-                              y_col, 
-                              save_path, 
+                              pathogen,
+                              y_col,
+                              save_path,
                               pathogen_colours,
                               y_lab = "Reads per 100,000",
                               error_col = NULL) {
@@ -393,7 +412,7 @@ plot_pathogen_bar <- function(data,
     custom_theme
   
   ggsave(save_path, p, width = 10, height = 6)
-  cat("Plot saved: ", save_path)
+  cat("Plot saved: ", save_path, "\n")
 }
 
 #Run for the two y cols and all genera
@@ -441,7 +460,7 @@ for (y in y_cols) {
     
     # Save
     ggsave(save_path, p, width = 16, height = 8)
-    cat("Facet plot saved: ", save_path)
+    cat("Facet plot saved: ", save_path, "\n")
   }
 }
 
@@ -498,20 +517,26 @@ coverage_plot_data <- barcode_genus_grid %>%
   )
 
 # Plot coverage of pathogens ----
-cat("Plotting pathogen genome coverage plots...")
+cat("Plotting pathogen genome coverage plots...\n")
 # Calling the earlier function
 for (genus in target_genera) {
   save_path <- fs::path(pathogen_dir, paste0(genus, "_genome_coverage.svg"))
   
-  plot_pathogen_bar(
-    data = coverage_plot_data,
-    pathogen = genus,
-    y_col = "Mean_Coverage",
-    y_lab = "Average Genome Coverage (%)",
-    error_col = "SE_Coverage",
-    save_path = save_path,
-    pathogen_colours = pathogen_colours
-  )
+  # Only plot if there is data for this genus
+  genus_data <- coverage_plot_data %>% filter(Genus == genus)
+  if (nrow(genus_data) > 0 && any(!is.na(genus_data$Mean_Coverage))) {
+    plot_pathogen_bar(
+      data = coverage_plot_data,
+      pathogen = genus,
+      y_col = "Mean_Coverage",
+      y_lab = "Average Genome Coverage (%)",
+      error_col = "SE_Coverage",
+      save_path = save_path,
+      pathogen_colours = pathogen_colours
+    )
+  } else {
+    cat("Skipping plot for genus ", genus, " due to no data.\n")
+  }
 }
 
 # Facetted
@@ -555,13 +580,13 @@ for (sc in scales_options) {
   save_path <- fs::path(pathogen_dir, filename)
   
   ggsave(save_path, p, width = 16, height = 8)
-  cat("Facet plot saved: ", save_path)
+  cat("Facet plot saved: ", save_path, "\n")
 }
 
 
 
 # Genus level heatmap --------
-cat("Plotting heatmaps...")
+cat("Plotting heatmaps...\n")
 heat_dir <- fs::path(graph_save_path, "heatmap")
 if (!dir.exists(heat_dir)) {
   dir.create(heat_dir, recursive = TRUE)
@@ -622,7 +647,7 @@ plot_genus_heatmap <- function(data,
   filename <- paste0("genus_heatmap_", y_col, "_min", min_reads, ".svg")
   save_path <- fs::path(heat_dir, filename)
   ggsave(save_path, p, width = 12, height = 10)
-  cat("Saved heatmap: ", save_path)
+  cat("Saved heatmap: ", save_path, "\n")
   
   return(p)
 }
@@ -644,7 +669,7 @@ for (y in c("HP100k", "Filtered_HP100k")) {
 # Pull out the species and maybe ReadIDs to consider in more depth -----
 extract_red_risk_reads <- function(data_risk,
                                    data_perread,
-                                   graph_save_path,
+                                   output_dir,
                                    exclude_widespread = FALSE,
                                    filename = "RedRisk_ReadIDs.tsv") {
   # Base filtering
@@ -673,17 +698,17 @@ extract_red_risk_reads <- function(data_risk,
     )
   
   # Save file
-  save_path <- fs::path(graph_save_path, filename)
+  save_path <- fs::path(output_dir, filename)
   write_tsv(read_ids, save_path)
   
-  cat("Saved ", nrow(read_ids), " read IDs to: ", save_path)
+  cat("Saved ", nrow(read_ids), " read IDs to: ", save_path, "\n")
 }
 
 # Red risk not considering presence in the UK
 extract_red_risk_reads(
   data_risk = risk_only,
   data_perread = lcaparse_perread,
-  output_dir = graph_save_path,
+  output_dir = output_dir,
   exclude_widespread = FALSE,
   filename = "RedRisk_ReadIDs_all.tsv"
 )
@@ -692,7 +717,7 @@ extract_red_risk_reads(
 extract_red_risk_reads(
   data_risk = risk_only,
   data_perread = lcaparse_perread,
-  output_dir = graph_save_path,
+  output_dir = output_dir,
   exclude_widespread = TRUE,
   filename = "RedRisk_ReadIDs_noWidespread.tsv"
 )
@@ -726,9 +751,9 @@ red_risk_summary <- red_risk_summary %>%
   )
 
 # Save
-write_tsv(red_risk_summary, fs::path(graph_save_path, "RedRisk_Species_Summary.tsv"))
+write_tsv(red_risk_summary, fs::path(output_dir, "RedRisk_Species_Summary.tsv"))
 
-cat("Saved ", red_risk_summary, " table to: ", graph_save_path, "/RedRisk_Species_Summary.tsv")
+cat("Saved red risk summary table to: ", output_dir, "/RedRisk_Species_Summary.tsv \n")
 
 # To finish 
-cat("R script complete")
+cat("R script complete \n")

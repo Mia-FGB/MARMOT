@@ -1,0 +1,13 @@
+name: r-marmot_env
+channels:
+  - conda-forge
+dependencies:
+  - python
+  - r-base
+  - r-fs
+  - r-rcolorbrewer
+  - r-readr
+  - r-stringr
+  - r-svglite
+  - r-tidyverse
+  - r-viridis
