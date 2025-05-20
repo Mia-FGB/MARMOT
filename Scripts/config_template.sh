@@ -33,3 +33,6 @@ contig_stats="no"
 
 # File that contains taxaIDS and genome lenghts, is created at the same time as the reference database
 genome_lengths_file="/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/Pathogen_Database/Pathogen_Database_042025_v2/042025_genome_lengths.tsv"
+
+#Risk Table File - generated with generate_risk_table.py at the same time as the reference database
+risk_table_file="/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/Pathogen_Database/Pathogen_Database_042025_v2/risk_table.csv"

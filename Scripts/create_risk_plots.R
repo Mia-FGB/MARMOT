@@ -14,36 +14,50 @@ library(viridis)
 # Get command line arguments
 args <- commandArgs(trailingOnly = TRUE)
 
-# Expecting: Rscript create_risk_plots.R <input_dir>
-if (length(args) < 1) {
-  stop("Usage: Rscript create_risk_plots.R <input_dir>")
+# Expecting: Rscript create_risk_plots.R <output_dir> <risk_table>
+if (length(args) < 2) {
+  stop("Usage: Rscript create_risk_plots.R <output_dir> <risk_table>")
 }
 
-# input_dir is where the downloaded outputs from the pipeline have been saved
-input_dir <- args[1]
+# output_dir is where the write file output is saved
+output_dir <- args[1]
+risk_table <- args[2]
 
-cat("Set paths and read in the data, input_dir ", input_dir)
+# Check if the input directory exists
+if (!dir.exists(output_dir)) {
+  stop("Output directory does not exist: ", output_dir)
+}
+# Check if the risk table file exists
+if (!file.exists(risk_table)) {
+  stop("Risk table file does not exist: ", risk_table)
+}
+
+# Read in the risk table
+risk_table <- read_input_file(risk_table, delim = "\t")
+
+cat("Set paths and read in the data, output_dir ", output_dir)
+cat("Risk table ", risk_table)
+
 
 # Construct output directory path
-output_dir <- path(input_dir, "Graphs")
+graph_save_path <- path(output_dir, "Graphs")
 
 # Check and create the graph output directory if it doesn't exist
-if (!dir.exists(output_dir)) {
-  dir.create(output_dir, recursive = TRUE)
+if (!dir.exists(graph_save_path)) {
+  dir.create(graph_save_path, recursive = TRUE)
 }
 
-read_input_file <- function(filename, input_dir, delim = "\t") {
-  readr::read_delim(fs::path(input_dir, filename), delim = delim, show_col_types = FALSE)
+# Function to read input files
+read_input_file <- function(filename, output_dir, delim = "\t") {
+  readr::read_delim(fs::path(output_dir, filename),
+  delim = delim, show_col_types = FALSE)
 }
 
-# Read all required files
-lcaparse_perread <- read_input_file("lcaparse_perread.txt", input_dir)
-genome_coverage <- read_input_file("genome_coverage_all.txt", input_dir)
-read_numbers     <- read_input_file("read_numbers.tsv", input_dir)
+# Read all required files, these were created in the write_files.sh script
+lcaparse_perread <- read_input_file("lcaparse_perread.txt", output_dir)
+genome_coverage <- read_input_file("genome_coverage_all.txt", output_dir)
+read_numbers     <- read_input_file("read_numbers.tsv", output_dir)
 
-# Created with ~/Library/CloudStorage/OneDrive-NorwichBioScienceInstitutes/Pathogen_Database/scripts/generate_risk_table.py
-# Same risk table for every analysis which lives in Pathogen_Database - Want to make this a argument
-risk_table <- read.csv("/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/Pathogen_Database/Pathogen_Database_042025_v2/risk_table.csv")
 
 # Set plotting theme
 custom_theme <- theme_minimal(base_size = 10) +
@@ -182,7 +196,7 @@ colours <- c(
 cat("Plotting risk plots...")
 
 # Create new output subdirectory 
-risk_dir <- fs::path(output_dir, "defra_risk")
+risk_dir <- fs::path(graph_save_path, "defra_risk")
 if (!dir.exists(risk_dir)) {
   dir.create(risk_dir, recursive = TRUE)
 }
@@ -312,8 +326,8 @@ genus_summary <- genus_summary %>%
 genus_export <- genus_summary %>%
   select(-TotalReadCount, -FilterReadCount)
 
-# Define save path - input directory so it will live with the other summary 
-save_path <- fs::path(input_dir, "genus_summary.tsv")
+# Define save path - output directory so it will live with the other summary 
+save_path <- fs::path(output_dir, "genus_summary.tsv")
 
 # Write to TSV
 write_tsv(genus_export, save_path)
@@ -328,7 +342,7 @@ cat("Genus summary saved to: ", save_path)
 pathogen_colours <- setNames(brewer.pal(9, "Set3"), target_genera)
 
 # Create subdirectory for these to be saved into
-pathogen_dir <- fs::path(output_dir, "pathogen_graphs")
+pathogen_dir <- fs::path(graph_save_path, "pathogen_graphs")
 if (!dir.exists(pathogen_dir)) {
   dir.create(pathogen_dir, recursive = TRUE)
 }
@@ -548,7 +562,7 @@ for (sc in scales_options) {
 
 # Genus level heatmap --------
 cat("Plotting heatmaps...")
-heat_dir <- fs::path(output_dir, "heatmap")
+heat_dir <- fs::path(graph_save_path, "heatmap")
 if (!dir.exists(heat_dir)) {
   dir.create(heat_dir, recursive = TRUE)
 }
@@ -630,7 +644,7 @@ for (y in c("HP100k", "Filtered_HP100k")) {
 # Pull out the species and maybe ReadIDs to consider in more depth -----
 extract_red_risk_reads <- function(data_risk,
                                    data_perread,
-                                   output_dir,
+                                   graph_save_path,
                                    exclude_widespread = FALSE,
                                    filename = "RedRisk_ReadIDs.tsv") {
   # Base filtering
@@ -659,7 +673,7 @@ extract_red_risk_reads <- function(data_risk,
     )
   
   # Save file
-  save_path <- fs::path(output_dir, filename)
+  save_path <- fs::path(graph_save_path, filename)
   write_tsv(read_ids, save_path)
   
   cat("Saved ", nrow(read_ids), " read IDs to: ", save_path)
@@ -669,7 +683,7 @@ extract_red_risk_reads <- function(data_risk,
 extract_red_risk_reads(
   data_risk = risk_only,
   data_perread = lcaparse_perread,
-  output_dir = output_dir,
+  output_dir = graph_save_path,
   exclude_widespread = FALSE,
   filename = "RedRisk_ReadIDs_all.tsv"
 )
@@ -678,7 +692,7 @@ extract_red_risk_reads(
 extract_red_risk_reads(
   data_risk = risk_only,
   data_perread = lcaparse_perread,
-  output_dir = output_dir,
+  output_dir = graph_save_path,
   exclude_widespread = TRUE,
   filename = "RedRisk_ReadIDs_noWidespread.tsv"
 )
@@ -712,9 +726,9 @@ red_risk_summary <- red_risk_summary %>%
   )
 
 # Save
-write_tsv(red_risk_summary, fs::path(output_dir, "RedRisk_Species_Summary.tsv"))
+write_tsv(red_risk_summary, fs::path(graph_save_path, "RedRisk_Species_Summary.tsv"))
 
-cat("Saved ", red_risk_summary, " table to: ", output_dir, "/RedRisk_Species_Summary.tsv")
+cat("Saved ", red_risk_summary, " table to: ", graph_save_path, "/RedRisk_Species_Summary.tsv")
 
 # To finish 
 cat("R script complete")

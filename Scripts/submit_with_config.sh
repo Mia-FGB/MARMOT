@@ -78,3 +78,6 @@ write_files_job_id=$(sbatch --dependency=afterok:$array_job_id --mem 1G \
     --job-name="${sample}_write_files" \
     --wrap "bash $(which write_files.sh) $(realpath "$config")" | awk '{print $4}')
 echo "Submitted write files job ID: $write_files_job_id"
+
+# Add the R script create_risk_plots.R here
+
