@@ -90,3 +90,5 @@ create_plots_id=$(sbatch --dependency=afterok:$write_files_job_id  \
     --wrap "source activate r-marmot_env && \
             Rscript create_risk_plots.R $output_dir $risk_table_file" | awk '{print $4}')
 
+echo "Submitted create plots job: $create_plots_id, will run when write_files_job ($write_files_job_id) finishes"
+
