@@ -22,7 +22,7 @@ if (length(args) < 1) {
 # input_dir is where the downloaded outputs from the pipeline have been saved
 input_dir <- args[1]
 
-message("Set paths and read in the data, input_dir ", input_dir)
+cat("Set paths and read in the data, input_dir ", input_dir)
 
 # Construct output directory path
 output_dir <- path(input_dir, "Graphs")
@@ -179,7 +179,7 @@ colours <- c(
 )
 
 # Plot stacked bar chart of defra risk categories --
-message("Plotting risk plots...")
+cat("Plotting risk plots...")
 
 # Create new output subdirectory 
 risk_dir <- fs::path(output_dir, "defra_risk")
@@ -188,7 +188,7 @@ if (!dir.exists(risk_dir)) {
 }
 
 plot_risk_stacked <- function(data, y_col, save_path, colours) {
-  message("Plotting graph: ", save_path)
+  cat("Plotting graph: ", save_path)
   p <- ggplot(data, aes(x = Barcode, y = .data[[y_col]], fill = Risk_Category)) +
     geom_bar(stat = "identity") +
     scale_fill_manual(values = colours) +
@@ -228,7 +228,7 @@ plot_risk_facet <- function(data, save_path, y_col, colours) {
     levels = c("Absent", "Present (Limited)", "Present (Unknown Distribution)",
                "Present (Widespread)", "N/A")
   )
-  message("Plotting graph: ", save_path)
+  cat("Plotting graph: ", save_path)
   p <- ggplot(data, aes(x = Barcode, y = .data[[y_col]], fill = Risk_Category)) +
     facet_wrap(~ UK, scales = "fixed", ncol =2) +
     geom_bar(stat = "identity") +
@@ -319,7 +319,7 @@ save_path <- fs::path(input_dir, "genus_summary.tsv")
 write_tsv(genus_export, save_path)
 
 
-message("Genus summary saved to: ", save_path)
+cat("Genus summary saved to: ", save_path)
 
 
 
@@ -334,7 +334,7 @@ if (!dir.exists(pathogen_dir)) {
 }
 
 # Individual plot per pathogen 
-message("Plotting pathogen plots...")
+cat("Plotting pathogen plots...")
 
 plot_pathogen_bar <- function(data,
                               pathogen, 
@@ -379,7 +379,7 @@ plot_pathogen_bar <- function(data,
     custom_theme
   
   ggsave(save_path, p, width = 10, height = 6)
-  message("Plot saved: ", save_path)
+  cat("Plot saved: ", save_path)
 }
 
 #Run for the two y cols and all genera
@@ -427,7 +427,7 @@ for (y in y_cols) {
     
     # Save
     ggsave(save_path, p, width = 16, height = 8)
-    message("Facet plot saved: ", save_path)
+    cat("Facet plot saved: ", save_path)
   }
 }
 
@@ -484,7 +484,7 @@ coverage_plot_data <- barcode_genus_grid %>%
   )
 
 # Plot coverage of pathogens ----
-message("Plotting pathogen genome coverage plots...")
+cat("Plotting pathogen genome coverage plots...")
 # Calling the earlier function
 for (genus in target_genera) {
   save_path <- fs::path(pathogen_dir, paste0(genus, "_genome_coverage.svg"))
@@ -541,13 +541,13 @@ for (sc in scales_options) {
   save_path <- fs::path(pathogen_dir, filename)
   
   ggsave(save_path, p, width = 16, height = 8)
-  message("Facet plot saved: ", save_path)
+  cat("Facet plot saved: ", save_path)
 }
 
 
 
 # Genus level heatmap --------
-message("Plotting heatmaps...")
+cat("Plotting heatmaps...")
 heat_dir <- fs::path(output_dir, "heatmap")
 if (!dir.exists(heat_dir)) {
   dir.create(heat_dir, recursive = TRUE)
@@ -608,7 +608,7 @@ plot_genus_heatmap <- function(data,
   filename <- paste0("genus_heatmap_", y_col, "_min", min_reads, ".svg")
   save_path <- fs::path(heat_dir, filename)
   ggsave(save_path, p, width = 12, height = 10)
-  message("Saved heatmap: ", save_path)
+  cat("Saved heatmap: ", save_path)
   
   return(p)
 }
@@ -662,7 +662,7 @@ extract_red_risk_reads <- function(data_risk,
   save_path <- fs::path(output_dir, filename)
   write_tsv(read_ids, save_path)
   
-  message("Saved ", nrow(read_ids), " read IDs to: ", save_path)
+  cat("Saved ", nrow(read_ids), " read IDs to: ", save_path)
 }
 
 # Red risk not considering presence in the UK
@@ -714,7 +714,7 @@ red_risk_summary <- red_risk_summary %>%
 # Save
 write_tsv(red_risk_summary, fs::path(output_dir, "RedRisk_Species_Summary.tsv"))
 
-message("Saved ", red_risk_summary, " table to: ", output_dir, "/RedRisk_Species_Summary.tsv")
+cat("Saved ", red_risk_summary, " table to: ", output_dir, "/RedRisk_Species_Summary.tsv")
 
 # To finish 
-message("R script complete")
+cat("R script complete")
