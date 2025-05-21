@@ -49,7 +49,7 @@ cat > "$temp_script" <<EOF
 #SBATCH --mem=2G
 #SBATCH --mail-type=END,FAIL
 #SBATCH --mail-user=mia.berelson@earlham.ac.uk
-#SBATCH --array=$array_range%96
+#SBATCH --array=$array_range%33
 
 echo "Running SLURM task ID: \$SLURM_ARRAY_TASK_ID"
 echo "Loaded job for sample: $sample"
@@ -82,14 +82,17 @@ echo "Submitted write files job ID: $write_files_job_id"
 
 
 # Create the risk plots job, run after write_files_job has completed
+# Need the full path to the R script here 
 create_plots_id=$(sbatch --dependency=afterok:$write_files_job_id  \
     --mem=5G \
     -p ei-short \
     -o "$log_dir/riskplots.out" \
     --error "$log_dir/riskplots.err" \
     --job-name="riskplots" \
-    --wrap "source activate r-marmot_env && Rscript $(realpath create_risk_plots.R) $output_dir $risk_table_file" | awk '{print $4}')
+    --wrap "source activate r-marmot_env && Rscript /ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/nanopore_PHIbase_analysis_scripts/Scripts/create_risk_plots.R $output_dir $risk_table_file" | awk '{print $4}')
 
 
 echo "Submitted create plots job: $create_plots_id, will run when write_files_job ($write_files_job_id) finishes"
+echo "Output dir: $output_dir"
+echo "Risk table file: $risk_table_file"
 
