@@ -4,7 +4,7 @@
 sample="marmot_cf_2023"
 
 # Location is the path to raw / rebasecalled reads 
-# Should be the level up to fastq
+# Should be up to the level above fastq directory
 location="/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/scratch/church_farm_2023/SubSamp_200k_CF_2023_Wkly_Comb_Reads_SUP"
 
 # Filter length - reads shorter than this will eb removed from analysis 
