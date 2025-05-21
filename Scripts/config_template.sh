@@ -11,7 +11,7 @@ location="/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/scratch/church_far
 filter_length="300"
 
 # Path to the reference database for alignment 
-reference_database="/ei/Projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/nanopore_PHIbase_analysis_scripts/Pathogen_Database_042025_v2/pathogen_database_042025.fa"
+reference_database="/ei/projects/8/818a2389-cfbb-4ffb-b424-98250a8a3118/data/results/PHIbase_database_May25/pathogen_database_042025.fa"
 
 # Directory for temporary files
 scratch_dir="/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/scratch/MARMOT_Output/cf_2023"
@@ -32,7 +32,7 @@ concatenated="yes"
 contig_stats="no"
 
 # File that contains taxaIDS and genome lenghts, is created at the same time as the reference database
-genome_lengths_file="/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/nanopore_PHIbase_analysis_scripts/Pathogen_Database_042025_v2/042025_genome_lengths.tsv"
+genome_lengths_file="/ei/projects/8/818a2389-cfbb-4ffb-b424-98250a8a3118/data/results/PHIbase_database_May25/042025_genome_lengths.tsv"
 
 #Risk Table File - generated with generate_risk_table.py at the same time as the reference database
-risk_table_file="/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/nanopore_PHIbase_analysis_scripts/Pathogen_Database_042025_v2/risk_table.csv"
+risk_table_file="/ei/projects/8/818a2389-cfbb-4ffb-b424-98250a8a3118/data/results/PHIbase_database_May25/risk_table.csv"
