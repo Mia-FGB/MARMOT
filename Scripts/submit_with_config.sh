@@ -49,7 +49,7 @@ cat > "$temp_script" <<EOF
 #SBATCH --mem=2G
 #SBATCH --mail-type=END,FAIL
 #SBATCH --mail-user=mia.berelson@earlham.ac.uk
-#SBATCH --array=$array_range%30
+#SBATCH --array=$array_range%32
 
 echo "Running SLURM task ID: \$SLURM_ARRAY_TASK_ID"
 echo "Loaded job for sample: $sample"
@@ -80,6 +80,7 @@ write_files_job_id=$(sbatch --dependency=afterok:$array_job_id \
     --wrap "bash $(which write_files.sh) $(realpath "$config")" | awk '{print $4}')
 echo "Submitted write files job ID: $write_files_job_id"
 
+
 # Create the risk plots job, run after write_files_job has completed
 create_plots_id=$(sbatch --dependency=afterok:$write_files_job_id  \
     --mem=5G \
@@ -87,8 +88,8 @@ create_plots_id=$(sbatch --dependency=afterok:$write_files_job_id  \
     -o "$log_dir/riskplots.out" \
     --error "$log_dir/riskplots.err" \
     --job-name="riskplots" \
-    --wrap "source activate r-marmot_env && \
-            Rscript create_risk_plots.R $output_dir $risk_table_file" | awk '{print $4}')
+    --wrap "source activate r-marmot_env && Rscript $(realpath create_risk_plots.R) $output_dir $risk_table_file" | awk '{print $4}')
+
 
 echo "Submitted create plots job: $create_plots_id, will run when write_files_job ($write_files_job_id) finishes"
 

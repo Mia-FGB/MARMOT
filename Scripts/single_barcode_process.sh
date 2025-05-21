@@ -147,5 +147,22 @@ JOBID4=$(sbatch --dependency=afterok:$JOBID3 \
     --job-name="${barcode_number}_genome_coverage" \
     --wrap "python /ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/nanopore_PHIbase_analysis_scripts/Scripts/pathogen_genome_coverage_from_paf.py $barcode_number $genome_lengths_file $barcode_dir" | awk '{print $NF}')
 
+while true; do
+    JOB4_STATUS=$(sacct -j $JOBID4 | awk 'NR==3 {print $6}')
+    #echo "Job status for $JOBID4 is $JOB4_STATUS" # Uncomment for debugging
+    if [[ "$JOB4_STATUS" == *COMPLETED* ]]; then
+        echo "genome coverage job has completed."
+        break
+    elif [[ "$JOB4_STATUS" == *FAILED* ]]; then
+        echo "Error: The genome coverage job ($JOBID4) failed."
+        exit 1
+    elif [[ "$JOB4_STATUS" == *RUNNING* || "$JOB4_STATUS" == *PENDING* ]]; then
+        echo "genome coverage job still running/pending..."
+        sleep 120
+    fi
+done
+
+echo "The genome coverage job ($JOBID4) completed successfully."
+
 echo "Barcode ${barcode_number} has been processed"
 
