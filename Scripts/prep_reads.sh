@@ -114,21 +114,26 @@ if [ "$concatenated" != "yes" ]; then
 fi  # Ensures this block is skipped when concatenated = 'yes'
 
 if [ "$concatenated" == "yes" ]; then
-    # Check if the barcode directory exists
-    if [ ! -d "$location/fastq/barcode${barcode_number}" ]; then
-        echo "Error: Barcode directory '$location/fastq/barcode${barcode_number}' does not exist."
+    # Try fastq_pass first, then fastq
+    barcode_dir_found=""
+    if [ -d "$location/fastq_pass/barcode${barcode_number}" ]; then
+        barcode_dir_found="$location/fastq_pass/barcode${barcode_number}"
+    elif [ -d "$location/fastq/barcode${barcode_number}" ]; then
+        barcode_dir_found="$location/fastq/barcode${barcode_number}"
+    else
+        echo "Error: Neither fastq nor fastq_pass directory exists for location ${location} and barcode ${barcode_number}."
         exit 1
     fi
 
     # Check there is only one .fastq file in the barcode directory (not including .fastq.* files)
-    num_files=$(find "$location/fastq/barcode${barcode_number}" -maxdepth 1 -type f -name "*.fastq" ! -name "*.fastq.*" | wc -l)
+    num_files=$(find "$barcode_dir_found" -maxdepth 1 -type f -name "*.fastq" ! -name "*.fastq.*" | wc -l)
     if [ "$num_files" -ne 1 ]; then
         echo "Error: More than one .fastq file found in the barcode directory, not concatenated. Exiting without processing."
         exit 1
     fi
 
     # Get the actual filename
-    file=$(find "$location/fastq/barcode${barcode_number}" -maxdepth 1 -type f -name "*.fastq" ! -name "*.fastq.*")
+    file=$(find "$barcode_dir_found" -maxdepth 1 -type f -name "*.fastq" ! -name "*.fastq.*")
 
     # Filter these concatenated reads on length & create new fasta file in scratch
     if ! awk -f /ei/projects/7/724b6a9a-6416-47eb-be58-d3737023e29b/scratch/getBigReads.awk -v min="${filter_length}" "$file" > "$scratch_dir/${barcode_number}_barcode_${filter_length}bp.fastq"; then
@@ -145,7 +150,7 @@ if [ "$concatenated" == "yes" ]; then
         exit 1
     fi
 
-    #Process contig stats if requested on the pre-existing file
+    # Process contig stats if requested on the pre-existing file
     if [ "$contig_stats" == "yes" ]; then
         echo "Calculating contig stats for barcode ${barcode_number}..."
         # Run the Perl script (get_contig_stats) on the concatenated FASTQ file - not length filtered
