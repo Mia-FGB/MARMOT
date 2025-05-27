@@ -62,6 +62,11 @@ lcaparse_perread <- read_input_file("lcaparse_perread.txt", output_dir)
 genome_coverage <- read_input_file("genome_coverage_all.txt", output_dir)
 read_numbers     <- read_input_file("read_numbers.tsv", output_dir)
 
+# Convert Barcode columns to character for consistency
+lcaparse_perread$Barcode <- as.character(lcaparse_perread$Barcode)
+read_numbers$Barcode <- as.character(read_numbers$Barcode)
+genome_coverage$Barcode <- as.character(genome_coverage$Barcode)
+
 
 # Set plotting theme
 custom_theme <- theme_minimal(base_size = 10) +

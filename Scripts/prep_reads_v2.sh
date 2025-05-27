@@ -72,18 +72,23 @@ else
     fi
 fi
 
+# Filter reads by length using awk script
 awk -f /ei/projects/7/724b6a9a-6416-47eb-be58-d3737023e29b/scratch/getBigReads.awk -v min="$min_length" "$concat_fastq" > "$filtered_fastq"
 
 total_reads=$(($(wc -l < "$concat_fastq") / 4))
 retained_reads=$(($(wc -l < "$filtered_fastq") / 4))
-echo "scale=2; (100 * $retained_reads / $total_reads)" | bc > "$barcode_dir/${barcode}_percent_retained.txt"
 
+echo "scale=2; (100 * $retained_reads / $total_reads)" | bc > "$barcode_dir/${barcode}_percent_retained.txt"
+echo -e "${barcode}\t${total_reads}\t${retained_reads}" >> "$barcode_dir/${barcode}_read_no.tsv"
+
+# Run contig stats if requested on non filtered reads
 if [ "$run_stats" == "yes" ]; then
+    echo "Running contig stats for non filtered reads..."
     get_contig_stats.pl -q -i "$concat_fastq" > "$barcode_dir/${barcode}_contig_stats.txt"
 fi
 
 echo "Running contig stats for filtered reads..."
 get_contig_stats.pl -q -i "$filtered_fastq" > "$barcode_dir/${barcode}_contig_stats_filtered_${min_length}.txt"
 
-echo -e "${barcode}\t${total_reads}\t${retained_reads}" >> "$barcode_dir/${barcode}_read_no.tsv"
+
 echo "Script finished for barcode ${barcode}."
