@@ -29,12 +29,6 @@ fi
 # Specify barcode directory - created in current directory 
 barcode_dir="$output_dir/barcode${barcode_number}"
 
-#Check if the flag file exists and exit without error if it does
-if [ -f "$barcode_dir/prep_reads_finished.flag" ]; then
-    echo "Flag file prep_reads_finished.flag already exists for barcode ${barcode_number}. Exiting"
-    exit 0
-fi
-
 # Create scratch directory if it doesn't exist
 mkdir -p "$scratch_dir"
 
@@ -46,7 +40,7 @@ if [ "$concatenated" != "yes" ]; then
     # First looks for fastq_pass directory 
     if [ -d "$location/fastq_pass/barcode${barcode_number}" ]; then
         for file in "$location/fastq_pass/barcode${barcode_number}"/*; do
-            if [[ "$file" == *.fastq || "$file" == *.fq ]]; then               #Check if file already unzipped
+            if [[ "$file" =~ \.fastq$ || "$file" =~ \.fq$ ]]; then               #Check if file already unzipped
                 cat "$file" >> "$scratch_dir/${barcode_number}_barcode.fastq"
             elif [[ "$file" == *.gz ]]; then                                    #Unzip if needed
                 zcat "$file" >> "$scratch_dir/${barcode_number}_barcode.fastq"
@@ -57,7 +51,7 @@ if [ "$concatenated" != "yes" ]; then
         # Same loop as above but looking in fastq directory
     elif [ -d "$location/fastq/barcode${barcode_number}" ]; then
         for file in "$location/fastq/barcode${barcode_number}"/*; do
-            if [[ "$file" == *.fastq || "$file" == *.fq ]]; then 
+            if [[ "$file" =~ \.fastq$ || "$file" =~ \.fq$ ]]; then 
                 cat "$file" >> "$scratch_dir/${barcode_number}_barcode.fastq"
             elif [[ "$file" == *.gz ]]; then 
                 zcat "$file" >> "$scratch_dir/${barcode_number}_barcode.fastq"
@@ -98,6 +92,15 @@ if [ "$concatenated" != "yes" ]; then
         exit 1
     fi
 
+    # Calculate the percentage of reads retained after filtering
+    total_reads=$(($(wc -l < "$scratch_dir/${barcode_number}_barcode.fastq") / 4))
+    retained_reads=$(($(wc -l < "$scratch_dir/${barcode_number}_barcode_${filter_length}bp.fastq") / 4))
+
+    if ! echo "scale=2; (100 * $retained_reads / $total_reads)" | bc > "$barcode_dir/${barcode_number}_barcode_percent_retained.txt"; then
+        echo "Error: Failed to calculate the percentage of reads retained after filtering."
+        exit 1
+    fi
+
     #Process contig stats if requested on the concatenated file
     if [ "$contig_stats" == "yes" ]; then
         echo "Calculating contig stats for barcode ${barcode_number}..."
@@ -117,15 +120,15 @@ if [ "$concatenated" == "yes" ]; then
         exit 1
     fi
 
-    # Check there is only one .fastq file in the barcode directory
-    num_files=$(find "$location/fastq/barcode${barcode_number}" -maxdepth 1 -type f -name "*.fastq" | wc -l)
+    # Check there is only one .fastq file in the barcode directory (not including .fastq.* files)
+    num_files=$(find "$location/fastq/barcode${barcode_number}" -maxdepth 1 -type f -name "*.fastq" ! -name "*.fastq.*" | wc -l)
     if [ "$num_files" -ne 1 ]; then
         echo "Error: More than one .fastq file found in the barcode directory, not concatenated. Exiting without processing."
         exit 1
     fi
 
     # Get the actual filename
-    file=$(find "$location/fastq/barcode${barcode_number}" -maxdepth 1 -type f -name "*.fastq")
+    file=$(find "$location/fastq/barcode${barcode_number}" -maxdepth 1 -type f -name "*.fastq" ! -name "*.fastq.*")
 
     # Filter these concatenated reads on length & create new fasta file in scratch
     if ! awk -f /ei/projects/7/724b6a9a-6416-47eb-be58-d3737023e29b/scratch/getBigReads.awk -v min="${filter_length}" "$file" > "$scratch_dir/${barcode_number}_barcode_${filter_length}bp.fastq"; then
@@ -174,6 +177,4 @@ touch "$output_tsv"
 # Append the current barcode's data
 echo -e "${barcode_number}\t${total_reads}\t${retained_reads}" >> "$output_tsv"
 
-# Create the flag file to indicate successful completion
-echo "prep_reads.sh has finished successfully, writing prep_reads_finished.flag"
-touch "$barcode_dir/prep_reads_finished.flag"
+echo "prep_reads.sh has finished successfully for barcode ${barcode_number}."

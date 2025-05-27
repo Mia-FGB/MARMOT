@@ -35,7 +35,7 @@ JOBID1=$(sbatch --mem 1G \
     -o "barcode${barcode_number}/logs/${barcode_number}_prepreads.out" \
     --error "barcode${barcode_number}/logs/${barcode_number}_prepreads.err" \
     --job-name="${barcode_number}_prepreads" \
-    --wrap "/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/nanopore_PHIbase_analysis_scripts/Scripts/prep_reads.sh $barcode_number $location $filter_length $scratch_dir $output_dir $concatenated $contig_stats" | awk '{print $NF}')
+    --wrap "/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/nanopore_PHIbase_analysis_scripts/Scripts/prep_reads_v2.sh $barcode_number $location $filter_length $scratch_dir $output_dir $concatenated $contig_stats" | awk '{print $NF}')
 
 # Check if the job submission was successful
 if [ -z "$JOBID1" ]; then
@@ -147,6 +147,7 @@ JOBID4=$(sbatch --dependency=afterok:$JOBID3 \
     --job-name="${barcode_number}_genome_coverage" \
     --wrap "python /ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/nanopore_PHIbase_analysis_scripts/Scripts/pathogen_genome_coverage_from_paf.py $barcode_number $genome_lengths_file $barcode_dir" | awk '{print $NF}')
 
+# make sure the genome coverage job has completed and created the files before completing single_barcode_process.sh
 while true; do
     JOB4_STATUS=$(sacct -j $JOBID4 | awk 'NR==3 {print $6}')
     #echo "Job status for $JOBID4 is $JOB4_STATUS" # Uncomment for debugging
