@@ -2,6 +2,7 @@
 
 # Script to process raw reads for a given barcode
 # version 2 - code has been simplified using chatGPT from the original prep_reads.sh script
+# Isn't working so going back to the original (May 2025)
 # This script concatenates reads, filters them by length, and calculates contig stats.
 # Usage: ./prep_reads.sh <barcode> <input_dir> <min_length> <scratch_dir> <output_dir> <is_concatenated> <run_stats>
 
@@ -29,8 +30,10 @@ fi
 concat_fastq="$scratch/${barcode}_reads.fastq"
 filtered_fastq="$scratch/${barcode}_reads_${min_length}bp.fastq"
 
+# If reads are not already concatenated, concatenate them
 if [ "$is_concat" != "yes" ]; then
     pass_dir=""
+    # Look for fastq_pass or fastq directory for the given barcode
     for sub in fastq_pass fastq; do
         if [ -d "$input_dir/$sub/barcode${barcode}" ]; then
             pass_dir="$input_dir/$sub/barcode${barcode}"
@@ -38,11 +41,13 @@ if [ "$is_concat" != "yes" ]; then
         fi
     done
 
+    # Exit if no valid directory is found
     if [ -z "$pass_dir" ]; then
         echo "Error: No valid fastq_pass or fastq directory for barcode $barcode"
         exit 1
     fi
 
+    # Concatenate all fastq/fq or gzipped files into one file
     for file in "$pass_dir"/*; do
         if [[ "$file" =~ \.fastq$ || "$file" =~ \.fq$ ]]; then
             cat "$file" >> "$concat_fastq"
@@ -53,9 +58,12 @@ if [ "$is_concat" != "yes" ]; then
         fi
     done
 
+    # Handle fail reads if present
     fail_dir="$input_dir/fastq_fail/barcode${barcode}"
     if [ -d "$fail_dir" ]; then
+        # Concatenate all fail reads into a single file
         zcat "$fail_dir"/* > "$scratch/fail_${barcode}.fastq"
+        # If fail reads exist, count them and write to file
         if [ -s "$scratch/fail_${barcode}.fastq" ]; then
             wc -l "$scratch/fail_${barcode}.fastq" | awk '{print $1/4}' > "$barcode_dir/${barcode}_num_fail.txt"
         else
@@ -65,6 +73,7 @@ if [ "$is_concat" != "yes" ]; then
         echo "No fastq_fail directory for barcode $barcode"
     fi
 else
+    # If reads are already concatenated, find the single fastq file
     concat_fastq=$(find "$input_dir/fastq/barcode${barcode}" -maxdepth 1 -type f -name "*.fastq" ! -name "*.fastq.*")
     if [ $(echo "$concat_fastq" | wc -l) -ne 1 ]; then
         echo "Error: Expected exactly one .fastq file in barcode dir."

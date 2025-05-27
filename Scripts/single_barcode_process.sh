@@ -35,7 +35,7 @@ JOBID1=$(sbatch --mem 1G \
     -o "barcode${barcode_number}/logs/${barcode_number}_prepreads.out" \
     --error "barcode${barcode_number}/logs/${barcode_number}_prepreads.err" \
     --job-name="${barcode_number}_prepreads" \
-    --wrap "/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/nanopore_PHIbase_analysis_scripts/Scripts/prep_reads_v2.sh $barcode_number $location $filter_length $scratch_dir $output_dir $concatenated $contig_stats" | awk '{print $NF}')
+    --wrap "/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/nanopore_PHIbase_analysis_scripts/Scripts/prep_reads.sh $barcode_number $location $filter_length $scratch_dir $output_dir $concatenated $contig_stats" | awk '{print $NF}')
 
 # Check if the job submission was successful
 if [ -z "$JOBID1" ]; then
