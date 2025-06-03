@@ -16,32 +16,37 @@ cat("Commencing R script... \n")
 # Get command line arguments
 args <- commandArgs(trailingOnly = TRUE)
 
-# Expecting: Rscript create_risk_plots.R <output_dir> <risk_table>
-if (length(args) < 2) {
-  stop("Usage: Rscript create_risk_plots.R <output_dir> <risk_table>")
+# Expecting: Rscript create_risk_plots.R <output_dir> <risk_table> <barcode_labels>
+if (length(args) < 3) {
+  stop("Usage: Rscript create_risk_plots.R <output_dir> <risk_table> <barcode_labels>")
 }
 
 # output_dir is where the write file output is saved
 output_dir <- args[1]
 risk_table <- args[2]
+barcode_labels <- args[3]
 
 # Check if the input directory exists
 if (!dir.exists(output_dir)) {
   stop("Output directory does not exist: ", output_dir)
 }
-# Check if the risk table file exists
+# Check if the risk table file exists & read in
 if (!file.exists(risk_table)) {
   stop("Risk table file does not exist: ", risk_table)
 }
-
 cat("Reading in risk table ", risk_table, "\n")
-
-# Read in the risk table
 risk_table <- read_csv(risk_table)
 
-cat("Set paths and read in the data, output_dir ", output_dir , "\n")
 
+# Check if the barcode labels file exists & read in
+if (!file.exists(barcode_labels)) {
+  stop("Barcode labels file does not exist: ", barcode_labels)
+}
+cat("Reading in barcode labels ", barcode_labels, "\n")
+barcode_labels <- read_csv(barcode_labels, delim = "\t")
+barcode_labels$Barcode <- as.character(barcode_labels$Barcode)
 
+cat("Set paths and read in the data, output_dir ", output_dir, "\n")
 
 # Construct output directory path
 graph_save_path <- path(output_dir, "Graphs")
@@ -66,6 +71,7 @@ read_numbers     <- read_input_file("read_numbers.tsv", output_dir)
 lcaparse_perread$Barcode <- as.character(lcaparse_perread$Barcode)
 read_numbers$Barcode <- as.character(read_numbers$Barcode)
 genome_coverage$Barcode <- as.character(genome_coverage$Barcode)
+
 
 
 # Set plotting theme
@@ -203,8 +209,15 @@ lca_risk$Risk_Category <- factor(
   levels = c("Red", "Orange", "Yellow", "Green", "Blue", "Unclassified")
 )
 
-lca_risk$Barcode <- 
-  factor(lca_risk$Barcode, levels = sort(unique(lca_risk$Barcode)))
+# Add Barcode labels to the lca_risk data
+lca_risk <- lca_risk %>%
+  left_join(barcode_labels, by = "Barcode")
+
+# Replace Barcode column with Label for plotting
+lca_risk$Barcode_Label <- factor(
+  lca_risk$Barcode_Label,
+  levels = unique(barcode_labels$Barcode_Label)  # preserve input order
+)
 
 #Summarise the data to only include species with a DEFRA defined Risk category
 risk_only <- lca_risk %>% 
@@ -231,7 +244,7 @@ if (!dir.exists(risk_dir)) {
 
 plot_risk_stacked <- function(data, y_col, save_path, colours) {
   cat("Plotting graph: ", save_path, "\n")
-  p <- ggplot(data, aes(x = Barcode, y = .data[[y_col]],
+  p <- ggplot(data, aes(x = Barcode_Label, y = .data[[y_col]],
     fill = Risk_Category)) +
     geom_bar(stat = "identity") +
     scale_fill_manual(values = colours) +
@@ -675,13 +688,14 @@ for (y in c("HP100k", "Filtered_HP100k")) {
 extract_red_risk_reads <- function(data_risk,
                                    data_perread,
                                    output_dir,
+                                   risk_categtory,
                                    exclude_widespread = FALSE,
                                    filename = "RedRisk_ReadIDs.tsv") {
   # Base filtering
   filtered <- data_risk %>%
     filter(
       Read_Count > 10,
-      Risk_Category == "Red",
+      Risk_Category == risk_category,
       Avg_Mean_Identity > 90
     )
   
@@ -706,7 +720,7 @@ extract_red_risk_reads <- function(data_risk,
   save_path <- fs::path(output_dir, filename)
   write_tsv(read_ids, save_path)
   
-  cat("Saved ", nrow(read_ids), " read IDs to: ", save_path, "\n")
+  cat("Saved ", nrow(read_ids), "read IDs for", risk_category, "risk to:" , save_path, "\n")
 }
 
 # Red risk not considering presence in the UK
@@ -714,6 +728,7 @@ extract_red_risk_reads(
   data_risk = risk_only,
   data_perread = lcaparse_perread,
   output_dir = output_dir,
+  risk_category = "Red",
   exclude_widespread = FALSE,
   filename = "RedRisk_ReadIDs_all.tsv"
 )
@@ -723,42 +738,80 @@ extract_red_risk_reads(
   data_risk = risk_only,
   data_perread = lcaparse_perread,
   output_dir = output_dir,
+  risk_category = "Red",
   exclude_widespread = TRUE,
   filename = "RedRisk_ReadIDs_noWidespread.tsv"
 )
 
+# For Orange Risk species -----
+extract_red_risk_reads(
+  data_risk = risk_only,
+  data_perread = lcaparse_perread,
+  output_dir = output_dir,
+  risk_category = "Orange",
+  exclude_widespread = FALSE,
+  filename = "OrangeRisk_ReadIDs_all.tsv"
+)
+
+# Red Risk, filtering out those already known to be widespread present in the UK
+extract_red_risk_reads(
+  data_risk = risk_only,
+  data_perread = lcaparse_perread,
+  output_dir = output_dir,
+  risk_category = "Orange",
+  exclude_widespread = TRUE,
+  filename = "OrangeRisk_ReadIDs_noWidespread.tsv"
+)
 
 # Create a summary file of species of interest -----
-# Filter risk_only for red-risk species of interest 
-red_risk_summary <- risk_only %>%
-  filter(
-    Risk_Category == "Red",
-    Read_Count > 10,
-    Avg_Mean_Identity > 90
-  ) %>%
-  select(
-    Barcode, Taxon_Name, Taxon_Rank, Taxon_ID,
-    Risk_Category, UK,
-    Read_Count, Avg_Mean_Identity
-  ) %>%
-  distinct() 
+create_risk_summary <- function(data_risk,
+                                genome_coverage,
+                                output_dir,
+                                risk_category = "Red",
+                                filename = "Risk_Species_Summary.tsv") {
+  summary_table <- data_risk %>%
+    filter(
+      Risk_Category == risk_category,
+      Read_Count > 10,
+      Avg_Mean_Identity > 90
+    ) %>%
+    select(
+      Barcode, Taxon_Name, Taxon_Rank, Taxon_ID,
+      Risk_Category, UK,
+      Read_Count, Avg_Mean_Identity
+    ) %>%
+    distinct() %>%
+    left_join(
+      genome_coverage %>%
+        select(Barcode, taxaID, coverage_percentage, num_reads),
+      by = c("Barcode" = "Barcode", "Taxon_ID" = "taxaID")
+    ) %>%
+    rename(
+      Genome_Coverage = coverage_percentage,
+      Coverage_Reads = num_reads
+    )
+  
+  # Save
+  save_path <- fs::path(output_dir, filename)
+  write_tsv(summary_table, save_path)
+  cat("Saved", risk_category, "risk summary table to:", save_path, "\n")
+}
 
-#  Join on genome coverage using Barcode + Taxon_ID
-red_risk_summary <- red_risk_summary %>%
-  left_join(
-    genome_coverage %>%
-      select(Barcode, taxaID, coverage_percentage, num_reads),
-    by = c("Barcode" = "Barcode", "Taxon_ID" = "taxaID")
-  ) %>%
-  rename(
-    Genome_Coverage = coverage_percentage,
-    Coverage_Reads = num_reads
-  )
-
-# Save
-write_tsv(red_risk_summary, fs::path(output_dir, "RedRisk_Species_Summary.tsv"))
-
-cat("Saved red risk summary table to: ", output_dir, "/RedRisk_Species_Summary.tsv \n")
+# Create summaries for Red and Orange risk categories
+create_risk_summary(
+  data_risk = risk_only,
+  genome_coverage = genome_coverage,
+  output_dir = output_dir,
+  risk_category = "Red",
+  filename = "Red_Risk_Species_Summary.tsv"
+)
+create_risk_summary(
+  data_risk = risk_only,
+  genome_coverage = genome_coverage,
+  output_dir = output_dir,
+  risk_category = "Orange",
+  filename = "Orange_Risk_Species_Summary.tsv"
+)
 
 # To finish 
 cat("R script complete \n")
