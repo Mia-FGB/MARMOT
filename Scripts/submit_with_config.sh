@@ -89,7 +89,7 @@ create_plots_id=$(sbatch --dependency=afterok:$write_files_job_id  \
     -o "$log_dir/riskplots.out" \
     --error "$log_dir/riskplots.err" \
     --job-name="${sample}_riskplots" \
-    --wrap "source activate r-marmot_env && Rscript /ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/nanopore_PHIbase_analysis_scripts/Scripts/create_risk_plots.R $output_dir $risk_table_file" | awk '{print $4}')
+    --wrap "source activate r-marmot_env && Rscript /ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/nanopore_PHIbase_analysis_scripts/Scripts/create_risk_plots.R $output_dir $risk_table_file $barcode_labels" | awk '{print $4}')
 
 
 echo "Submitted create plots job: $create_plots_id, will run when write_files_job ($write_files_job_id) finishes"

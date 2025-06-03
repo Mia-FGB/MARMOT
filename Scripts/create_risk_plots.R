@@ -48,9 +48,14 @@ barcode_labels <-
   read_delim(barcode_labels, delim = "\t",  show_col_types = FALSE)
 
 barcode_labels$Barcode <- as.character(barcode_labels$Barcode)
+barcode_labels$Barcode_Label <- as.character(barcode_labels$Barcode_Label)
+
+cat("Barcode label file read successfully:\n")
+cat("  Number of rows: ", nrow(barcode_labels), "\n")
+cat("  Unique Barcodes in labels:\n")
+print(head(unique(barcode_labels$Barcode)))
 
 cat("Set paths and read in the data, output_dir ", output_dir, "\n")
-
 # Construct output directory path
 graph_save_path <- path(output_dir, "Graphs")
 
@@ -84,7 +89,7 @@ custom_theme <- theme_minimal(base_size = 10) +
     axis.line.y = element_line(color = "black", linewidth = 0.3),
     panel.grid.minor = element_blank(),
     strip.text = element_text(size = 10),
-    axis.text.x = element_text(angle = 45, hjust = 1)
+    axis.text.x = element_text(angle = 90)
   )
 
 
@@ -212,6 +217,11 @@ lca_risk$Risk_Category <- factor(
   levels = c("Red", "Orange", "Yellow", "Green", "Blue", "Unclassified")
 )
 
+#For debugging 
+cat("Joining barcode labels to lca_risk...\n")
+cat("  Unique Barcodes in lca_risk before join:\n")
+print(head(unique(lca_risk$Barcode)))
+
 # Add Barcode labels to the lca_risk data
 lca_risk <- lca_risk %>%
   left_join(barcode_labels, by = "Barcode")
@@ -221,6 +231,17 @@ lca_risk$Barcode_Label <- factor(
   lca_risk$Barcode_Label,
   levels = unique(barcode_labels$Barcode_Label)  # preserve input order
 )
+
+# For debugging
+cat("After join:\n")
+cat("  Total rows in lca_risk: ", nrow(lca_risk), "\n")
+cat("  Rows with missing Barcode_Label: ", sum(is.na(lca_risk$Barcode_Label)), "\n")
+cat("  Example Barcode_Label values:\n")
+print(head(unique(lca_risk$Barcode_Label)))
+
+missing_labels <- setdiff(unique(lca_risk$Barcode), barcode_labels$Barcode)
+cat("Barcodes in lca_risk missing from barcode_labels:\n")
+print(missing_labels)
 
 #Summarise the data to only include species with a DEFRA defined Risk category
 risk_only <- lca_risk %>% 
@@ -598,7 +619,7 @@ for (sc in scales_options) {
     custom_theme +
     theme(
       legend.position = "none",
-      axis.text.x = element_text(angle = 45, hjust = 1),
+      axis.text.x = element_text(angle = 90),
       axis.text.y = element_text(size = 9)
     )
   
@@ -667,7 +688,7 @@ plot_genus_heatmap <- function(data,
     ) +
     theme_minimal(base_size = 13) +
     theme(
-      axis.text.x = element_text(angle = 45, hjust = 1, size = 8),
+      axis.text.x = element_text(angle = 90, size = 8),
       axis.text.y = element_text(size = 9),
       legend.key.size = unit(1.2, "cm")
     )
@@ -699,7 +720,7 @@ for (y in c("HP100k", "Filtered_HP100k")) {
 extract_red_risk_reads <- function(data_risk,
                                    data_perread,
                                    output_dir,
-                                   risk_categtory,
+                                   risk_category,
                                    exclude_widespread = FALSE,
                                    filename = "RedRisk_ReadIDs.tsv") {
   # Base filtering
@@ -787,7 +808,7 @@ create_risk_summary <- function(data_risk,
       Avg_Mean_Identity > 90
     ) %>%
     select(
-      Barcode, Taxon_Name, Taxon_Rank, Taxon_ID,
+      Barcode, Barcode_Label, Taxon_Name, Taxon_Rank, Taxon_ID,
       Risk_Category, UK,
       Read_Count, Avg_Mean_Identity
     ) %>%

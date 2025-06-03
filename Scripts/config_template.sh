@@ -38,4 +38,4 @@ genome_lengths_file="/ei/projects/8/818a2389-cfbb-4ffb-b424-98250a8a3118/data/re
 risk_table_file="/ei/projects/8/818a2389-cfbb-4ffb-b424-98250a8a3118/data/results/PHIbase_database_May25/risk_table.csv"
 
 # Barcode Labels for the graphs as a tab-separated file
-barcode_labels_file="/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/scratch/MARMOT_Output/cf_2023/barcode_labels.tsv"
+barcode_labels="/ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/scratch/MARMOT_Output/cf_2023/barcode_labels.tsv"
