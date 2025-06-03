@@ -35,15 +35,18 @@ if (!file.exists(risk_table)) {
   stop("Risk table file does not exist: ", risk_table)
 }
 cat("Reading in risk table ", risk_table, "\n")
-risk_table <- read_csv(risk_table)
+risk_table <- read_csv(risk_table,  show_col_types = FALSE)
 
 
 # Check if the barcode labels file exists & read in
 if (!file.exists(barcode_labels)) {
-  stop("Barcode labels file does not exist: ", barcode_labels)
+  stop("Barcode labels file does not exist: ", barcode_labels, )
 }
 cat("Reading in barcode labels ", barcode_labels, "\n")
-barcode_labels <- read_csv(barcode_labels, delim = "\t")
+
+barcode_labels <- 
+  read_delim(barcode_labels, delim = "\t",  show_col_types = FALSE)
+
 barcode_labels$Barcode <- as.character(barcode_labels$Barcode)
 
 cat("Set paths and read in the data, output_dir ", output_dir, "\n")
@@ -282,7 +285,7 @@ plot_risk_facet <- function(data, save_path, y_col, colours) {
                "Present (Widespread)", "N/A")
   )
   cat("Plotting graph: ", save_path, "\n")
-  p <- ggplot(data, aes(x = Barcode, y = .data[[y_col]],
+  p <- ggplot(data, aes(x = Barcode_Label, y = .data[[y_col]],
     fill = Risk_Category)) +
     facet_wrap(~ UK, scales = "fixed", ncol =2) +
     geom_bar(stat = "identity") +
@@ -359,6 +362,8 @@ genus_summary <- genus_summary %>%
     Filtered_HP100k = (Read_Count / FilterReadCount) * 100000
   )
 
+genus_summary <- genus_summary %>% left_join(barcode_labels, by = "Barcode")
+
 # Export pathogen tsv  ----
 # Clean up the output
 genus_export <- genus_summary %>%
@@ -406,7 +411,7 @@ plot_pathogen_bar <- function(data,
   y_upper <- if (y_max == 0) 1 else NA
   
   # Plot
-  p <- ggplot(pathogen_data, aes(x = Barcode, y = .data[[y_col]])) +
+  p <- ggplot(pathogen_data, aes(x = Barcode_Label, y = .data[[y_col]])) +
     geom_bar(stat = "identity", fill = fill_colour) 
   
   # Add error bars if specified
@@ -423,7 +428,7 @@ plot_pathogen_bar <- function(data,
   
   p <- p +  labs(
       title = pathogen,
-      x = "Barcode",
+      x = "Sample ID",
       y = y_lab
     ) +
     scale_y_continuous(expand = c(0, 0), limits = c(0, y_upper)) +
@@ -458,13 +463,13 @@ for (y in y_cols) {
   for (sc in scales_options) {
     
     # Create the plot
-    p <- ggplot(genus_summary, aes(x = Barcode, y = .data[[y]], fill = Genus)) +
+    p <- ggplot(genus_summary, aes(x = Barcode_Label, y = .data[[y]], fill = Genus)) +
       geom_bar(stat = "identity") +
       facet_wrap(~ Genus, scales = sc, ncol = 3) +
       scale_fill_manual(values = pathogen_colours) +
       labs(
         title = paste("Pathogen Abundance by Genus (", y, ", ", sc, ")", sep = ""),
-        x = "Barcode",
+        x = "Sample ID",
         y = "Reads per 100,000",
         fill = "Genus"
       ) +
@@ -534,6 +539,10 @@ coverage_plot_data <- barcode_genus_grid %>%
     SE_Coverage = replace_na(SE_Coverage, 0)
   )
 
+# Merge on the labels 
+coverage_plot_data <- coverage_plot_data %>%
+  left_join(barcode_labels, by = "Barcode")
+
 # Plot coverage of pathogens ----
 cat("Plotting pathogen genome coverage plots...\n")
 # Calling the earlier function
@@ -566,7 +575,7 @@ for (sc in scales_options) {
   y_upper <- if (y_max == 0) 1 else NA
   
   # Create the plot
-  p <- ggplot(coverage_plot_data, aes(x = Barcode, y = Mean_Coverage, fill = Genus)) +
+  p <- ggplot(coverage_plot_data, aes(x = Barcode_Label, y = Mean_Coverage, fill = Genus)) +
     geom_bar(stat = "identity") +
     geom_errorbar(
       aes(ymin = Mean_Coverage - SE_Coverage,
@@ -639,8 +648,10 @@ plot_genus_heatmap <- function(data,
   plot_data <- filtered_data %>%
     mutate(Genus = factor(Genus, levels = genus_order))
   
+  plot_data <- plot_data %>% left_join(barcode_labels, by = "Barcode")
+  
   # Create plot
-  p <- ggplot(plot_data, aes(x = Barcode, y = Genus, fill = .data[[y_col]])) +
+  p <- ggplot(plot_data, aes(x = Barcode_Label, y = Genus, fill = .data[[y_col]])) +
     geom_tile() +
     scale_fill_viridis_c(
       trans = "log1p",
