@@ -93,6 +93,18 @@ create_plots_id=$(sbatch --dependency=afterok:$write_files_job_id  \
 
 
 echo "Submitted create plots job: $create_plots_id, will run when write_files_job ($write_files_job_id) finishes"
+
+risk_pathogens_id=$(sbatch --dependency=afterok:$write_files_job_id  \
+    --mem=5G \
+    -p ei-short \
+    -o "$log_dir/risk_path.out" \
+    --error "$log_dir/risk_path.err" \
+    --job-name="${sample}_risk_path" \
+    --wrap "source activate r-marmot_env && Rscript /ei/projects/9/9742f7cc-c169-405d-bf27-cd520e26f0be/data/results/nanopore_PHIbase_analysis_scripts/Scripts/Risk_Pathogens.R $output_dir $risk_table_file $barcode_labels" | awk '{print $4}')
+echo "Submitted risk pathogens job: $risk_pathogens_id using config file: $config, 
+will run when write_files_job ($write_files_job_id) finishes"
+
+
 echo "Output dir: $output_dir"
 echo "Risk table file: $risk_table_file"
 
