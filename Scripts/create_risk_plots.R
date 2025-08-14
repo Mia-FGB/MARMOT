@@ -360,6 +360,12 @@ genus_summary_all <- lcaparse_genus %>%
     .groups = "drop"
   )
 
+# Export genus level to tsv -----
+genus_export <- genus_summary_all %>% left_join(barcode_labels, by = "Barcode")
+
+# Define save path - output directory so it will live with the other summary 
+save_path <- fs::path(output_dir, "genus_summary.tsv")
+
 # Get all the unique barcodes in the df
 all_barcodes <- unique(lcaparse$Barcode)
 
@@ -391,13 +397,13 @@ genus_export <- genus_summary %>%
   select(-TotalReadCount, -FilterReadCount)
 
 # Define save path - output directory so it will live with the other summary 
-save_path <- fs::path(output_dir, "genus_summary.tsv")
+save_path <- fs::path(output_dir, "nine_pathogens_summary.tsv")
 
 # Write to TSV
 write_tsv(genus_export, save_path)
 
 
-cat("Genus summary saved to: ", save_path, "\n")
+cat("nine pathogens summary saved to: ", save_path, "\n")
 
 
 
@@ -715,137 +721,8 @@ for (y in c("HP100k", "Filtered_HP100k")) {
   }
 }
 
+# Also export the genus level data
 
-# Moving this section to its own script to be explored in more depth - Risk_Pathogens.R
-
-# # Pull out the species and maybe ReadIDs to consider in more depth -----
-# extract_red_risk_reads <- function(data_risk,
-#                                    data_perread,
-#                                    output_dir,
-#                                    risk_category,
-#                                    exclude_widespread = FALSE,
-#                                    filename = "RedRisk_ReadIDs.tsv") {
-#   # Base filtering
-#   filtered <- data_risk %>%
-#     filter(
-#       Read_Count > 10,
-#       Risk_Category == risk_category,
-#       Avg_Mean_Identity > 90
-#     )
-  
-#   # Optional additional filter
-#   if (exclude_widespread) {
-#     filtered <- filtered %>% filter(UK != "Present (Widespread)")
-#   }
-  
-#   # Get read IDs with metadata
-#   barcode_taxa <- filtered %>%
-#     distinct(Barcode, Taxon_Name)
-  
-#   read_ids <- data_perread %>%
-#     semi_join(barcode_taxa, by = c("Barcode", "Taxon_Name")) %>%
-#     select(Barcode, Read_ID, Taxon_Name) %>%
-#     left_join(
-#       filtered %>% select(Barcode, Taxon_Name, Risk_Category, UK),
-#       by = c("Barcode", "Taxon_Name")
-#     )
-  
-#   # Save file
-#   save_path <- fs::path(output_dir, filename)
-#   write_tsv(read_ids, save_path)
-  
-#   cat("Saved ", nrow(read_ids), "read IDs for", risk_category, "risk to:" , save_path, "\n")
-# }
-
-# # Red risk not considering presence in the UK
-# extract_red_risk_reads(
-#   data_risk = risk_only,
-#   data_perread = lcaparse_perread,
-#   output_dir = output_dir,
-#   risk_category = "Red",
-#   exclude_widespread = FALSE,
-#   filename = "RedRisk_ReadIDs_all.tsv"
-# )
-
-# # Red Risk, filtering out those already known to be widespread present in the UK
-# extract_red_risk_reads(
-#   data_risk = risk_only,
-#   data_perread = lcaparse_perread,
-#   output_dir = output_dir,
-#   risk_category = "Red",
-#   exclude_widespread = TRUE,
-#   filename = "RedRisk_ReadIDs_noWidespread.tsv"
-# )
-
-# # For Orange Risk species -----
-# extract_red_risk_reads(
-#   data_risk = risk_only,
-#   data_perread = lcaparse_perread,
-#   output_dir = output_dir,
-#   risk_category = "Orange",
-#   exclude_widespread = FALSE,
-#   filename = "OrangeRisk_ReadIDs_all.tsv"
-# )
-
-# # Red Risk, filtering out those already known to be widespread present in the UK
-# extract_red_risk_reads(
-#   data_risk = risk_only,
-#   data_perread = lcaparse_perread,
-#   output_dir = output_dir,
-#   risk_category = "Orange",
-#   exclude_widespread = TRUE,
-#   filename = "OrangeRisk_ReadIDs_noWidespread.tsv"
-# )
-
-# # Create a summary file of species of interest -----
-# create_risk_summary <- function(data_risk,
-#                                 genome_coverage,
-#                                 output_dir,
-#                                 risk_category = "Red",
-#                                 filename = "Risk_Species_Summary.tsv") {
-#   summary_table <- data_risk %>%
-#     filter(
-#       Risk_Category == risk_category,
-#       Read_Count > 10,
-#       Avg_Mean_Identity > 90
-#     ) %>%
-#     select(
-#       Barcode, Barcode_Label, Taxon_Name, Taxon_Rank, Taxon_ID,
-#       Risk_Category, UK,
-#       Read_Count, Avg_Mean_Identity
-#     ) %>%
-#     distinct() %>%
-#     left_join(
-#       genome_coverage %>%
-#         select(Barcode, taxaID, coverage_percentage, num_reads),
-#       by = c("Barcode" = "Barcode", "Taxon_ID" = "taxaID")
-#     ) %>%
-#     rename(
-#       Genome_Coverage = coverage_percentage,
-#       Coverage_Reads = num_reads
-#     )
-  
-#   # Save
-#   save_path <- fs::path(output_dir, filename)
-#   write_tsv(summary_table, save_path)
-#   cat("Saved", risk_category, "risk summary table to:", save_path, "\n")
-# }
-
-# # Create summaries for Red and Orange risk categories
-# create_risk_summary(
-#   data_risk = risk_only,
-#   genome_coverage = genome_coverage,
-#   output_dir = output_dir,
-#   risk_category = "Red",
-#   filename = "Red_Risk_Species_Summary.tsv"
-# )
-# create_risk_summary(
-#   data_risk = risk_only,
-#   genome_coverage = genome_coverage,
-#   output_dir = output_dir,
-#   risk_category = "Orange",
-#   filename = "Orange_Risk_Species_Summary.tsv"
-# )
 
 # To finish 
 cat("R script for plots complete \n")

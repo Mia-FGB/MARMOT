@@ -44,7 +44,7 @@ cat > "$temp_script" <<EOF
 #SBATCH -J $sample
 #SBATCH -o $log_dir/submission_%a.out
 #SBATCH -e $log_dir/submission_%a.err
-#SBATCH -p ei-short
+#SBATCH -p ei-medium
 #SBATCH -c 1
 #SBATCH --mem=2G
 #SBATCH --mail-type=END,FAIL
