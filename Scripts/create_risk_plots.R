@@ -50,6 +50,10 @@ barcode_labels <-
 barcode_labels$Barcode <- as.character(barcode_labels$Barcode)
 barcode_labels$Barcode_Label <- as.character(barcode_labels$Barcode_Label)
 
+# Filter out lambda / positive / negative samples via barcode label 
+barcode_labels <- barcode_labels %>%
+  filter(!grepl("lambda|positive|negative", Barcode_Label, ignore.case = TRUE))
+
 cat("Barcode label file read successfully:\n")
 cat("  Number of rows: ", nrow(barcode_labels), "\n")
 cat("  Unique Barcodes in labels:\n")
@@ -222,9 +226,10 @@ cat("Joining barcode labels to lca_risk...\n")
 cat("  Unique Barcodes in lca_risk before join:\n")
 print(head(unique(lca_risk$Barcode)))
 
-# Add Barcode labels to the lca_risk data
+# Add Barcode labels to the lca_risk data and filter out rows with missing Barcode_Label
 lca_risk <- lca_risk %>%
-  left_join(barcode_labels, by = "Barcode")
+  left_join(barcode_labels, by = "Barcode") %>%
+  filter(!is.na(Barcode_Label))
 
 # Replace Barcode column with Label for plotting
 lca_risk$Barcode_Label <- factor(
@@ -360,10 +365,9 @@ genus_summary_all <- lcaparse_genus %>%
     .groups = "drop"
   )
 
-# Export genus level to tsv -----
+## Export genus level to tsv (all)  -----
 genus_export <- genus_summary_all %>% left_join(barcode_labels, by = "Barcode")
-
-# Define save path - output directory so it will live with the other summary 
+# Define save path - output directory 
 save_path <- fs::path(output_dir, "genus_summary.tsv")
 
 # Get all the unique barcodes in the df
@@ -389,7 +393,9 @@ genus_summary <- genus_summary %>%
     Filtered_HP100k = (Read_Count / FilterReadCount) * 100000
   )
 
-genus_summary <- genus_summary %>% left_join(barcode_labels, by = "Barcode")
+genus_summary <- genus_summary %>%
+ left_join(barcode_labels, by = "Barcode")  %>%
+ filter(!is.na(Barcode_Label))
 
 # Export pathogen tsv  ----
 # Clean up the output
@@ -568,7 +574,8 @@ coverage_plot_data <- barcode_genus_grid %>%
 
 # Merge on the labels 
 coverage_plot_data <- coverage_plot_data %>%
-  left_join(barcode_labels, by = "Barcode")
+  left_join(barcode_labels, by = "Barcode") %>%
+  filter(!is.na(Barcode_Label))
 
 # Plot coverage of pathogens ----
 cat("Plotting pathogen genome coverage plots...\n")
@@ -674,9 +681,10 @@ plot_genus_heatmap <- function(data,
   
   plot_data <- filtered_data %>%
     mutate(Genus = factor(Genus, levels = genus_order))
-  
-  plot_data <- plot_data %>% left_join(barcode_labels, by = "Barcode")
-  
+
+  plot_data <- plot_data %>% left_join(barcode_labels, by = "Barcode") %>%
+    filter(!is.na(Barcode_Label))
+
   # Create plot
   p <- ggplot(plot_data, aes(x = Barcode_Label, y = Genus, fill = .data[[y_col]])) +
     geom_tile() +
