@@ -67,14 +67,17 @@ def write_genome_coverage(genome_coverage_file, taxa_mapped_bases, genome_length
         mapped_file.write("taxaID\tmapped_bases\tgenome_length\tcoverage_percentage\tnum_reads\tread_ids\n")
         for taxaID, bases in taxa_mapped_bases.items():
             genome_length = genome_lengths.get(taxaID, 0)
+            coverage_percentage = 'N/A'  # Default value
             if genome_length > 0:
                 coverage_percentage = (bases / genome_length) * 100
             else:
                 print(f"Warning: taxaID {taxaID} not found in genome lengths table.")
-                coverage_percentage = 'N/A'
             num_reads = len(taxa_read_ids[taxaID])
             read_ids = ",".join(taxa_read_ids[taxaID])
-            mapped_file.write(f"{taxaID}\t{bases}\t{genome_length}\t{coverage_percentage:.4f}\t{num_reads}\t{read_ids}\n")
+            if isinstance(coverage_percentage, str):
+                mapped_file.write(f"{taxaID}\t{bases}\t{genome_length}\t{coverage_percentage}\t{num_reads}\t{read_ids}\n")
+            else:
+                mapped_file.write(f"{taxaID}\t{bases}\t{genome_length}\t{coverage_percentage:.4f}\t{num_reads}\t{read_ids}\n")
 
 def write_filtered_reads(filtered_reads_file, filtered_reads):
     with open(filtered_reads_file, "w") as filtered_file:
